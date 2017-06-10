@@ -1,0 +1,55 @@
+body{
+    background: #f7f9fc;
+}
+.nav-aside{
+    background: #252b4d;
+}
+
+::selection,
+.paging a.p-selected{
+    color: #fff;
+}
+
+.n-box .n-tab,
+button.submit:hover{
+   
+    background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #5c6bc0;
+}
+
+.nav li>a::before,
+.nav .nav-selected::after,
+.n-box .n-tab:hover,
+.n-box .n-read a:hover::before,
+.paging a:hover li,
+.paging a.p-selected li,
+::selection,
+footer,
+button.submit:active{
+    background: #5c6bc0;
+}
+
+
+
+.n-box .n-read a,
+.n-box .n-tab-smaller a:hover,
+button.submit{
+    color:#5c6bc0;
+}
+
+.logo-footer,
+.nav-aside .aside-selected,
+.nav-aside-copyright span{
+    color:#4a569a;
+}
+.info-footer::after,.info-footer::before{
+    background: #5765b5;
+}
+button.submit{
+    border:1px solid #5c6bc0;
+    background: #fff;
+    
+}
+button.submit:hover{
+    color:  #fff;  
+}
+

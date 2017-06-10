@@ -1,0 +1,387 @@
+header {
+    position: relative;
+    height: 190px;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.logo,
+.burger {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo {
+    font-size: 4.2em;
+}
+
+.burger {
+    display: none;
+    right: 0;
+    background: url("../img/sprite.png");
+    width: 54px;
+    height: 47px;
+}
+
+.nav ul {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.nav li {
+    display: inline-block;
+    position: relative;
+    margin-left: 35px;
+    padding-bottom: .4em;
+    font-size: 1.6em;
+}
+.nav-aside {
+    display: none;
+    position: absolute;
+    transform: translateX(300px);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+}
+.nav-aside a{
+    color: #fff;
+    font-size: 3em;
+    line-height: 70px;
+}
+
+.nav-aside ul{
+
+    top: 0;
+    margin: 60px;
+}
+.nav-aside ul,.nav-aside-copyright {
+    margin: 60px 0 0 60px;
+}
+
+.nav-aside-copyright {
+    color: #fff;
+}
+.nav-aside-copyright span{
+    line-height: 50px;
+    font-size: 3em;
+}
+
+.n-box {
+    position: relative;
+    width: 950px;
+    margin: 0 auto 50px;
+    background: #fff;
+}
+.n-box .n-top{
+    padding: 0;
+}
+.n-box .n-top img{
+    width: 100%;
+}
+
+.n-box>div {
+    padding: 0 120px 0 140px;
+}
+
+.n-box .n-tab {
+    float: right;
+    position: relative;
+    top: 20px;
+    right: -12px;
+    padding: 0 0 0 .6em;
+    width: 88px;
+    height: 32px;
+    font-size: 1.4em;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.n-box .n-tab a {
+    color: #fff;
+    letter-spacing: .6em;
+}
+
+.n-box .n-date {
+    overflow: hidden;
+    padding-top: 57px;
+    font-size: 1.4em;
+    color: #bdbdbd;
+}
+
+.n-box .n-title {
+    margin: 25px 0 30px;
+    font-size: 4em;
+    line-height: 1.25;
+}
+
+.n-box .n-content {
+    overflow: hidden;
+    position: relative;
+    padding-top: 25px;
+    font-size: 1.7em;
+    line-height: 1.8;
+    text-indent: 2em;
+}
+
+.n-box .n-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: #eee;
+}
+
+.n-box .n-read {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.n-box .n-read a {
+    position: relative;
+    padding-bottom: 2px;
+    font-size: 1.5em;
+    line-height: 2;
+}
+
+.n-box .n-tab-smaller {
+    position: relative;
+    float: right;
+    right: 10px;
+    bottom: -35px;
+    cursor: default;
+}
+
+.n-box .n-tab-smaller a {
+    margin-left: 4px;
+    color: #ccc;
+}
+.n-box .comments{
+    border-top: 1px solid #eee;
+    height: 300px;
+}
+.comments .c-top{  
+    position: relative;
+    height: 92px;  
+}
+.comments .c-top::before{
+    content:"";
+    position: absolute;
+    bottom: 0;
+    width: 50px; 
+    height: 4px;
+    background: #000;
+}
+.comments .c-top::after{
+    content:"";
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+    height: 2px;
+    background: #eee;
+}
+.comments .c-top p{
+    position: absolute;
+    bottom: 0;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.comments .c-content{
+    margin-top:30px;
+}
+.comments .c-content .c-label{
+    float: left;
+    width: 52px;
+    height: 52px;
+    background: url("../img/sprite.png") 0 -51px;
+}
+.comments .c-content .c-input{
+    overflow: scroll;
+    border:1px solid #eee;
+    text-indent: 1em;
+    border-radius: .2em;
+    color: #ccc;
+    font-size: 1.6em;
+    line-height: 3;
+
+    outline: 0;
+    height: 100px;
+
+}
+.comments .c-submit{
+    position: relative;
+    margin-top: 50px;
+}
+.comments .c-submit button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+.paging {
+    margin: 50px auto;
+    text-align: center;
+}
+
+.paging ul {
+    cursor: default;
+}
+
+.paging li {
+    display: inline-block;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 2em;
+    margin: 0 .5em;
+}
+
+.paging a:hover {
+    color: #fff;
+}
+
+footer {
+    padding: 0 10%;
+    cursor: default;
+}
+
+footer,
+footer a {
+    color: #fff;
+    text-align: center;
+}
+
+.logo-footer {
+    padding: 40px 0 40px;
+    font-size: 3em;
+}
+
+.nav-footer a,
+.info-footer,
+.copyright {
+    color: #a9afdb;
+}
+
+.nav-footer li {
+    display: inline-block;
+    font-size: 2em;
+    padding: 1em;
+}
+
+.nav-footer a:hover {
+    color: #fff;
+}
+
+.nav-footer .f-nav-selected {
+    color: #fff;
+}
+
+.info-footer {
+    position: relative;
+    padding: 30px 0;
+    margin-top: 30px;
+    line-height: 23px;
+}
+
+.info-footer::before,
+.info-footer::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+}
+
+.info-footer::before {
+    top: 0;
+    width: 100%;
+}
+
+.info-footer::after {
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+}
+
+.copyright a:hover {
+    color: #ccc;
+}
+
+.copyright {
+    margin-top: 30px;
+}
+
+.contact {
+    padding: 30px 0;
+}
+
+.contact div {
+    display: inline-block;
+    width: 22px;
+    height: 28px;
+    margin: 0 1em;
+}
+.contact .git{
+    background: url("../img/sprite.png") -56px 0;
+}
+.contact .facebook{
+    background: url("../img/sprite.png") -80px 0;
+}
+/*屏幕尺寸小于640的时候采用如下样式*/
+
+@media screen and (max-width: 640px) {
+    .nav ul {
+        display: none;
+    }
+    header {
+        width: 100%;
+        height: 100px;
+    }
+    header .logo {
+        font-size: 2.8em;
+        left: .7em;
+    }
+    header .burger {
+        display: block;
+        right: .8em;
+        cursor: pointer;
+    }
+    body {
+        position: absolute;
+        transition: .3s ease-in-out;
+    }
+    body .burger-click {
+        display: block;
+    }
+    .nav-aside {
+        /*display: block;*/
+    }
+    .n-box {
+        width: 90%;
+    }
+    .n-box .n-title {
+        font-size: 2.8em;
+    }
+    .n-box .n-tab {
+        right: 0;
+    }
+    .n-box>div {
+        padding: 0 .5em 0 1em;
+    }
+    .n-box .n-read{
+        padding-left: 1.5em;
+    }
+    footer .nav-footer li {
+        font-size: 1.5em;
+        padding: .5em;
+    }
+
+}
