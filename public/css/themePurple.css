@@ -6,12 +6,13 @@ body{
 }
 
 ::selection,
-.paging a.p-selected{
+.paging a.p-selected,
+button.submit{
     color: #fff;
 }
 
 .n-box .n-tab,
-button.submit:hover{
+button.submit{
    
     background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #5c6bc0;
 }
@@ -24,16 +25,18 @@ button.submit:hover{
 .paging a.p-selected li,
 ::selection,
 footer,
-button.submit:active{
+button.submit:hover
+{
     background: #5c6bc0;
 }
 
-
+button.submit:active
 
 .n-box .n-read a,
-.n-box .n-tab-smaller a:hover,
-button.submit{
+.n-box .n-tab-smaller a:hover
+{
     color:#5c6bc0;
+
 }
 
 .logo-footer,
@@ -44,12 +47,9 @@ button.submit{
 .info-footer::after,.info-footer::before{
     background: #5765b5;
 }
+
 button.submit{
-    border:1px solid #5c6bc0;
-    background: #fff;
-    
+    border:1px solid #5c6bc0;   
 }
-button.submit:hover{
-    color:  #fff;  
-}
+
 

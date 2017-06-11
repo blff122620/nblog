@@ -2,3 +2,6 @@
 .vscode/settings.json
 node_modules/*
 start
+public/js/vue.js
+views/app.html
+views/index.html

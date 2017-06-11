@@ -25,12 +25,27 @@
                 <li><a href="#" class="nav-selected">关于我</a></li>
                 <li><a href="#" class="underline">博客分类</a></li>
                 <li><a href="mailto:blff122620@163.com" class="underline">联系我</a></li>
+                <li><a class="underline" id="js-login-button">立即登录</a></li>
+                <li><a class="underline" id="js-reg-button">免费注册</a></li>
             </ul>
         </nav>
         <div class="burger" id="js-burger"></div>
+        <aside class="nav-aside" id="js-nav-aside">
+            <ul>
+            <li><a href="#" class="">主页</a></li>
+            <li><a href="#" class="aside-selected">关于我</a></li>
+            <li><a href="#" class="">博客分类</a></li>
+            <li><a href="mailto:blff122620@163.com" class="">联系我</a></li>
+            <li><a href="/login">立即登录</a></li>
+            <li><a href="/register">免费注册</a></li>
+            </ul>
+            <div class="nav-aside-copyright">
+                <span>Beau的家园</span><br/> Designed &amp; Developed by Beau. 
+            </div>
+        </aside>
     </header>
     <main>
-        <section>
+        <section id="js-box-section">
             <article id="js-article">
                 <div class="n-box box-shadow">
                     <div class="n-top"></div>
@@ -44,6 +59,18 @@
                         <a href="">爱心词汇</a>
                     </div>
                     <div class="n-read"><a href="" class="underline">阅读原文</a></div>
+                </div>
+                <div class="n-box box-shadow" v-for="box in boxes">
+                    <div class="n-top"></div>
+                    <div class="n-tab overflow-ellipse"><a :title="box.tab">{{box.tab}}</a></div>
+                    <div class="n-date">{{box.date}}</div>
+                    <div class="n-title">{{box.title}}</div>
+                    <div class="n-content" >{{box.content}}</div>
+                    <div class="n-tab-smaller">
+                        <a :href="smallTab.href" v-for="smallTab in box.smallTabs">{{smallTab.text}}</a>
+                        
+                    </div>
+                    <div class="n-read"><a :href="box.href" class="underline">阅读原文</a></div>
                 </div>
                 <div class="n-box box-shadow">
                     <div class="n-top"><img src="../public/img/gz.jpeg" alt=""></div>
@@ -59,17 +86,7 @@
                     <div class="n-read"><a href="" class="underline">阅读原文</a></div>
                 </div>
             </article>
-            <aside class="nav-aside" id="js-nav-aside">
-                <ul>
-                <li><a href="#" class="">主页</a></li>
-                <li><a href="#" class="aside-selected">关于我</a></li>
-                <li><a href="#" class="">博客分类</a></li>
-                <li><a href="mailto:blff122620@163.com" class="">联系我</a></li>
-                </ul>
-                <div class="nav-aside-copyright">
-                    <span>Beau的家园</span><br/> Designed &amp; Developed by Beau. 
-                </div>
-            </aside>
+            
             <div class="paging">
                 <ul>
                     <a href="">
@@ -123,6 +140,7 @@
         </div>
     </footer>
     <script type="text/javascript" src="../public/js/util.js"></script>
+    <script type="text/javascript" src="../public/js/vue.js"></script>
     <script>
     (function(){
 
@@ -130,16 +148,48 @@
             var burger = $$("#js-burger"),
                 navAside = $$("#js-nav-aside"),
                 article = $$("#js-article"),
+                boxSection = $$("#js-box-section"),
                 burgerClick = false,
                 navAsideMove = 300,
                 body = document.body || document.documentElement,
-                touchStartX,touchEndX;
+                touchStartX,touchEndX,
+                loginBtn = $$("#js-login-button"),
+                loginDiv = $$("#js-login"),
+                regBtn = $$("#js-reg-button"),
+                regDiv = $$("#js-reg"),
+                mask = $$("#js-mask");
+
+            loginBtn.onclick = function(){
+                loginDiv.style.display = "block";
+                maskShow(true);
+            };
+
+            regBtn.onclick = function(){
+                regDiv.style.display = "block";
+                maskShow(true);
+            };
+            mask.onclick = function(){
+                loginDiv.style.display = "none";
+                regDiv.style.display = "none";
+                maskShow(false);
+            }
+            function maskShow(toggle){
+                if(toggle){
+                    mask.style.display = "block";
+                    body.style.overflow = "hidden";
+                }
+                else{
+                    mask.style.display = "none";
+                    body.style.overflow = "auto";
+                }
+            }
+
             burger.onclick = function(event){
                 event.stopPropagation();
                 navAsideTransform();  
                 
             };
-            article.addEventListener("click",function(){
+            boxSection.addEventListener("click",function(){
                 if(burgerClick){
                     navAsideTransform(); 
                 }
@@ -186,12 +236,58 @@
             document.addEventListener("touchmove",handleTouch);
             document.addEventListener("touchstart",handleTouch);
             document.addEventListener("touchend",handleTouch);
+
+            var app4 = new Vue({
+              el: '#js-article',
+              data: {
+                boxes: [
+                  { tab: 'Java',
+                    date: new Date().getDate(),
+                    title:"星灵吉他",
+                    content:"<h1>内容</h1>",
+                    smallTabs:[
+                        {
+                            text:"鸡汤",
+                            href:"#"
+                        },
+                        {
+                            text:"打鸡血了",
+                            href:"#"
+                        }
+                    ],
+                    href:"ccccccc" 
+                  }
+                ]
+              }
+            });
         };
         
         
     }());
+
     
     </script>
+
+    <div class="mask" id="js-mask"></div>
+    <div class="login" id="js-login">
+        <div>
+            <form action="">
+                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
+                <label class="form-label" for="">密码<input required class="input" type="password"></label>
+                <button class="submit">登录</button>
+            </form>
+        </div>
+    </div>
+    <div class="register" id="js-reg">
+        <div>
+            <form action="">
+                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
+                <label class="form-label" for="">密码<input required class="input" type="password"></label>
+                <label class="form-label" for="">重复密码<input required class="input" type="password"></label>
+                <button class="submit">注册</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

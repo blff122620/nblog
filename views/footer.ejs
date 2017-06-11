@@ -1,0 +1,163 @@
+    <footer>
+        <div class="logo-footer">Beau的家园</div>
+        <div class="nav-footer">
+            <ul>
+                <a href="#" class="f-nav-selected">
+                    <li>主页</li>
+                </a>
+                <a href="#">
+                    <li>关于我</li>
+                </a>
+                <a href="#">
+                    <li>博客分类</li>
+                </a>
+                <a href="mailto:blff122620@163.com">
+                    <li>联系我</li>
+                </a>
+            </ul>
+        </div>
+        <div class="info-footer">
+            不要停留在过去，不要去回忆从前，不管发生什么，都不要放弃，坚持走下去，肯定会有意想不到的风景。也许不是你本来想走的路，也不是你本来想登临的山顶，可另一条路有另一条路的风景，不同的山顶也一样会有美丽的日出，不要念念不忘原来的路。
+        </div>
+        <div class="copyright">
+            © 2017 - copyright. All Rights Reserved. Designed &amp; Developed by Beau. <a href="http://www.bx1987.com" target="blank">www.bx1987.com</a>
+        </div>
+        <div class="contact">
+            <a href="https://github.com/blff122620" target="blank">
+                <div class="git" title="github"></div>
+            </a>
+            <a href="https://www.facebook.com/xu.beau" target="blank">
+                <div class="facebook" title="facebook"></div>
+            </a>
+           
+        </div>
+    </footer>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script>
+    (function(){
+
+        window.onload = function(){
+            var burger = $$("#js-burger"),
+                navAside = $$("#js-nav-aside"),
+                article = $$("#js-article"),
+                boxSection = $$("#js-box-section"),
+                burgerClick = false,
+                navAsideMove = 300,
+                body = document.body || document.documentElement,
+                touchStartX,touchEndX,
+                loginBtn = $$("#js-login-button"),
+                loginDiv = $$("#js-login"),
+                regBtn = $$("#js-reg-button"),
+                regDiv = $$("#js-reg"),
+                mask = $$("#js-mask");
+
+            loginBtn.onclick = function(){
+                loginDiv.style.display = "block";
+                maskShow(true);
+            };
+
+            regBtn.onclick = function(){
+                regDiv.style.display = "block";
+                maskShow(true);
+            };
+            mask.onclick = function(){
+                loginDiv.style.display = "none";
+                regDiv.style.display = "none";
+                maskShow(false);
+            }
+            function maskShow(toggle){
+                if(toggle){
+                    mask.style.display = "block";
+                    body.style.overflow = "hidden";
+                }
+                else{
+                    mask.style.display = "none";
+                    body.style.overflow = "auto";
+                }
+            }
+
+            burger.onclick = function(event){
+                event.stopPropagation();
+                navAsideTransform();  
+                
+            };
+            boxSection.addEventListener("click",function(){
+                if(burgerClick){
+                    navAsideTransform(); 
+                }
+            });
+            function handleTouch(event){
+                switch(event.type){
+                    case "touchmove":
+                        if(navAsideOpen()){
+                            event.preventDefault();
+                        }
+                        break;
+                    case "touchstart":
+                        touchStartX = event.changedTouches[0].clientX;
+                        break;
+                    case "touchend":
+                        touchEndX = event.changedTouches[0].clientX;
+                        if(navAsideOpen() && touchEndX-touchStartX>0){
+                            //向右滑动
+                            navAsideTransform(); 
+                        }
+                        break;
+
+                }
+            }
+            function navAsideOpen(){
+                if(navAside.classList.contains("burger-click")){
+                    return true;
+                }
+                return false;
+            }
+            function navAsideTransform(){
+                navAside.classList.toggle("burger-click");
+                  
+                burgerClick = !burgerClick;
+                if(burgerClick){
+                    body.style.transform = "translateX(-"+navAsideMove+"px)";
+                    body.style.overflow = "hidden";
+                }
+                else{
+                    body.style.transform = "translateX(0)";
+                    body.style.overflow = "auto";
+                }  
+            }
+            document.addEventListener("touchmove",handleTouch);
+            document.addEventListener("touchstart",handleTouch);
+            document.addEventListener("touchend",handleTouch);
+
+        };
+        
+        
+    }());
+
+    
+    </script>
+
+    <div class="mask" id="js-mask"></div>
+    <div class="login" id="js-login">
+        <div>
+            <form action="">
+                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
+                <label class="form-label" for="">密码<input required class="input" type="password"></label>
+                <button class="submit">登录</button>
+            </form>
+        </div>
+    </div>
+    <div class="register" id="js-reg">
+        <div>
+            <form action="">
+                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
+                <label class="form-label" for="">密码<input required class="input" type="password"></label>
+                <label class="form-label" for="">重复密码<input required class="input" type="password"></label>
+                <button class="submit">注册</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
