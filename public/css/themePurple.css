@@ -30,10 +30,10 @@ button.submit:hover
     background: #5c6bc0;
 }
 
-button.submit:active
 
 .n-box .n-read a,
-.n-box .n-tab-smaller a:hover
+.n-box .n-tab-smaller a:hover,
+main .alert p 
 {
     color:#5c6bc0;
 
@@ -48,7 +48,8 @@ button.submit:active
     background: #5765b5;
 }
 
-button.submit{
+button.submit,
+main .alert{
     border:1px solid #5c6bc0;   
 }
 

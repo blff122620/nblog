@@ -33,6 +33,7 @@
         </div>
     </footer>
     <script type="text/javascript" src="js/util.js"></script>
+    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
     <script>
     (function(){
@@ -53,11 +54,13 @@
                 mask = $$("#js-mask");
 
             loginBtn.onclick = function(){
+                loginBtn.classList.remove("underline");
                 loginDiv.style.display = "block";
                 maskShow(true);
             };
 
             regBtn.onclick = function(){
+                regBtn.classList.remove("underline");
                 regDiv.style.display = "block";
                 maskShow(true);
             };
@@ -72,6 +75,8 @@
                     body.style.overflow = "hidden";
                 }
                 else{
+                    loginBtn.classList.add("underline");
+                    regBtn.classList.add("underline");
                     mask.style.display = "none";
                     body.style.overflow = "auto";
                 }
@@ -129,6 +134,67 @@
             document.addEventListener("touchmove",handleTouch);
             document.addEventListener("touchstart",handleTouch);
             document.addEventListener("touchend",handleTouch);
+            
+
+            new Vue({
+                el: '#js-reg-form',
+                data:{
+                    name:'',
+                    password:'',
+                    repassword:'',
+                    message:''
+                },
+                methods: {
+                    check: function (event) {
+                        var vm = this;
+                        axios.post('/signup/check', this.$data)
+                        .then(function (response) {
+                            if(response.data.status == 'valid'){
+                                vm.$el.submit();
+                            }
+                            else{
+                                vm.message = response.data.msg;
+                            }
+                                
+                        })
+                        .catch(function (error) {
+                            vm.message = '抱歉，服务器出错了';
+                        });
+                        
+                        
+                    }
+                }
+            });
+
+            new Vue({
+                el: '#js-login-form',
+                data:{
+                    name:'',
+                    password:'',
+                    message:''
+                },
+                methods: {
+                    check: function (event) {
+                        var vm = this;
+                        axios.post('/signin/check', this.$data)
+                        .then(function (response) {
+                            if(response.data.status == 'valid'){
+                                vm.$el.submit();
+                            }
+                            else{
+                                vm.message = response.data.msg;
+                            }
+                                
+                        })
+                        .catch(function (error) {
+                            vm.message = '抱歉，服务器出错了';
+                        });
+                        
+                        
+                    }
+                }
+            });
+
 
         };
         
@@ -139,25 +205,8 @@
     </script>
 
     <div class="mask" id="js-mask"></div>
-    <div class="login" id="js-login">
-        <div>
-            <form action="">
-                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
-                <label class="form-label" for="">密码<input required class="input" type="password"></label>
-                <button class="submit">登录</button>
-            </form>
-        </div>
-    </div>
-    <div class="register" id="js-reg">
-        <div>
-            <form action="">
-                <label class="form-label" for="">用户名<input required class="input" type="text"></label>
-                <label class="form-label" for="">密码<input required class="input" type="password"></label>
-                <label class="form-label" for="">重复密码<input required class="input" type="password"></label>
-                <button class="submit">注册</button>
-            </form>
-        </div>
-    </div>
+    <%- include('components/login') %>
+    <%- include('components/register') %>
 </body>
 
 </html>
