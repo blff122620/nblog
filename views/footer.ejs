@@ -1,20 +1,7 @@
     <footer>
         <div class="logo-footer">Beau的家园</div>
         <div class="nav-footer">
-            <ul>
-                <a href="#" class="f-nav-selected">
-                    <li>主页</li>
-                </a>
-                <a href="#">
-                    <li>关于我</li>
-                </a>
-                <a href="#">
-                    <li>博客分类</li>
-                </a>
-                <a href="mailto:blff122620@163.com">
-                    <li>联系我</li>
-                </a>
-            </ul>
+            <%- include('components/nav') %>
         </div>
         <div class="info-footer">
             不要停留在过去，不要去回忆从前，不管发生什么，都不要放弃，坚持走下去，肯定会有意想不到的风景。也许不是你本来想走的路，也不是你本来想登临的山顶，可另一条路有另一条路的风景，不同的山顶也一样会有美丽的日出，不要念念不忘原来的路。
@@ -47,27 +34,49 @@
                 navAsideMove = 300,
                 body = document.body || document.documentElement,
                 touchStartX,touchEndX,
-                loginBtn = $$("#js-login-button"),
+                loginBtn = $$(".js-login-button"),
                 loginDiv = $$("#js-login"),
-                regBtn = $$("#js-reg-button"),
+                regBtn = $$(".js-reg-button"),
                 regDiv = $$("#js-reg"),
-                mask = $$("#js-mask");
+                mask = $$("#js-mask"),
+                popX = $$(".js-pop-x"),
+                navSlideIndex = 1;
+            loginBtn.forEach(function(element,index) {
+                element.onclick = function(){
+                    regLogShow(element,loginDiv,index);
+                };
+            });
+            
+            regBtn.forEach(function(element,index){
+                element.onclick = function(){
+                    regLogShow(element,regDiv,index);
+                };
+            });
 
-            loginBtn.onclick = function(){
-                loginBtn.classList.remove("underline");
-                loginDiv.style.display = "block";
-                maskShow(true);
-            };
+            popX.forEach(function(ele){
+                ele.onclick =function(event){
+                    event.stopPropagation();
+                    regLogDisappear();
+                }
+            });
 
-            regBtn.onclick = function(){
-                regBtn.classList.remove("underline");
-                regDiv.style.display = "block";
+            function regLogShow(ele,whatDiv,index){
+                if(index ==navSlideIndex){
+                    navAsideTransform();
+                }
+                ele.classList.remove("underline");
+                whatDiv.style.display = "block";
+                whatDiv.scrollIntoView();
                 maskShow(true);
-            };
+            }
+        
             mask.onclick = function(){
+                regLogDisappear();
+            }
+            function regLogDisappear(){
                 loginDiv.style.display = "none";
                 regDiv.style.display = "none";
-                maskShow(false);
+                maskShow(false,loginBtn,regBtn);
             }
             function maskShow(toggle){
                 if(toggle){
@@ -75,8 +84,11 @@
                     body.style.overflow = "hidden";
                 }
                 else{
-                    loginBtn.classList.add("underline");
-                    regBtn.classList.add("underline");
+                    for(var i=1;i<arguments.length;i++){
+                        arguments[i].forEach(function(element){
+                            element.classList.add("underline");
+                        });
+                    }
                     mask.style.display = "none";
                     body.style.overflow = "auto";
                 }

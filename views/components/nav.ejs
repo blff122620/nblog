@@ -1,0 +1,26 @@
+<ul id="js-nav">
+
+    <% for(var i=0; i<nav.length; i++){ %>
+        <% if(nav[i].display) {%>
+         <li><a 
+           
+            <%if(nav[i].href){%>
+                href="<%= nav[i].href%>"
+            <%}%> 
+            class="underline 
+                <%if(nav[i].selected){%>
+                    selected
+                <%}%> 
+                <%if(nav[i].addClass){%>
+                    <%= nav[i].addClass%>
+                <%}%> 
+            "
+            ><%= nav[i].value%>
+         </a></li>
+         <% } %>
+    <% }%>
+    <% if(user) {%>
+    <li><a class="underline"><%=user.name%></a></li>
+    <li><a class="underline" href="/signout" id="js-signout">注销</a></li>
+    <% }%>
+</ul>

@@ -7,6 +7,7 @@ var checkLogin = require('../middlewares/check').checkLogin;
 //   eg: GET /posts?author=xxx
 router.get('/', function(req, res, next) {
   // res.send(req.flash());
+  console.log(res.locals.nav);
   res.render("index.ejs");
 });
 

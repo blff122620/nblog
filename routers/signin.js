@@ -22,7 +22,7 @@ router.post('/check',function(req,res,next){
   UserModel.getUserByName(name)
     .then(function (user) {
       if (!user) {
-        req.flash('error', '用户不存在');
+        // req.flash('error', '用户不存在');
         message.status = "notvalid";
         message.msg = "用户不存在";
         res.end(JSON.stringify(message));
@@ -34,7 +34,7 @@ router.post('/check',function(req,res,next){
         res.end(JSON.stringify(message));
       }
       if (password && sha1(password) !== user.password) {
-        req.flash('error', '用户名或密码错误');
+        // req.flash('error', '用户名或密码错误');
         message.status = "notvalid";
         message.msg = "用户名或密码错误";
         res.end(JSON.stringify(message));

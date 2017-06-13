@@ -67,12 +67,12 @@ header {
     font-size: 3em;
 }
 main .alert{
-    float: left;
-    position: relative;
+    
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.3em;
-    top:-50px;
+    top:130px;
     border-radius: 4px;
     padding: .5em 1em;
 }
@@ -289,7 +289,7 @@ footer a {
     color: #fff;
 }
 
-.nav-footer .f-nav-selected {
+.nav-footer .selected {
     color: #fff;
 }
 
@@ -360,6 +360,13 @@ footer a {
         display: block;
         right: .8em;
         cursor: pointer;
+    }
+    /*.login,.register{
+        top:10%;
+    }*/
+    main .alert{
+        top:70px; 
+        font-size: 1em;  
     }
     body {
         position: absolute;

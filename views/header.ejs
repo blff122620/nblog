@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width
         ,initial-scale=1.0
+        ,minimum-scale=1.0
+        ,maximum-scale=1.0
         ,user-scalable=no">
     <title><%= blog.title %></title>
     <link rel="stylesheet" href="css/reset.css">
@@ -20,26 +22,11 @@
     <header>
         <a href="http://www.bx1987.com" target="blank"><div class="logo">Beau的家园</div></a>
         <nav class="nav">
-            <ul>
-                <li><a href="#" class="underline">主页</a></li>
-                <li><a href="#" class="nav-selected">关于我</a></li>
-                <li><a href="#" class="underline">博客分类</a></li>
-                <li><a href="mailto:blff122620@163.com" class="underline">联系我</a></li>
-                <li><a class="underline" id="js-login-button">立即登录</a></li>
-                <li><a class="underline" id="js-reg-button">免费注册</a></li>
-                <li><a class="underline" href="/signout" id="js-signout">注销</a></li>
-            </ul>
+            <%- include('components/nav') %>
         </nav>
         <div class="burger" id="js-burger"></div>
         <aside class="nav-aside" id="js-nav-aside">
-            <ul>
-            <li><a href="#" class="">主页</a></li>
-            <li><a href="#" class="aside-selected">关于我</a></li>
-            <li><a href="#" class="">博客分类</a></li>
-            <li><a href="mailto:blff122620@163.com" class="">联系我</a></li>
-            <li><a href="/login">立即登录</a></li>
-            <li><a href="/register">免费注册</a></li>
-            </ul>
+            <%- include('components/nav') %>
             <div class="nav-aside-copyright">
                 <span>Beau的家园</span><br/> Designed &amp; Developed by Beau. 
             </div>

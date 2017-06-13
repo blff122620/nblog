@@ -38,7 +38,7 @@ body{
     font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
 }
 
-.underline::before,.nav-selected::after{
+.underline::before,.nav .selected::after{
     content: "";
     position: absolute;
     bottom:0;
@@ -73,14 +73,16 @@ body{
 
 button.submit{
     border-radius: .2em;
-    font-size: 1.8em;
-    line-height: 1.3;
+    font-size: 1.6em;
+    line-height: 1.2;
     padding: .4em 1em;
 }
 .login,.register{
     z-index: 101;
     display: none;
     position: fixed;
+    width: 320px;
+    overflow: hidden;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -88,17 +90,26 @@ button.submit{
     border-radius: 5px;
 }
 .login .tips,.register .tips{
-    font-size: 1.6em;
+    font-size: 1.2em;
     color: red;
-    line-height: 40px;
+    line-height: 2.5;
 }
 .login .pop-header,.register .pop-header{
+    position: relative;
     background: #f3f3f3;
     padding: 15px;
     border-radius:inherit;
 }
+.login .pop-header span,.register .pop-header span{
+    position: absolute;
+    top:50%;
+    right: 5%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.6em;
+}
 .login .pop-content,.register .pop-content{ 
-    padding: 20px 40px 20px;
+    padding: 20px 30px 20px;
 }
 .login button.submit,.register button.submit{
     float: right;
@@ -110,6 +121,7 @@ button.submit{
 }
 .input{
     display: block;
+    width: 100%;
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;

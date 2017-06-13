@@ -49,6 +49,34 @@ app.use(function (req, res, next) {
   res.locals.user = req.session.user;
   res.locals.success = req.flash('success').toString();
   res.locals.error = req.flash('error').toString();
+  res.locals.nav = [
+    {
+      href:'/',
+      value:'主页',
+      selected:true,
+      display:true
+    },
+    {
+      href:'mailto:blff122620@163.com',
+      value:'联系我',
+      selected:false,
+      display:true
+    },
+    {
+      href:'',
+      value:'立即登录',
+      addClass:'js-login-button',
+      selected:false,
+      display:!res.locals.user
+    },
+    {
+      href:'',
+      value:'免费注册',
+      addClass:'js-reg-button',
+      selected:false,
+      display:!res.locals.user
+    }
+  ];
   next();
 });
 
