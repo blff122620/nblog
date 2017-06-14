@@ -25,7 +25,8 @@ button.submit{
 .paging a.p-selected li,
 ::selection,
 footer,
-button.submit:hover
+button.submit:hover,
+.comments .c-top::before
 {
     background: #5c6bc0;
 }
@@ -33,8 +34,11 @@ button.submit:hover
 
 .n-box .n-read a,
 .n-box .n-tab-smaller a:hover,
-main .alert p,
-.login .pop-header span:hover,.register .pop-header span:hover
+.alert p,
+.login .pop-header span:hover,
+.register .pop-header span:hover,
+.n-box .n-read-time .edit:hover,
+.comments .c-top p
 {
     color:#5c6bc0;
 
@@ -50,8 +54,14 @@ main .alert p,
 }
 
 button.submit,
-main .alert{
+.alert p{
     border:1px solid #5c6bc0;   
+}
+.alert.error p{
+    border:1px solid red;
+}
+.alert.error p{
+    color: red;
 }
 
 

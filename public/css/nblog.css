@@ -3,6 +3,7 @@ header {
     height: 190px;
     width: 1000px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .logo,
@@ -13,7 +14,7 @@ header {
 }
 
 .logo {
-    font-size: 4.2em;
+    font-size: 3.2em;
 }
 
 .burger {
@@ -47,10 +48,11 @@ header {
     bottom: 0;
     right: 0;
     width: 300px;
+    text-align: left;
 }
 .nav-aside a{
     color: #fff;
-    font-size: 3em;
+    font-size: 2.5em;
     line-height: 70px;
 }
 
@@ -66,13 +68,15 @@ header {
     line-height: 50px;
     font-size: 3em;
 }
-main .alert{
-    
+.alert{
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    top:138px;
+}
+.alert p{
+    display: inline-block;
     font-size: 1.3em;
-    top:130px;
     border-radius: 4px;
     padding: .5em 1em;
 }
@@ -91,7 +95,7 @@ main .alert{
     width: 100%;
 }
 
-.n-box>div {
+.n-box>div ,.n-box-form{
     padding: 0 120px 0 140px;
 }
 
@@ -125,6 +129,12 @@ main .alert{
     margin: 25px 0 30px;
     font-size: 4em;
     line-height: 1.25;
+    
+}
+.n-box .n-title,
+.n-box .n-content{
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .n-box .n-content {
@@ -146,9 +156,24 @@ main .alert{
     background: #eee;
 }
 
-.n-box .n-read {
+.n-box .n-read,
+.n-box .n-read-time {
     padding-top: 30px;
     padding-bottom: 30px;
+    
+}
+.n-box .n-read-time,
+.n-box .n-read-time a{
+    color:#bbb;
+}
+.n-box .n-read-time a{
+    position: relative;
+    padding-bottom: 2px;
+    font-size: 1.2em;
+    line-height: 2;
+}
+.n-box .n-read-time .edit{
+    cursor: pointer;
 }
 
 .n-box .n-read a {
@@ -164,15 +189,17 @@ main .alert{
     right: 10px;
     bottom: -35px;
     cursor: default;
+    color: #aaa;
 }
 
 .n-box .n-tab-smaller a {
     margin-left: 4px;
-    color: #ccc;
+    color: #aaa;
 }
 .n-box .comments{
     border-top: 1px solid #eee;
-    height: 300px;
+    /*height: 300px;*/
+    padding-bottom:40px;
 }
 .comments .c-top{  
     position: relative;
@@ -184,7 +211,6 @@ main .alert{
     bottom: 0;
     width: 50px; 
     height: 4px;
-    background: #000;
 }
 .comments .c-top::after{
     content:"";
@@ -231,6 +257,22 @@ main .alert{
     position: absolute;
     right: 0;
     bottom: 0;
+}
+.comments .c-list{
+    padding-top:20px;
+    font-size: 1.3em;
+}
+.comments .c-list .c-detail{
+    margin: 5px 0;
+    color: #ccc;
+    font-size:.8em;
+}
+.comments .c-list .c-date{
+    float: left;
+}
+.comments .c-list .c-user{
+    overflow: hidden;
+    text-align: right;
 }
 
 
@@ -353,7 +395,7 @@ footer a {
         height: 100px;
     }
     header .logo {
-        font-size: 2.8em;
+        font-size: 2.0em;
         left: .7em;
     }
     header .burger {
@@ -364,9 +406,9 @@ footer a {
     /*.login,.register{
         top:10%;
     }*/
-    main .alert{
-        top:70px; 
-        font-size: 1em;  
+    .alert{
+        font-size: 1em;
+        top:68px;
     }
     body {
         position: absolute;
@@ -385,7 +427,8 @@ footer a {
     .n-box .n-tab {
         right: 0;
     }
-    .n-box>div {
+    .n-box>div ,
+    .n-box-form{
         padding: 0 .5em 0 1em;
     }
     .n-box .n-read{
@@ -395,5 +438,17 @@ footer a {
         font-size: 1.5em;
         padding: .5em;
     }
+
+    .n-box .pub{
+        padding: 0 20px;
+    }
+    .n-box .pub .input,.n-box .pub .textarea{
+        font-size: 1em;
+    }
+
+    .comment-form{
+        margin-right: 5%;
+    }
+
 
 }

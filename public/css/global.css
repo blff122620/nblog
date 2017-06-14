@@ -32,6 +32,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #fff;
 }
 
 body{
@@ -126,5 +127,33 @@ button.submit{
     border-radius: 5px;
     border: 1px solid #ccc;
     height: 30px;
-    font-size: 2em;
+    font-size: 1.4em;
+    padding:1px 2px;
+}
+.textarea{
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    /*height: 30px;*/
+    font-size: 1.6em;
+    padding:6px 6px;
+}
+.select{
+    display: block;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    /*height: 30px;*/
+    font-size: 1.6em;
+    padding:1px 2px;
+}
+.n-box .pub{
+    margin:20px 0;
+}
+
+.n-box .pub-btn{
+    float: right;
+    margin-bottom: 20px;
 }

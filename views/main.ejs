@@ -1,36 +1,21 @@
 <main>
-    <%- include('components/notification') %>
+    
     <section id="js-box-section">
         <article id="js-article">
-            <div class="n-box box-shadow">
-                <div class="n-top"></div>
-                <div class="n-tab overflow-ellipse"><a title="鸡汤">鸡汤</a></div>
-                <div class="n-date">2017.07.01</div>
-                <div class="n-title">过往，终是回不去的曾经。</div>
-                <div class="n-content">当你简约、释然了自己的时候，你会发现另一份生命中的快乐。那快乐是发自一颗简单的心，那快乐是从心灵的草地里欢快的迸发出来，通过你温柔的眼眸和开心的笑声来传递。所以，心宽便心悦，你人生的天空是什么颜色，往往取决于你对人生的态度和对于自己情绪的驾驭。</div>
-                <div class="n-tab-smaller">
-                    <a href="">鸡汤</a>
-                    <a href="">暖文</a>
-                    <a href="">爱心词汇</a>
+            <% if(posts.length>0){%>
+            <% posts.forEach(function (post) { %>
+                <%- include('components/box', { post: post }) %>
+            <% }); %>
+            <% }else{%>
+                <div class="alert">
+                    <p>朋友，您的主页还空空如也，写篇文章先~</p>
                 </div>
-                <div class="n-read"><a href="" class="underline">阅读原文</a></div>
-            </div>
-            <div class="n-box box-shadow">
-                <div class="n-top"><img src="img/gz.jpeg" alt=""></div>
-                <div class="n-tab overflow-ellipse"><a title="鸡汤">鸡汤</a></div>
-                <div class="n-date">2017.07.01</div>
-                <div class="n-title">过往，终是回不去的曾经。</div>
-                <div class="n-content">当你简约、释然了自己的时候，你会发现另一份生命中的快乐。那快乐是发自一颗简单的心，那快乐是从心灵的草地里欢快的迸发出来，通过你温柔的眼眸和开心的笑声来传递。所以，心宽便心悦，你人生的天空是什么颜色，往往取决于你对人生的态度和对于自己情绪的驾驭。</div>
-                <div class="n-tab-smaller">
-                    <a href="">鸡汤</a>
-                    <a href="">暖文</a>
-                    <a href="">爱心词汇</a>
-                </div>
-                <div class="n-read"><a href="" class="underline">阅读原文</a></div>
-            </div>
+                 <%- include('components/pub-box') %> 
+            <% }%>
+            
         </article>
         
-        <div class="paging">
+        <!--<div class="paging">
             <ul>
                 <a href="">
                     <li class="box-shadow">1</li>
@@ -45,6 +30,6 @@
                     <li class="box-shadow">4</li>
                 </a>
             </ul>
-        </div>
+        </div>-->
     </section>
 </main>

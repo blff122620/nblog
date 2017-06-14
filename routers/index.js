@@ -1,5 +1,6 @@
 module.exports = function (app) {
   app.get('/', function (req, res) {
+    res.locals.indexShowUnderline = true;//默认显示首页下划线
     res.redirect('/posts');
   });
   app.use('/signup', require('./signup'));

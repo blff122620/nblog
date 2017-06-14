@@ -15,6 +15,7 @@ router.get('/', checkNotLogin, function(req, res, next) {
 // GET /signup 注册页
 router.post('/check', function(req, res, next) {
   var name = req.fields.name;
+  var nickname = req.fields.nickname;
   var password = req.fields.password;
   var repassword = req.fields.repassword;
   var message = {
@@ -32,6 +33,9 @@ router.post('/check', function(req, res, next) {
       try {
         if (name.length === 0 ) {
           throw new Error('请输入用户名');
+        }
+        if (nickname.length === 0 ) {
+          throw new Error('请输入昵称');
         }
         if (!(name.length >= 1 && name.length <= 10)) {
           throw new Error('名字请限制在 1-10 个字符');
@@ -68,6 +72,7 @@ router.post('/check', function(req, res, next) {
 router.post('/', checkNotLogin, function(req, res, next) {
   
   var name = req.fields.name;
+  var nickname = req.fields.nickname;
   // var gender = req.fields.gender;
   // var bio = req.fields.bio;
   // var avatar = req.files.avatar.path.split(path.sep).pop();
@@ -83,6 +88,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
   // 待写入数据库的用户信息
   var user = {
     name: name,
+    nickname:nickname,
     password: password
     // gender: gender,
     // bio: bio,
@@ -97,7 +103,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
       // delete user.password;
       // req.session.user = user;
       // 写入 flash
-      req.flash('success', '注册成功,欢迎您来到博客家园，点击右上方即可登录');
+      req.flash('success', '注册成功，欢迎您的到来，点击右上方即可登录');
       // 跳转到首页
       res.redirect('/posts');
     })

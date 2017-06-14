@@ -1,0 +1,29 @@
+<%- include('header') %>
+    <main>
+        <section id="js-box-section">
+            <article id="js-article">
+                <div class="n-box box-shadow">
+                    <% if (post.img){%>
+                    <div class="n-top"><img src="<%= post.img %>" alt=""></div>
+                    <% }%>
+                    <div class="n-tab overflow-ellipse"><a title="<%= post.tab %>"><%= post.tab %></a></div>
+                    <div class="n-date"><%= post.date %></div>
+                    <div class="n-title"><%= post.title %></div>
+                    <div class="n-content"><%- post.content %></div>
+                    <div class="n-tab-smaller">
+                        <a href="/posts?author=<%= post.author._id %>">作者：<%= post.author.nickname %></a>
+                        
+                    </div>
+                    <div class="n-read-time">阅读次数(<%= post.pv %>)&nbsp;&nbsp;
+                    <% if (user && post.author._id && user._id.toString() === post.author._id.toString()) { %>
+                    <a href="/posts/<%=post._id%>/editor" class="edit">编辑</a>
+                    &nbsp;&nbsp;<a href="/posts/<%=post._id%>/removal" onclick="return confirm('您真的决定删除了吗？可没有后悔药啊~');" class="edit">删除</a>
+                    <% }%>
+                    </div>
+                    <%- include('components/comments') %>
+                </div>
+            </article>
+            
+        </section>
+    </main>
+<%- include('footer') %>

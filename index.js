@@ -49,18 +49,31 @@ app.use(function (req, res, next) {
   res.locals.user = req.session.user;
   res.locals.success = req.flash('success').toString();
   res.locals.error = req.flash('error').toString();
+  res.locals.authorName = "";//logo的名字
   res.locals.nav = [
     {
-      href:'/',
+      href:'/posts',
       value:'主页',
       selected:true,
       display:true
     },
     {
-      href:'mailto:blff122620@163.com',
-      value:'联系我',
+      href:res.locals.user?'/posts?author=' + res.locals.user._id:'/',
+      value:'我的文章',
       selected:false,
-      display:true
+      display:res.locals.user
+    },
+    {
+      href:'/posts/publisher',
+      value:'发表文章',
+      selected:false,
+      display:res.locals.user
+    },
+    {
+      href:'mailto:blff122620@163.com',
+      value:'联系博主',
+      selected:false,
+      display:!res.locals.user
     },
     {
       href:'',
@@ -82,6 +95,15 @@ app.use(function (req, res, next) {
 
 // 路由
 routers(app);
+
+//处理所有的最后的消息，包括异常，并返回主页
+// app.use(function(err, req, res, next) {
+//   // res.status(err.status || 500);
+//   res.render('index', {
+//     message: err.message,
+//     error: err.message
+//   });
+// });
 
 // 监听端口，启动程序
 app.listen(config.port, function () {

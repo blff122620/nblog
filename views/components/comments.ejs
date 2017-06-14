@@ -1,0 +1,25 @@
+<div class="comments ">
+    <div class="c-top">
+        <p>0 评论</p>
+    </div>
+    <div class="c-list">
+        <div class="c-data">#1 评论内容</div>
+        <div class="c-detail">
+            <div class="c-date">发布时间：1111-11-11 11：11：11</div>
+            <div class="c-user">评论人:baox</div>
+        </div>
+    </div>
+    <div class="c-content">
+        <form action="/posts/<%= post._id %>/editor" method="post" class="comment-form">
+        <textarea class="textarea comment-textarea" name="comment" id="" cols="30" rows="7"  placeholder="
+  1.有啥说啥
+    
+  2.想啥说啥
+
+  3.随便说啥"></textarea>
+        </form>
+    </div>
+    <div class="c-submit">
+        <button class="submit">提交评论</button>
+    </div>
+</div>

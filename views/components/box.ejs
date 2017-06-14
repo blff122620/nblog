@@ -1,0 +1,15 @@
+<div class="n-box box-shadow">
+    <% if (post.img){%>
+        <div class="n-top"><img src="<%= post.img %>" alt=""></div>
+    <% }%>
+    <div class="n-tab overflow-ellipse"><a title="<%= post.tab %>"><%= post.tab %></a></div>
+    <div class="n-date"><%= post.date %></div>
+    <div class="n-title"><%= post.title %></div>
+    <div class="n-content">
+        <%- post.content %></div>
+        
+    <div class="n-tab-smaller">
+        阅读次数(<%= post.pv %>)&nbsp;&nbsp;&nbsp;<a href="/posts?author=<%= post.author._id %>">作者：<%= post.author.nickname %> </a>
+    </div>
+    <div class="n-read"><a href="/posts/<%= post._id %>" class="underline">阅读全文</a></div>
+</div>

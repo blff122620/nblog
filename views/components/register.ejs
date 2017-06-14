@@ -8,6 +8,7 @@
             <label class="form-label" for="">用户名<input required maxlength="10" class="input" type="text" name="name" v-model="name"></label>
             <label class="form-label" for="">密码<input required maxlength="20" class="input" type="password" name="password" v-model="password"></label>
             <label class="form-label" for="">重复密码<input required maxlength="20" class="input" type="password" name="repassword" v-model="repassword"></label>
+            <label class="form-label" for="">昵称<input required maxlength="9" class="input" type="text" name="nickname" v-model="nickname"></label>
             <span class="tips">{{message}}</span><button class="submit" type="button" v-on:click="check($event)">注册</button>
         </form>
     </div>
