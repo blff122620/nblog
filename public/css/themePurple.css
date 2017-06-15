@@ -38,7 +38,9 @@ button.submit:hover,
 .login .pop-header span:hover,
 .register .pop-header span:hover,
 .n-box .n-read-time .edit:hover,
-.comments .c-top p
+.comments .c-top p,
+
+.comments .c-list .c-detail a:hover
 {
     color:#5c6bc0;
 

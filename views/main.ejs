@@ -2,6 +2,7 @@
     
     <section id="js-box-section">
         <article id="js-article">
+            <% if(posts){%>
             <% if(posts.length>0){%>
             <% posts.forEach(function (post) { %>
                 <%- include('components/box', { post: post }) %>
@@ -12,7 +13,7 @@
                 </div>
                  <%- include('components/pub-box') %> 
             <% }%>
-            
+            <% }%>
         </article>
         
         <!--<div class="paging">

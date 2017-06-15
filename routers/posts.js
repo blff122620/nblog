@@ -4,16 +4,20 @@ var utils = require('../lib/utils');
 var PostModel = require('../models/posts');
 var UserModel = require('../models/users');
 var checkLogin = require('../middlewares/check').checkLogin;
+var CommentModel = require('../models/comments');
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
 router.get('/', function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var author = req.query.author;
-  var nickname ;
+  var nickname ='';
   UserModel.getUserById(author)
     .then(function (user) {
-      nickname = user.nickname;
+      if(user){
+        nickname = user.nickname;
+      }
+      
     });
   PostModel.getPosts(author)
     .then(function (posts) {
@@ -21,7 +25,7 @@ router.get('/', function(req, res, next) {
       res.render('index', {
         posts: posts,
         date:utils.formatDate(new Date()),
-        authorName: nickname
+        authorName:nickname
       });
     })
     .catch(next);
@@ -92,7 +96,7 @@ router.get('/:postId', function(req, res, next) {
   .then(function (result) {
     var post = result[0];
     if (!post) {
-      
+      // res.redirect('back');
       throw new Error('该文章不存在');    
     }
 
@@ -162,14 +166,102 @@ router.get('/:postId/removal', checkLogin, function(req, res, next) {
     .catch(next);
 });
 
+router.get('/:postId/comment/',function(req,res,next){
+  var postId = req.params.postId;
+  var author = req.session.user?req.session.user._id:'';
+  var postAuthor = false;
+  Promise.all([
+    PostModel.getPostById(postId),
+    CommentModel.getComments(postId)
+    ])
+    .then(function(result){
+      if(result[0].author._id == author){
+        postAuthor = true;
+      }
+      result[1].forEach(function(item){
+        item["post_author"] = postAuthor;
+        item["session_author"] = author;
+      });
+      res.end(JSON.stringify(result[1]));
+    })
+    .catch(next);// 获取该文章所有留言
+});
 // POST /posts/:postId/comment 创建一条留言
-router.post('/:postId/comment', checkLogin, function(req, res, next) {
-  res.send(req.flash());
+router.post('/:postId/comment', function(req, res, next) {
+  
+  var postId = req.fields.postId;
+  var content = req.fields.comment;
+  var author = '';
+  var message = {
+    status:'notvalid',
+    result:''
+  };
+  var comment = {
+    postId: postId,
+    content: content
+  };
+  if(req.session.user){
+    author = req.session.user._id;
+    comment['author'] = author;
+  }
+  if(comment.content){
+    CommentModel.create(comment)
+      .then(function () {
+        // req.flash('success', '留言成功');
+        message.status = 'valid';
+        message.result = '留言成功';
+        // 留言成功后跳转到上一页
+        // res.redirect('back');
+        res.end(JSON.stringify(message));
+      })
+      .catch(next);
+  }else{
+    message.result = "朋友，您啥也没写啊";
+    res.end(JSON.stringify(message));
+  }
 });
 
 // GET /posts/:postId/comment/:commentId/remove 删除一条留言
-router.get('/:postId/comment/:commentId/remove', checkLogin, function(req, res, next) {
-  res.send(req.flash());
+router.get('/:postId/comment/:commentId/removal', checkLogin, function(req, res, next) {
+  var postId = req.params.postId;
+  var commentId = req.params.commentId;
+  var author = req.session.user._id;
+  var canDelComment = false;
+  Promise.all([
+    CommentModel.getRawCommentById(commentId),
+    PostModel.getPostById(postId)
+  ])
+    .then(function(result){
+      if (author ==result[1].author._id){
+        //这篇文章就是当前登陆用户的文章
+        canDelComment = true;
+      }
+      else if(result[0].author && result[0].author == author){
+        canDelComment = true;
+      }
+      
+    })
+    .then(function(){
+      if(canDelComment){
+        CommentModel.delCommentById(commentId)
+      
+        .then(function(){
+          CommentModel.getComments(postId)
+          .then(function(comment){
+            res.end(JSON.stringify(comment));
+          });
+          
+        });
+      }
+      else{
+        res.end("");
+      }
+    })
+    .catch(next);
+  
+  
+
+    
 });
 
 module.exports = router;

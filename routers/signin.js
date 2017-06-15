@@ -33,13 +33,15 @@ router.post('/check',function(req,res,next){
         message.msg = "请输入密码";
         res.end(JSON.stringify(message));
       }
-      if (password && sha1(password) !== user.password) {
-        // req.flash('error', '用户名或密码错误');
-        message.status = "notvalid";
-        message.msg = "用户名或密码错误";
-        res.end(JSON.stringify(message));
+      if(user){
+        if (!!password && 
+        sha1(password) !== user.password) {
+          // req.flash('error', '用户名或密码错误');
+          message.status = "notvalid";
+          message.msg = "用户名或密码错误";
+          res.end(JSON.stringify(message));
+        }
       }
-
       message.status = "valid";
       res.end(JSON.stringify(message));
     });

@@ -6,6 +6,13 @@ header {
     text-align: center;
 }
 
+.top-progress{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 2px;
+}
+
 .logo,
 .burger {
     position: absolute;
@@ -145,6 +152,9 @@ header {
     line-height: 1.8;
     text-indent: 2em;
 }
+.n-box .n-content img{
+    max-width: 100%;
+}
 
 .n-box .n-content::before {
     content: "";
@@ -187,7 +197,7 @@ header {
     position: relative;
     float: right;
     right: 10px;
-    bottom: -35px;
+    bottom: -38px;
     cursor: default;
     color: #aaa;
 }
@@ -259,13 +269,34 @@ header {
     bottom: 0;
 }
 .comments .c-list{
-    padding-top:20px;
-    font-size: 1.3em;
+    position: relative;
+    padding:20px 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.comments .c-list::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+    height: 1px;
+    background: #eee;
+}
+.comments .c-list .c-data{
+    font-size:1.8em;
+}
+.comments .c-list .c-data span{
+    font-size: .7em;
+    color:#ccc;
 }
 .comments .c-list .c-detail{
     margin: 5px 0;
+    
+    font-size:.7em;
+}
+.comments .c-list .c-detail,
+.comments .c-list .c-detail a{
     color: #ccc;
-    font-size:.8em;
 }
 .comments .c-list .c-date{
     float: left;
@@ -273,6 +304,14 @@ header {
 .comments .c-list .c-user{
     overflow: hidden;
     text-align: right;
+}
+.comments .c-submit .message{
+    position: relative;
+    bottom:-10px;
+    right: -25px;
+    float: right;
+    color: red;
+    border: 0px solid black;
 }
 
 
@@ -395,7 +434,7 @@ footer a {
         height: 100px;
     }
     header .logo {
-        font-size: 2.0em;
+        font-size: 1.7em;
         left: .7em;
     }
     header .burger {
@@ -434,6 +473,16 @@ footer a {
     .n-box .n-read{
         padding-left: 1.5em;
     }
+    .n-box .n-read-time{
+        margin-left: 10px;
+    }
+    .n-box .n-tab-smaller {
+        position: relative;
+        float: left;
+        left: 6px;
+        bottom: -10px;
+        
+    }
     footer .nav-footer li {
         font-size: 1.5em;
         padding: .5em;
@@ -449,6 +498,11 @@ footer a {
     .comment-form{
         margin-right: 5%;
     }
-
+    .logo-footer{
+        font-size: 2em;
+    }
+    .nav-aside-copyright>span{
+        font-size: 1.5em;
+    }
 
 }

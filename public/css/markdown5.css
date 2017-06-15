@@ -1,0 +1,135 @@
+
+
+
+.n-box .n-content p   {
+    font-size: 16px;
+    line-height: 150%;
+    max-width: 540px;
+    max-width: 960px;
+    font-weight: 400;
+     color: #333333
+}
+
+
+.n-box .n-content h1, .n-box .n-content h2, .n-box .n-content h3, .n-box .n-content h4 {
+    color: #111111;
+    font-weight: 400;
+}
+
+.n-box .n-content h2, .n-box .n-content h3, .n-box .n-content h4, .n-box .n-content h5, .n-box .n-content p {
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.n-box .n-content h1 {
+    margin-bottom: 10px;
+    font-size:300%;
+    padding: 0px;
+    font-variant:small-caps;
+}
+
+.n-box .n-content h2 {
+    font-size:150%;
+    margin: 24px 0 6px; 
+}
+
+.n-box .n-content h3 {
+    font-size:120%;
+}
+.n-box .n-content h4 {
+    font-size:100%;
+    font-variant:small-caps;
+
+}
+.n-box .n-content h5 {
+    font-size:80%;
+    font-weight: 100;
+}
+
+.n-box .n-content h6 {
+    font-size:80%;
+    font-weight: 100;
+    color:red;
+    font-variant:small-caps;
+}
+.n-box .n-content a {
+    color: grey;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+.n-box .n-content a:hover {
+    text-decoration: blink;
+    color: green;
+}
+.n-box .n-content a:visited {
+    color: black;
+}
+.n-box .n-content ul, .n-box .n-content ol {
+    padding: 0;
+    margin: 0px 0px 0px 50px;
+}
+.n-box .n-content ul {
+    list-style-type: square;
+    list-style-position: inside;
+
+}
+
+.n-box .n-content li {
+     line-height:150%    
+}
+.n-box .n-content li ul, .n-box .n-content li ul {
+    margin-left: 24px;
+}
+
+.n-box .n-content pre {
+    padding: 0px 24px;
+    max-width: 800px;
+    white-space: pre-wrap;
+}
+.n-box .n-content code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+    font-size: 13px;
+}
+.n-box .n-content aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+.n-box .n-content blockquote {
+    border-left:.5em solid #eee;
+    padding: 0 1em;
+    margin-left:0;
+    /*max-width: 476px;*/
+}
+.n-box .n-content blockquote  cite {
+    font-size:14px;
+    line-height:20px;
+    color:#bfbfbf;
+}
+.n-box .n-content blockquote cite:before {
+    content: '\2014 \00A0';
+}
+
+.n-box .n-content blockquote p {  
+    color: #666;
+    /*max-width: 460px;*/
+}
+.n-box .n-content hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #999;
+}
+
+.n-box .n-content pre {
+    overflow: visible !important;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    word-break: normal;
+    word-wrap: normal;
+}
+

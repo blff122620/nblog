@@ -6,6 +6,8 @@ var flash = require('connect-flash');
 var config = require('config-lite')(__dirname);
 var routers = require('./routers');
 var pkg = require('./package');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 
 var app = express();
 
@@ -93,13 +95,37 @@ app.use(function (req, res, next) {
   next();
 });
 
+// 正常请求的日志
+app.use(expressWinston.logger({
+  transports: [
+    // new (winston.transports.Console)({
+    //   json: true,
+    //   colorize: true
+    // }),
+    new winston.transports.File({
+      filename: 'logs/success.log'
+    })
+  ]
+}));
 // 路由
 routers(app);
+// 错误请求的日志
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: 'logs/error.log'
+    })
+  ]
+}));
 
 //处理所有的最后的消息，包括异常，并返回主页
 // app.use(function(err, req, res, next) {
 //   // res.status(err.status || 500);
-//   res.render('index', {
+//   res.render('/', {
 //     message: err.message,
 //     error: err.message
 //   });
