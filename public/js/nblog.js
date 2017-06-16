@@ -234,8 +234,26 @@
                     vJsComment.comments = response.data;
             });
         }
-        p.over(); //页面加载完毕，调用，让进度条走完到100%
-
+        p.over(); //页面加载完毕，调用，让头部进度条走完到100%
+        var pics = $A ('.n-box .n-top>img');
+        var nContentPics = $A('.n-box .n-content img');
+        pics = pics.concat(nContentPics);
+        setPicSrc(pics);
+        window.onscroll = function(){
+            setPicSrc(pics);
+        };
+        function setPicSrc(pics){
+            pics.forEach(function(item){
+                if(inViewPort(item)){
+                    item.src = item.dataset.url;
+                };   
+            });
+                    
+        }
+        $A("pre").forEach(function(item){
+            item.classList.add("line-numbers");
+        });
+        Prism.highlightAll();
     };
     var p = myProgress.create($$("#js-top-progress"), "#5c6bc0", false); //第一个参数必须为原生dom对象
     //第三个参数默认为true，表示进度条走完是否还显示

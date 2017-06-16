@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
       }
       
     });
-  PostModel.getPosts(author)
+  PostModel.getPostsSkeleton(author)
     .then(function (posts) {
       
       res.render('index', {

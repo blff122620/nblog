@@ -4,7 +4,7 @@
             <article id="js-article">
                 <div class="n-box box-shadow">
                     <% if (post.img){%>
-                    <div class="n-top"><img src="<%= post.img %>" alt=""></div>
+                    <div class="n-top"><img src="/img/img_default.png" data-url="<%= post.img %>" alt=""></div>
                     <% }%>
                     <div class="n-tab overflow-ellipse"><a title="<%= post.tab %>"><%= post.tab %></a></div>
                     <div class="n-date"><%= post.date %></div>

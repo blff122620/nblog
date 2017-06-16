@@ -150,7 +150,7 @@ header {
     padding-top: 25px;
     font-size: 1.7em;
     line-height: 1.8;
-    text-indent: 2em;
+    /*text-indent: 2em;*/
 }
 .n-box .n-content img{
     max-width: 100%;
@@ -468,8 +468,9 @@ footer a {
     }
     .n-box>div ,
     .n-box-form{
-        padding: 0 .5em 0 1em;
+        padding: 0 1em 0 1em;
     }
+  
     .n-box .n-read{
         padding-left: 1.5em;
     }
@@ -505,4 +506,28 @@ footer a {
         font-size: 1.5em;
     }
 
+}
+@media screen and (max-width: 640px) {
+  /*代码片段*/
+    .n-box .n-content pre{
+        max-width: 600px;
+    }
+}
+@media screen and (max-width: 480px) {
+  /*代码片段*/
+    .n-box .n-content pre{
+        max-width: 380px;
+    }
+}
+@media screen and (max-width: 420px) {
+  /*代码片段*/
+    .n-box .n-content pre{
+        max-width: 320px;
+    }
+}
+@media screen and (max-width: 360px) {
+  /*代码片段*/
+    .n-box .n-content pre{
+        max-width: 290px;
+    }
 }

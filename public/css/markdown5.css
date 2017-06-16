@@ -4,8 +4,8 @@
 .n-box .n-content p   {
     font-size: 16px;
     line-height: 150%;
-    max-width: 540px;
-    max-width: 960px;
+    /*max-width: 540px;
+    max-width: 960px;*/
     font-weight: 400;
      color: #333333
 }
@@ -23,7 +23,7 @@
 
 .n-box .n-content h1 {
     margin-bottom: 10px;
-    font-size:300%;
+    font-size:2em;
     padding: 0px;
     font-variant:small-caps;
 }
@@ -82,7 +82,7 @@
     margin-left: 24px;
 }
 
-.n-box .n-content pre {
+/*.n-box .n-content pre {
     padding: 0px 24px;
     max-width: 800px;
     white-space: pre-wrap;
@@ -91,7 +91,7 @@
     font-family: Consolas, Monaco, Andale Mono, monospace;
     line-height: 1.5;
     font-size: 13px;
-}
+}*/
 .n-box .n-content aside {
     display: block;
     float: right;

@@ -1,22 +1,80 @@
 var marked = require('marked');
 var Post = require('../lib/mongo').Post;
 var CommentModel = require('./comments');
+var postContentLengh = 15;//保留的每篇文章的前多少行，列表页的显示
 
 // 将 post 的 content 从 markdown 转换成 html
 Post.plugin('contentToHtml', {
   afterFind: function (posts) {
     return posts.map(function (post) {
-      post.content = marked(post.content);
+      post.content = marked(post.content,{renderer:getMarkedRenderer()});
       return post;
     });
   },
   afterFindOne: function (post) {
     if (post) {
-      post.content = marked(post.content);
+      post.content = marked(post.content,{renderer:getMarkedRenderer()});
     }
     return post;
   }
 });
+
+// 将 post 的 content 截断，只留前几行
+Post.plugin('postsSkeleton', {
+  afterFind: function (posts) {
+    return posts.map(function (post) {
+      post.content = cutPost(post.content,"\r\n",postContentLengh);
+      return post;
+    });
+  },
+  afterFindOne: function (post) {
+    if (post) {
+      post.content = cutPost(post.content,"\r\n",postContentLengh);
+    }
+    return post;
+  }
+});
+
+/**
+ * 切割post.content ,只取前几行
+ * 这里还要处理markdown的问题，不能截断 语句块``` ```
+ * @param {*} content 
+ * @param {*} pattern 
+ * @param {*} lines 
+ */
+function cutPost(content,pattern,lines){
+  var contentArray = content.split(pattern);
+  var inBlock = false;
+  var lineCount = 0;
+  var appendStr = "\r\n# .................";
+  return contentArray.filter(function(item,index){
+    lineCount++;
+    if(index<lines){
+      if(item.indexOf("```") !=-1){
+        inBlock = true;
+      }
+      return true;
+    }
+    else if(inBlock){
+      if(item.indexOf("```") !=-1){
+        inBlock = false;
+      }
+      return true;
+    }
+  }).join(pattern) + (lineCount>lines?appendStr:'');
+}
+
+function getMarkedRenderer(){
+  var renderer = new marked.Renderer();
+  renderer.image = function(href,title,text){
+    return `<img src="/img/img_default.png" data-url="${href}" alt="${text}">`;
+  };
+  renderer.html = function(text){
+    console.log(text);
+  };
+
+  return renderer;
+}
 
 // 给 post 添加留言数 commentsCount
 Post.plugin('addCommentsCount', {
@@ -68,6 +126,23 @@ module.exports = {
       .sort({ _id: -1 })
       .addCreatedAt()
       .addCommentsCount()
+      .contentToHtml()
+      .exec();
+  },
+
+    // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章,不过这个获得是缩略，截取每个post的前8行
+  getPostsSkeleton: function getPosts(author) {
+    var query = {};
+    if (author) {
+      query.author = author;
+    }
+    return Post
+      .find(query)
+      .populate({ path: 'author', model: 'User' })
+      .sort({ _id: -1 })
+      .addCreatedAt()
+      .addCommentsCount()
+      .postsSkeleton()
       .contentToHtml()
       .exec();
   },

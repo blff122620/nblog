@@ -7,6 +7,12 @@ var $$ = function(selector, context) {
     }
     return elements;
 }
+var $A = function(selector, context) { //返回数组，甭管几个
+    context = context || document;
+    var elements = context.querySelectorAll(selector);
+    elements = Array.prototype.slice.call(elements);
+    return elements;
+}
 var $ = (function() {
     var _instance = null;
 
