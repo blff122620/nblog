@@ -255,7 +255,7 @@
         });
         Prism.highlightAll();
     };
-    var p = myProgress.create($$("#js-top-progress"), "#5c6bc0", false); //第一个参数必须为原生dom对象
+    var p = myProgress.create($$("#js-top-progress"), "#ff4081", false); //第一个参数必须为原生dom对象
     //第三个参数默认为true，表示进度条走完是否还显示
     p.start(); //进度条开始走
 

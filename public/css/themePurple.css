@@ -1,8 +1,9 @@
 body{
     background: #f7f9fc;
 }
-.nav-aside{
-    background: #252b4d;
+
+header a,header a:hover{
+    color: #fff;
 }
 
 ::selection,
@@ -14,7 +15,8 @@ button.submit{
 .n-box .n-tab,
 button.submit{
    
-    background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #5c6bc0;
+    /*background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #5c6bc0;*/
+    background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #2196f3;
 }
 
 .nav li>a::before,
@@ -26,10 +28,13 @@ button.submit{
 ::selection,
 footer,
 button.submit:hover,
-.comments .c-top::before
+.comments .c-top::before,
+.nav-aside
 {
-    background: #5c6bc0;
+    /*background: #5c6bc0;*/
+    background:#2196f3;
 }
+
 
 
 .n-box .n-read a,
@@ -42,22 +47,28 @@ button.submit:hover,
 
 .comments .c-list .c-detail a:hover
 {
-    color:#5c6bc0;
+    /*color:#5c6bc0;*/
+    color: #2196f3;
 
 }
 
 .logo-footer,
 .nav-aside .selected,
-.nav-aside-copyright span{
-    color:#4a569a;
+.nav-aside-copyright span,
+.nav-footer a,
+.info-footer,
+.copyright {
+    /*color:#866995;*/
+    color: hsla(0,0%,100%,.6);
 }
 .info-footer::after,.info-footer::before{
-    background: #5765b5;
+    background: linear-gradient(hsla(0,0%,100%,.2) 0 , hsla(0,0%,100%,.2) 100%);
 }
 
 button.submit,
 .alert p{
-    border:1px solid #5c6bc0;   
+    /*border:1px solid #5c6bc0; */
+    border:1px solid #2196f3;  
 }
 .alert.error p{
     border:1px solid red;
