@@ -31,6 +31,7 @@ header {
 
 .logo,
 .logo-b,
+.logo-c,
 header .semi-title {
     position: absolute;
     top: 15%;
@@ -38,11 +39,17 @@ header .semi-title {
     transform: translateX(-50%);
     font-size: 3.2em;
 }
-.logo-b{
+.logo-b,
+.logo-c{
     width: 80px ;
     height: 50px;
-    top:5%;
+    
+}
+.logo-b{
     background: url("/img/sprite.png") 0 -118px;
+}
+.logo-b-positon{
+    top:5%;
 }
 header .semi-title{
     font-size: 1.4em;
@@ -109,6 +116,52 @@ header .semi-title{
 .nav-aside-copyright span{
     line-height: 50px;
     font-size: 3em;
+}
+
+.default-nav{
+    /*visibility: hidden;*/
+    z-index: 1;
+    position: fixed;
+    top:0;
+    overflow: hidden;
+    height: 60px;
+    width: 100%;
+    transition: .3s ease-in-out top; 
+    text-align: center;
+    line-height: 60px;
+}
+.default-nav:hover>.default-nav-horizon{
+    opacity: .95;
+}
+.default-nav:hover>.logo-c{
+    opacity: 0;
+}
+.default-move-nav{
+    top:-60px;
+}
+.default-nav li{
+    display: inline-block;
+    position: relative;
+    font-size: 1.6em;
+    padding:0 1em;
+}
+.default-nav li a{
+    color: #fff;
+}
+.default-nav-horizon{
+    opacity: 0;
+    transition: .2s linear opacity; 
+}
+.logo-default-nav{
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    transform:translateX(0);
+}
+.logo-c{
+    opacity: 1;
+    transition: .2s linear opacity;
+    background: url("/img/sprite.png") 0 -168px;
 }
 .alert{
     /*position: absolute;*/

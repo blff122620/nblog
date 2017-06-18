@@ -29,10 +29,16 @@ button.submit{
 footer,
 button.submit:hover,
 .comments .c-top::before,
-.nav-aside
+.nav-aside,
+.default-nav-horizon
 {
     /*background: #5c6bc0;*/
     background:#2196f3;
+}
+
+.default-nav-horizon li>a::before,
+.default-nav-horizon .selected::after{
+    background:#fff;
 }
 
 

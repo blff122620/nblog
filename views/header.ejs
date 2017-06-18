@@ -21,10 +21,10 @@
 </head>
 
 <body>
-    <header class="header-bg">
+    <header class="header-bg" id="js-header">
         
         <a href="http://www.bx1987.com" target="blank">
-            <div class="logo-b">
+            <div class="logo-b logo-b-positon">
                  
             </div>
             <div class="semi-title">-&nbsp;&nbsp;尽情的驰骋吧&nbsp;&nbsp;-</div>  
@@ -43,6 +43,13 @@
                     </span><br/> Designed &amp; Developed by Beau. 
             </div>
         </aside>
-        
     </header>
+    <nav class="default-nav default-move-nav" id="js-default-nav">
+        <div class="logo-c logo-default-nav logo-c-default-nav" id="js-logo-c"></div>
+        <div class="default-nav-horizon">
+            <div class="logo-b logo-default-nav"></div>   
+            <%- include('components/nav') %>
+        </div>
+        
+    </nav>
     <%- include('components/notification') %>

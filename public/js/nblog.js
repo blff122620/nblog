@@ -15,6 +15,9 @@
             regDiv = $$("#js-reg"),
             mask = $$("#js-mask"),
             popX = $$(".js-pop-x"),
+            defaultNav = $$("#js-default-nav"),//当header滚动出viewport时候显示的导航
+            header = $$("#js-header"),
+            logoC = $$("#js-logo-c"),
             navSlideIndex = 1;
         loginBtn.forEach(function(element,index) {
             element.onclick = function(){
@@ -239,10 +242,12 @@
         var nContentPics = $A('.n-box .n-content img');
         pics = pics.concat(nContentPics);
         setPicSrc(pics);
+        setDefaultNav();
         window.onscroll = function(){
+            setDefaultNav();
             setPicSrc(pics);
         };
-        function setPicSrc(pics){
+        function setPicSrc(pics){//设置照片的src，用于懒加载
             pics.forEach(function(item){
                 if(inViewPort(item)){
                     item.src = item.dataset.url;
@@ -250,12 +255,32 @@
             });
                     
         }
+        /**
+         * [setDefaultNav 设置默认头部导航，用于header不在viewport显示]
+         */
+        function setDefaultNav(){
+            var moveClass = "default-move-nav";
+            if(inViewPort(header)){//判断header在视窗内
+                if(!defaultNav.classList.contains(moveClass)){
+                    defaultNav.classList.add(moveClass);
+                }
+                
+            }
+            else{
+
+                if(defaultNav.classList.contains(moveClass)){
+                    defaultNav.classList.remove(moveClass);
+                }
+            }
+        }
         $A("pre").forEach(function(item){
             item.classList.add("line-numbers");
         });
         Prism.highlightAll();
     };
-    var p = myProgress.create($$("#js-top-progress"), "#ff4081", false); //第一个参数必须为原生dom对象
+
+    //load事件外
+    var p = myProgress.create($$("#js-top-progress"), "#2196f3", false); //第一个参数必须为原生dom对象
     //第三个参数默认为true，表示进度条走完是否还显示
     p.start(); //进度条开始走
 

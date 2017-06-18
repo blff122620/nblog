@@ -36,15 +36,16 @@
 }
 
 body{
-    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+    /*font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;*/
+    font-family:"Lucida Grande","Helvetica Neue",Helvetica,Arial,Verdana,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
 }
 
-.underline::before,.nav .selected::after{
+.underline::before,nav .selected::after{
     content: "";
     position: absolute;
     bottom:0;
     left:0;
-    height: .2em;
+    height: 4px;
     width: 100%;
     transform-origin: left bottom;
     transition: .3s ease-in-out;
