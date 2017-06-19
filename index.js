@@ -52,6 +52,7 @@ app.use(function (req, res, next) {
   res.locals.success = req.flash('success').toString();
   res.locals.error = req.flash('error').toString();
   res.locals.authorName = "";//logo的名字
+  res.locals.nicknameSelected = false;
   res.locals.nav = [
     {
       href:'/posts',
@@ -90,6 +91,12 @@ app.use(function (req, res, next) {
       addClass:'js-reg-button',
       selected:false,
       display:!res.locals.user
+    },
+    {
+      href:'/personal',
+      value:'nickname',
+      selected:false,
+      display:false
     }
   ];
   next();

@@ -70,7 +70,7 @@ function getMarkedRenderer(){
     return `<img src="/img/img_default.png" data-url="${href}" alt="${text}">`;
   };
   renderer.html = function(text){
-    console.log(text);
+    // console.log(text);
   };
 
   return renderer;

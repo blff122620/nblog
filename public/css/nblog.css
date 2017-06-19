@@ -2,7 +2,7 @@ header {
     position: relative;
     /*height: 190px;*/
     /*width: 1000px;*/
-    height: 600px;
+    height: 500px;
     margin: 0 auto;
     text-align: center;
     margin-bottom: 50px;
@@ -89,6 +89,56 @@ header .semi-title{
     font:1.8em sans-serif;
     
 }
+nav .more{
+    position: relative !important;
+    overflow: visible ;
+    cursor: pointer;
+}
+
+nav .more .classify{
+    position: absolute;
+    visibility: hidden;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+    transition: .2s ease-in-out opacity;
+}
+nav .more:hover .classify{
+    visibility: visible;
+    opacity: 1;
+}
+nav .more>a{
+    transition: .2s ease-in-out opacity;
+}
+nav .more:hover>a{
+    opacity: 0;
+}
+
+
+nav .more .classify a{
+
+    font-size: 16px;
+    line-height: 45px;
+    padding: 18px 18px;
+}
+nav .more .classify li{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+nav .more .classify li:first-of-type{
+    margin-top: 3px;
+}
+nav .more .classify li:last-of-type{
+    margin-bottom: 3px;
+}
 .nav-aside {
     display: none;
     position: fixed;
@@ -123,7 +173,7 @@ header .semi-title{
     z-index: 1;
     position: fixed;
     top:0;
-    overflow: hidden;
+    overflow: visible;
     height: 60px;
     width: 100%;
     transition: .3s ease-in-out top; 
@@ -140,18 +190,25 @@ header .semi-title{
 .default-move-nav{
     top:-60px;
 }
-.default-nav li{
+.default-nav .default-nav-horizon>ul>li{
     display: inline-block;
     position: relative;
     font-size: 1.6em;
     padding:0 1em;
 }
-.default-nav li a{
+.default-nav .default-nav-horizon>ul>li>a{
     color: #fff;
 }
 .default-nav-horizon{
     opacity: 0;
+    height: 60px;
     transition: .2s linear opacity; 
+}
+.default-nav-horizon .more .classify{
+    top: 2px;
+}
+.default-nav-horizon .more .classify li:first-of-type{
+    margin-top: 0px;
 }
 .logo-default-nav{
     position: absolute;

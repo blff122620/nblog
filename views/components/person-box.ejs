@@ -1,0 +1,15 @@
+
+<div class="n-box box-shadow clearfix">
+                    
+    <div class="n-tab overflow-ellipse"><a title="">撰写文章</a></div>
+    <div class="n-date"><%= date%></div>
+    <form action="/posts/publisher" method="post" class="n-box-form">
+    <div class="pub-title pub"><input required maxlength="9" type="text" class="input" value="" placeholder="  昵称:给自己取个好名字" name="title"></div>
+    <div class="pub-tab pub"><input type="text" class="input" value="" placeholder="  邮箱：正确填写哦，要不大家联系不到你" name="tab"></div>
+    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/([\w\-]+(\.[\w\-]+)*\/)*[\w\-]+(\.[\w\-]+)*\/?(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?" placeholder="  个人主页配图URL：显示在页面头部" class="input" type="text" value="" name="img"></div>
+    <div class="pub-content pub"><textarea required class="textarea" name="content" id="" cols="30" rows="10" placeholder="  
+个人简介"></textarea></div>
+    
+    <div class="pub "><button class="submit pub-btn" >更新资料</button></div>
+    </form>
+</div>

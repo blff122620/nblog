@@ -133,7 +133,7 @@ button.submit{
 }
 .textarea{
     display: block;
-    width: 100%;
+    width: 99%;
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;

@@ -8,7 +8,8 @@ header a,header a:hover{
 
 ::selection,
 .paging a.p-selected,
-button.submit{
+button.submit,
+nav .more .classify li:hover a{
     color: #fff;
 }
 
@@ -30,7 +31,8 @@ footer,
 button.submit:hover,
 .comments .c-top::before,
 .nav-aside,
-.default-nav-horizon
+.default-nav-horizon,
+nav .more .classify li:hover
 {
     /*background: #5c6bc0;*/
     background:#2196f3;
@@ -50,7 +52,7 @@ button.submit:hover,
 .register .pop-header span:hover,
 .n-box .n-read-time .edit:hover,
 .comments .c-top p,
-
+nav .more .classify a,
 .comments .c-list .c-detail a:hover
 {
     /*color:#5c6bc0;*/
