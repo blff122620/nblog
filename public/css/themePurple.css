@@ -10,7 +10,8 @@ header a,header a:hover{
 .paging a.p-selected,
 button.submit,
 nav .more .classify li:hover a,
-.phone-nav-title{
+.phone-nav-title,
+.phone-nav-burger span{
     color: #fff;
 }
 

@@ -19,17 +19,21 @@
             header = $$("#js-header"),
             logoC = $$("#js-logo-c"),
             phoneNavBurger = $$("#js-phone-nav-burger"),//手机端头部导航右侧的汉堡图标
+            phoneNavBurgerX = $$("#js-phone-nav-burger span"),//手机端头部导航右侧的x图标
             fullscreen = $$("#js-fullscreen"),
             navSlideIndex = 1;
 
         phoneNavBurger.onclick = function(){
             fullscreen.classList.toggle("fullscreen");
+            phoneNavBurger.classList.toggle("phone-nav-burger-bg");
             if(fullscreen.classList.contains("fullscreen")){
                 body.style.overflow = "hidden";
                 toggleTouchMove(preventDefault,true);
+                phoneNavBurgerX.style.opacity = "1";
             }else{
                 body.style.overflow = "auto";
                 toggleTouchMove(preventDefault,false);
+                phoneNavBurgerX.style.opacity = "0";
             } 
             
         }
