@@ -78,7 +78,7 @@ header .semi-title{
 }
 .nav ul {
 
-    cursor: pointer;
+    cursor: default;
 }
 
 .nav li {
@@ -129,6 +129,7 @@ header .semi-title{
     transition: .3s ease-in-out top; 
     text-align: center;
     line-height: 60px;
+    cursor: default;
 }
 .default-nav:hover>.default-nav-horizon{
     opacity: .95;
