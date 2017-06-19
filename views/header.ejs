@@ -36,7 +36,7 @@
         </nav>
         <div class="burger" id="js-burger"></div>
         <aside class="nav-aside" id="js-nav-aside">
-            <%- include('components/nav') %>
+            <%- include('components/nav_other') %>
             <div class="nav-aside-copyright">
                 <span>
                     <%- include('components/logo') %>
@@ -47,9 +47,17 @@
     <nav class="default-nav default-move-nav" id="js-default-nav">
         <div class="logo-c logo-default-nav logo-c-default-nav" id="js-logo-c"></div>
         <div class="default-nav-horizon">
-            <div class="logo-b logo-default-nav"></div>   
+            <div class="logo-d logo-default-nav"></div>   
+            <div class="phone-nav-title"><%-include('components/logo')%></div>
+            <div class="phone-nav-burger" id="js-phone-nav-burger">
+                
+            </div>
+
             <%- include('components/nav') %>
         </div>
-        
+        <div class="fullscreen-default" id="js-fullscreen">
+            <%- include('components/nav_other') %>
+        </div>
     </nav>
+
     <%- include('components/notification') %>

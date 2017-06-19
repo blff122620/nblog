@@ -7,6 +7,9 @@ header {
     text-align: center;
     margin-bottom: 50px;
 }
+body{
+    min-width: 1000px;
+}
 
 .header-bg{
     background:
@@ -28,10 +31,19 @@ header {
     top: 10%;
     transform: translateY(-50%);
 }
+.logo-b,
+.logo-c,
+.logo-d,
+.contact .git,
+.contact .facebook
+{
+    background: url("/img/sprite.png");
+}
 
 .logo,
 .logo-b,
 .logo-c,
+.logo-d,
 header .semi-title {
     position: absolute;
     top: 15%;
@@ -40,14 +52,17 @@ header .semi-title {
     font-size: 3.2em;
 }
 .logo-b,
-.logo-c{
+.logo-c,
+.logo-d{
     width: 80px ;
     height: 50px;
     
 }
-.logo-b{
-    background: url("/img/sprite.png") 0 -118px;
+.logo-b,
+.logo-d{
+    background-position: 0 -118px;
 }
+
 .logo-b-positon{
     top:5%;
 }
@@ -59,7 +74,6 @@ header .semi-title{
 .burger {
     display: none;
     right: 0;
-    /*background: url("../img/sprite.png");*/
     background: linear-gradient(to top,hsla(0,0%,100%,.8) 0 ,hsla(0,0%,100%,.8) 3px,
                  transparent 0,transparent 12px,
                  hsla(0,0%,100%,.8) 0 , hsla(0,0%,100%,.8) 15px,
@@ -90,7 +104,7 @@ header .semi-title{
     
 }
 nav .more{
-    position: relative !important;
+    position: relative ;
     overflow: visible ;
     cursor: pointer;
 }
@@ -149,7 +163,8 @@ nav .more .classify li:last-of-type{
     width: 300px;
     text-align: left;
 }
-.nav-aside a{
+.nav-aside a,
+.fullscreen-default a{
     color: #fff;
     font-size: 2.5em;
     line-height: 70px;
@@ -167,7 +182,9 @@ nav .more .classify li:last-of-type{
     line-height: 50px;
     font-size: 3em;
 }
-
+.fullscreen-default{
+    display: none;
+}
 .default-nav{
     /*visibility: hidden;*/
     z-index: 1;
@@ -205,10 +222,10 @@ nav .more .classify li:last-of-type{
     transition: .2s linear opacity; 
 }
 .default-nav-horizon .more .classify{
-    top: 2px;
+    top: 0;
 }
 .default-nav-horizon .more .classify li:first-of-type{
-    margin-top: 0px;
+    margin-top: 0;
 }
 .logo-default-nav{
     position: absolute;
@@ -216,10 +233,18 @@ nav .more .classify li:last-of-type{
     margin-left: 20px;
     transform:translateX(0);
 }
+.phone-nav-title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4em;
+    line-height: 50px;
+    visibility: hidden;
+}
 .logo-c{
     opacity: 1;
     transition: .2s linear opacity;
-    background: url("/img/sprite.png") 0 -168px;
+    background-position:  0 -168px;
 }
 .alert{
     /*position: absolute;*/
@@ -335,7 +360,7 @@ nav .more .classify li:last-of-type{
 
 .n-box .n-read a {
     position: relative;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
     font-size: 1.5em;
     line-height: 2;
 }
@@ -391,9 +416,9 @@ nav .more .classify li:last-of-type{
     float: left;
     width: 52px;
     height: 52px;
-    background: url("../img/sprite.png") 0 -51px;
+    /*background: url("../img/sprite.png") 0 -51px;*/
 }
-.comments .c-content .c-input{
+/*.comments .c-content .c-input{
     overflow: scroll;
     border:1px solid #eee;
     text-indent: 1em;
@@ -405,7 +430,7 @@ nav .more .classify li:last-of-type{
     outline: 0;
     height: 100px;
 
-}
+}*/
 .comments .c-submit{
     position: relative;
     margin-top: 50px;
@@ -458,7 +483,7 @@ nav .more .classify li:last-of-type{
     right: -25px;
     float: right;
     color: red;
-    border: 0px solid black;
+    border:0;
 }
 
 
@@ -560,14 +585,17 @@ footer a {
     margin: 0 1em;
 }
 .contact .git{
-    background: url("../img/sprite.png") -56px 0;
+    background-position:  -56px 0;
 }
 .contact .facebook{
-    background: url("../img/sprite.png") -80px 0;
+    background-position:  -80px 0;
 }
 /*屏幕尺寸小于640的时候采用如下样式*/
 
 @media screen and (max-width: 640px) {
+    body{
+        min-width: unset;
+    }
     .nav ul {
         display: none;
     }
@@ -599,6 +627,60 @@ footer a {
         cursor: pointer;
     }
     header .semi-title{
+        display: none;
+    }
+    .default-nav-horizon{
+        position: relative;
+        height: 50px;
+        opacity: 1;
+        z-index: 1;
+    }
+    
+    .default-nav-horizon ul{
+        display: none;
+    }
+    .default-nav:hover>.default-nav-horizon{
+        opacity: 1;
+    }
+    .phone-nav-burger {
+        position: absolute;
+        right: 10px;
+        top: -4px;
+        background: linear-gradient(to top,hsla(0,0%,100%,1) 0 ,hsla(0,0%,100%,1) 2px,
+                     transparent 0,transparent 10px,
+                     hsla(0,0%,100%,1) 0 , hsla(0,0%,100%,1) 12px,
+                     transparent 0,transparent 20px,
+                     hsla(0,0%,100%,1) 0 , hsla(0,0%,100%,1) 22px,transparent 0);
+        ;
+        width: 25px;
+        height: 40px;
+        
+    }
+    .fullscreen-default{
+        position: fixed;
+        top: 0;left: 0;right: 0;bottom:50px;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        transition: .2s linear;
+    }
+    .fullscreen{
+        top: 50px;left: 0;right: 0;bottom:0;
+        visibility: visible;
+        opacity: 1;
+    }
+    .phone-nav-title{
+        visibility: visible;
+    }
+    .logo-d{
+        margin: 0;
+        width: 39px;
+        height: 21px;
+        background-position: 0 -220px;
+        top: 15px;
+        left: 10px;
+    }
+    .logo-c{
         display: none;
     }
     /*.login,.register{

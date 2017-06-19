@@ -18,7 +18,34 @@
             defaultNav = $$("#js-default-nav"),//当header滚动出viewport时候显示的导航
             header = $$("#js-header"),
             logoC = $$("#js-logo-c"),
+            phoneNavBurger = $$("#js-phone-nav-burger"),//手机端头部导航右侧的汉堡图标
+            fullscreen = $$("#js-fullscreen"),
             navSlideIndex = 1;
+
+        phoneNavBurger.onclick = function(){
+            fullscreen.classList.toggle("fullscreen");
+            if(fullscreen.classList.contains("fullscreen")){
+                body.style.overflow = "hidden";
+                toggleTouchMove(preventDefault,true);
+            }else{
+                body.style.overflow = "auto";
+                toggleTouchMove(preventDefault,false);
+            } 
+            
+        }
+        function toggleTouchMove(preventDefault,flag){
+            if(flag){
+                body.addEventListener("touchmove",preventDefault, false);
+            }
+            else{
+                body.removeEventListener("touchmove",preventDefault, false);
+            }
+        }
+        var preventDefault = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        };
+            
         loginBtn.forEach(function(element,index) {
             element.onclick = function(){
                 regLogShow(element,loginDiv,index);
@@ -244,6 +271,7 @@
         setPicSrc(pics);
         setDefaultNav();
         window.onscroll = function(){
+            body.style.transform = "none"; //解决aside点击之后transform影响nav弹出的bug
             setDefaultNav();
             setPicSrc(pics);
         };
