@@ -78,9 +78,11 @@ router.post('/publisher', checkLogin, function(req, res, next) {
 router.get('/publisher', checkLogin, function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var date = new Date();
+  var authorName = req.session.user.nickname;
   
   res.render("publisher.ejs",{
-    date: utils.formatDate(date)
+    date: utils.formatDate(date),
+    authorName:authorName
   });
 });
 

@@ -309,6 +309,34 @@
             item.classList.add("line-numbers");
         });
         Prism.highlightAll();
+
+        function readURL(input) {
+            var type = ['.gif','.jpg','.jpeg','.png'];
+            if(input.files[0].size>100*1024){
+                alert("文件过大，头像文件需要小于100KB的文件~");
+                return ;
+            }
+            var filename = input.files[0].name;
+            if(!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
+                alert("文件类型不匹配，请上传如下类型后缀的文件: "+type.join(" "));
+                return ;
+            }
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $$('#avatarimg').src = e.target.result;
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        if($$("#avatar").length!=0){
+            $$("#avatar").onchange=function(){
+                readURL(this);
+            };
+        }
+        
     };
 
     //load事件外

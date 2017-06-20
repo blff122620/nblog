@@ -17,6 +17,11 @@ body{
         url("/img/header_bg.jpeg") center/cover no-repeat;
 
 }
+.header-avatar{
+    position: absolute;
+    right: 40px;
+    top:20px;
+}
 
 .top-progress{
     position: fixed;
@@ -154,8 +159,8 @@ nav .more .classify li:first-of-type{
 nav .more .classify li:last-of-type{
     margin-bottom: 3px;
 }
-nav .more>a::after,
-.default-nav .more>a::after{
+nav .more>a::before,
+.default-nav .more>a::before{
     content: "";
     position: absolute;
     
@@ -163,12 +168,13 @@ nav .more>a::after,
     border-style: solid;
     border-width: 6px;
 }
-nav .more>a::after{
+nav .more>a::before{
+
     right: -17px;
     top: 50%;
     transform: translateY(-50%);
 }
-.default-nav .more>a::after{
+.default-nav .more>a::before{
     /*right: px;*/
     right: 0;
     top: 55%;
@@ -613,6 +619,47 @@ footer a {
 .contact .facebook{
     background-position:  -80px 0;
 }
+
+.avatar-s,
+.avatar-xs,
+.avatar,
+.avatar-mask{
+    border-radius: 50%;
+}
+.avatar,
+.avatar-mask{
+    
+    width: 90px;
+    height: 90px;
+}
+.avatar-s{
+    width: 40px;
+    height: 40px;
+}
+.avatar-xs{
+    width: 30px;
+    height: 30px;
+}
+
+.avatar-upload img,
+.avatar-mask{
+    position: absolute;
+    cursor: pointer;
+    left: 30px;
+    top: 20px;
+}
+.avatar-mask{
+    display: none;
+    line-height: 90px;
+    text-align: center;
+    color: #fff;
+}
+.avatar-upload:hover .avatar-mask{
+    display: block;
+    z-index: 1;
+    background: rgba(0,0,0,.5);
+}
+
 /*屏幕尺寸小于640的时候采用如下样式*/
 
 @media screen and (max-width: 640px) {
@@ -638,6 +685,10 @@ footer a {
         right: 10%;
         bottom: 15px;
     }
+    header .logo-new{
+        right: 100px;
+        bottom: 10px;
+    }
     header .logo-b{
         transform: none;
         top:7%;
@@ -651,6 +702,18 @@ footer a {
     }
     header .semi-title{
         display: none;
+    }
+    .avatar-header-mobile{
+        width: 80px;  
+        height: 80px;
+        border-radius: 0;
+        border: 2px solid #fff;
+    }
+    .header-avatar{
+        position: absolute;
+        right: 10px;
+        top:auto;
+        bottom: 5px;
     }
     .default-nav-horizon{
         position: relative;
@@ -775,6 +838,19 @@ footer a {
     }
     .nav-aside-copyright>span{
         font-size: 1.5em;
+    }
+    .avatar-phone{
+        width: 40px;
+        height: 40px;
+        
+    }
+    .avatar-upload img{
+        right: 100px;
+        left: auto;
+        top: 15px;
+    }
+    .avatar-upload:hover .avatar-mask{
+        display: none;
     }
 
 }

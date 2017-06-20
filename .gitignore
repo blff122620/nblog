@@ -14,3 +14,5 @@ public/img/mi.jpeg
 public/img/mi.jpeg
 public/img/sprite.psd
 public/img/sprite.psd
+public/img/upload/*
+!public/img/upload/avatar_default.jpg

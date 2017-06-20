@@ -1,15 +1,29 @@
 
 <div class="n-box box-shadow clearfix">
                     
-    <div class="n-tab overflow-ellipse"><a title="">撰写文章</a></div>
-    <div class="n-date"><%= date%></div>
-    <form action="/posts/publisher" method="post" class="n-box-form">
-    <div class="pub-title pub"><input required maxlength="9" type="text" class="input" value="" placeholder="  昵称:给自己取个好名字" name="title"></div>
-    <div class="pub-tab pub"><input type="text" class="input" value="" placeholder="  邮箱：正确填写哦，要不大家联系不到你" name="tab"></div>
-    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/([\w\-]+(\.[\w\-]+)*\/)*[\w\-]+(\.[\w\-]+)*\/?(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?" placeholder="  个人主页配图URL：显示在页面头部" class="input" type="text" value="" name="img"></div>
-    <div class="pub-content pub"><textarea required class="textarea" name="content" id="" cols="30" rows="10" placeholder="  
-个人简介"></textarea></div>
-    
+    <div class="n-tab overflow-ellipse"><a title="">个人资料</a></div>
+    <div class="n-date"></div>
+    <form action="/personal" method="post" class="n-box-form" enctype="multipart/form-data">
+    <input type="text" name="userid" style="display: none;" value="<%=user._id%>">
+    <label class="label">昵称
+    <div class="pub-title pub"><input required maxlength="9" type="text" class="input" value="<%=user.nickname%>" placeholder="  昵称:给自己取个好名字" name="nickname"></div>
+    </label>
+    <div class="field required">
+        <label for="avatar" class="avatar-upload">
+            <img id="avatarimg" class="avatar img avatar-phone" src="/img/upload/<%=user.avatar%>">
+            <div class="avatar-mask ft14">上传头像</div>
+            </label>
+        <input type="file" id="avatar" style="display:none;" name="avatar">
+        
+    </div>
+    <label class="label">个人邮箱
+    <div class="pub-tab pub"><input type="text" class="input" value="<%=user.email%>" placeholder="  邮箱：正确填写哦，要不大家联系不到你" name="email"></div>
+    </label><label class="label">个人首页头部背景图
+    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/([\w\-]+(\.[\w\-]+)*\/)*[\w\-]+(\.[\w\-]+)*\/?(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?" placeholder="  个人主页配图URL：显示在页面头部" class="input" type="text" value="<%=user.topimg%>" name="topimg"></div>
+    </label><label class="label">个人简介
+    <div class="pub-content pub"><textarea required class="textarea" name="info" id="" cols="30" rows="10" placeholder="  
+个人简介"><%-user.info%></textarea></div>
+    </label>
     <div class="pub "><button class="submit pub-btn" >更新资料</button></div>
     </form>
 </div>

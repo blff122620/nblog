@@ -40,9 +40,12 @@ nav .more .classify li:hover,
     /*background: #5c6bc0;*/
     background:#2196f3;
 }
-
-.default-nav-horizon li>a::before,
-.default-nav-horizon .selected::after{
+nav .more>a::before,
+.default-nav-horizon li>a::before{
+    background: transparent; 
+}
+.default-nav-horizon .selected::after,
+.default-nav-horizon li>a.underline::before{
     background:#fff;
 }
 
@@ -56,7 +59,8 @@ nav .more .classify li:hover,
 .n-box .n-read-time .edit:hover,
 .comments .c-top p,
 nav .more .classify a,
-.comments .c-list .c-detail a:hover
+.comments .c-list .c-detail a:hover,
+.label
 {
     /*color:#5c6bc0;*/
     color: #2196f3;

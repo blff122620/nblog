@@ -22,13 +22,15 @@
 
 <body>
     <header class="header-bg" id="js-header">
-        
-        <a href="http://www.bx1987.com" target="blank">
+        <%if(user){%>
+        <a href="/personal" class="header-avatar"><img class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
+        <%}%>
+        <a href="/personal" target="blank">
             <div class="logo-b logo-b-positon">
                  
             </div>
             <div class="semi-title">-&nbsp;&nbsp;尽情的驰骋吧&nbsp;&nbsp;-</div>  
-            <div class="logo">
+            <div class="logo <%if(user){%>logo-new<%}%>">
             <%- include('components/logo') %>
             </div></a>
         <nav class="nav">
