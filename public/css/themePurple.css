@@ -9,6 +9,7 @@ header a,header a:hover{
 ::selection,
 .paging a.p-selected,
 button.submit,
+a.button,
 nav .more .classify li:hover a,
 .phone-nav-title,
 .phone-nav-burger span{
@@ -16,7 +17,8 @@ nav .more .classify li:hover a,
 }
 
 .n-box .n-tab,
-button.submit{
+button.submit,
+a.button{
    
     /*background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #5c6bc0;*/
     background: linear-gradient(hsla(0,0%,100%,.2) 0,hsla(0,0%,100%,.2) 100%) #2196f3;
@@ -31,6 +33,7 @@ button.submit{
 ::selection,
 footer,
 button.submit:hover,
+a.button:hover,
 .comments .c-top::before,
 .nav-aside,
 .default-nav-horizon,
@@ -54,8 +57,8 @@ nav .more>a::before,
 .n-box .n-read a,
 .n-box .n-tab-smaller a:hover,
 .alert p,
-.login .pop-header span:hover,
-.register .pop-header span:hover,
+.pop .pop-header span:hover,
+
 .n-box .n-read-time .edit:hover,
 .comments .c-top p,
 nav .more .classify a,
@@ -82,6 +85,7 @@ nav .more .classify a,
 }
 
 button.submit,
+a.button,
 .alert p{
     /*border:1px solid #5c6bc0; */
     border:1px solid #2196f3;  

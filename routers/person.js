@@ -6,7 +6,22 @@ var utils = require('../lib/utils');
 var UserModel = require('../models/users');
 var checkLogin = require('../middlewares/check').checkLogin
 
-// GET /personal 个人资料页的显示
+// GET /personal/info 个人资料
+router.get("/info",function(req,res,next){
+  var userid = req.query.author;
+  UserModel.getUserById(userid)
+    .then(function (user) {
+      if(user){
+        res.render('person',{
+          user:user
+        });
+      }
+      
+    })
+    .catch(next);
+});
+
+// GET /personal 个人资料页的显示及更新
 router.get('/',checkLogin, function(req, res, next) {
   var underlineCount = utils.toggleNav(req,res);//改变导航栏状态
   var author = req.session.user;
@@ -45,12 +60,15 @@ router.post('/', checkLogin, function(req, res, next) {
     // if (!req.files.avatar.name) {
     //   throw new Error('缺少头像');
     // }
-    if(req.files.avatar.size>100*1024){
-      throw new Error('文件过大，请不要超过100k');
+    if(req.files.avatar.size>200*1024){
+      throw new Error('文件过大，压缩后还是超过了200kb');
+    }
+    if(req.files.avatar.size == 0){
+      throw new Error('');
     }
     var type = ['.gif','.jpg','.jpeg','.png'];
     var filename = req.files.avatar.name;
-    if(!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
+    if(filename&&!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
         throw new Error("文件类型不匹配，请上传如下类型后缀的文件: "+type.join(" "));
     }
     
@@ -66,17 +84,13 @@ router.post('/', checkLogin, function(req, res, next) {
     nickname: nickname,
     topimg: topimg,
     info: info,
-    email: email,
-    avatar: avatar
+    email: email
   };
+  if(filename){
+    user.avatar = avatar;
+  }
   // 用户信息写入数据库
-    UserModel.updateUserById(userId, { 
-      nickname: nickname, 
-      topimg: topimg,
-      info:info,
-      avatar: avatar,
-      email:email
-    })
+    UserModel.updateUserById(userId, user)
     .then(function () {
       req.flash('success', '个人资料编辑成功');
       // 编辑成功后跳转到上一页

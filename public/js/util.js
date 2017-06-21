@@ -117,12 +117,23 @@ var $ = (function() {
 
     };
 
+    var _getPosition = function(elem){
+        var elemX = elem.offsetLeft;
+        var elemY = elem.offsetTop;
+        while(elem = elem.offsetParent) {
+            elemX += elem.offsetLeft;
+            elemY += elem.offsetTop
+        }
+        return {X : elemX, Y : elemY}
+    }
+
     function Single() {
         this.getAllElement = _getAllElement;
         this.getNodeIndex = _getNodeIndex;
         this.removeClass = _removeClass;
         this.cookie = _cookie;
         this.ajax = _ajax;
+        this.getPosition = _getPosition;
     }
 
     if (!_instance) {

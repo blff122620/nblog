@@ -14,13 +14,15 @@
             regBtn = $$(".js-reg-button"),
             regDiv = $$("#js-reg"),
             mask = $$("#js-mask"),
+            pops = $$(".pop"),
             popX = $$(".js-pop-x"),
             defaultNav = $$("#js-default-nav"),//当header滚动出viewport时候显示的导航
             header = $$("#js-header"),
             logoC = $$("#js-logo-c"),
             phoneNavBurger = $$("#js-phone-nav-burger"),//手机端头部导航右侧的汉堡图标
             phoneNavBurgerX = $$("#js-phone-nav-burger span"),//手机端头部导航右侧的x图标
-            fullscreen = $$("#js-fullscreen"),
+            fullscreen = $$("#js-fullscreen"),//手机端全屏的背景铺满div
+            popImgHandler = $$("#js-img-handler"),//弹出层 裁剪图片的弹窗
             navSlideIndex = 1;
 
         phoneNavBurger.onclick = function(){
@@ -66,6 +68,7 @@
             ele.onclick =function(event){
                 event.stopPropagation();
                 regLogDisappear();
+                popsDisappear();
             }
         });
 
@@ -81,6 +84,14 @@
     
         mask.onclick = function(){
             regLogDisappear();
+            popsDisappear();
+        }
+        function popsDisappear(){
+            //所有弹窗关闭
+            pops.forEach(function(item){
+                item.style.display = "none";
+            });
+            body.style.overflow = "auto";
         }
         function regLogDisappear(){
             loginDiv.style.display = "none";
@@ -310,30 +321,51 @@
         });
         Prism.highlightAll();
 
-        function readURL(input) {
+        function readURL(input,mask) {
             var type = ['.gif','.jpg','.jpeg','.png'];
-            if(input.files[0].size>100*1024){
-                alert("文件过大，头像文件需要小于100KB的文件~");
-                return ;
-            }
+            // if(input.files[0].size>200*1024){
+            //     alert("文件过大，头像文件需要小于200KB的文件~");
+            //     return ;
+            // }
             var filename = input.files[0].name;
             if(!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
                 alert("文件类型不匹配，请上传如下类型后缀的文件: "+type.join(" "));
                 return ;
             }
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                var reader = new FileReader(),
+                    baseimg = $$("#js-clip-base-img"),//基础层图片
+                    clipimg = $$("#js-clip-img"),// 裁剪层图片
+                    
+                    result;
                 
                 reader.onload = function (e) {
-                    $$('#avatarimg').src = e.target.result;
+                    
+                    result = e.target.result;
+                    mask.style.display = "block";
+                    popImgHandler.style.display = "block";
+                    if(input.files[0].size>200*1024){
+                        baseimg.src = result;
+                        clipimg.src = result;
+                        
+                    }
+                    else{
+                        baseimg.src = result;
+                        clipimg.src = result;
+                        
+                    }
+                    body.style.overflow = "hidden";
+                    setTimeout(dragF,0);
+                    
                 }
                 
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
         if($$("#avatar").length!=0){
             $$("#avatar").onchange=function(){
-                readURL(this);
+                readURL(this,mask);
             };
         }
         

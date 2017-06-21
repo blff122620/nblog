@@ -79,30 +79,41 @@ button.submit{
     line-height: 1.2;
     padding: .4em 1em;
 }
-.login,.register{
+a.button{
+    display: inline-block;
+    border-radius: .2em;
+    line-height: 1.2;
+    padding: .4em 1em;
+    /*margin: .4em 1em;*/
+}
+.pop{
     z-index: 101;
     display: none;
     position: fixed;
-    width: 320px;
     overflow: hidden;
+    width: 80%;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     background: #fff;
     border-radius: 5px;
 }
+.login,
+.register{
+    width: 320px;
+}
 .login .tips,.register .tips{
     font-size: 1.2em;
     color: red;
     line-height: 2.5;
 }
-.login .pop-header,.register .pop-header{
+.pop-header{
     position: relative;
     background: #f3f3f3;
     padding: 15px;
     border-radius:inherit;
 }
-.login .pop-header span,.register .pop-header span{
+.pop-header span{
     position: absolute;
     top:50%;
     right: 5%;
@@ -110,7 +121,7 @@ button.submit{
     cursor: pointer;
     font-size: 1.6em;
 }
-.login .pop-content,.register .pop-content{ 
+.pop-content{ 
     padding: 20px 30px 20px;
 }
 .login button.submit,.register button.submit{
@@ -161,4 +172,87 @@ button.submit{
 
 .ft14{
     font-size: 1.4rem;
+}
+.ft16{
+    font-size: 1.6rem;
+}
+
+.clip-area{
+    position: relative;
+    width: 100%;
+    /*图像裁剪div*/
+}
+.clip-area .clip-base-img{
+    opacity: .3;
+}
+.clip-area .clip-img,
+.drag-path
+{
+    position: absolute;
+    top:0;left: 0;
+}
+
+.clip-img{
+    clip-path: polygon(0 0,200px 0,200px 200px,0 200px);
+    /*clip: rect(0 200px 200px 0);*/
+}
+.drag-path{
+    box-sizing: border-box;
+    border:1px dashed #ccc;
+    width: 200px;
+    height: 200px;
+    cursor: move;
+}
+
+.box-xs{
+    position: absolute;
+    background: #ccc;
+    border:1px solid #eee;
+    height: 7px;
+    width: 7px;
+
+}
+.box-nw{
+    top:-4px;
+    left: -4px;
+    cursor: nw-resize; 
+}
+.box-n{
+    top:-4px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+.box-ne{
+    top:-4px;
+    right: -4px;
+    cursor: ne-resize;
+}
+.box-e{
+    top:50%;
+    right: -4px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+.box-se{
+    bottom: -4px;
+    right: -4px;
+    cursor: se-resize;
+}
+.box-s{
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+.box-sw{
+    bottom: -4px;
+    left: -4px;
+    cursor: sw-resize;
+}
+.box-w{
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+    cursor: w-resize;
 }
