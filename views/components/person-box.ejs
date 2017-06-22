@@ -4,7 +4,7 @@
     <div class="n-tab overflow-ellipse"><a title="">个人资料</a></div>
     <div class="n-date"></div>
     <form action="/personal" method="post" class="n-box-form" enctype="multipart/form-data">
-    <input type="text" name="userid" style="display: none;" value="<%=user._id%>">
+    <input type="text" name="userid" id="userid" style="display: none;" value="<%=user._id%>">
     <label class="label">昵称
     <div class="pub-title pub"><input required maxlength="9" type="text" class="input" value="<%=user.nickname%>" placeholder="  昵称:给自己取个好名字" name="nickname"></div>
     </label>
@@ -14,7 +14,7 @@
             <div class="avatar-mask ft14">上传头像</div>
 
             </label>
-        <input type="file" id="avatar" style="display:none;" name="avatar">
+        <input type="file" accept="image/*" capture="camera" id="avatar" style="display:none;" name="avatar">
     </div>
     <label class="label">个人邮箱
     <div class="pub-tab pub"><input type="text" class="input" value="<%=user.email%>" placeholder="  邮箱：正确填写哦，要不大家联系不到你" name="email"></div>

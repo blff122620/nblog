@@ -22,7 +22,8 @@
             phoneNavBurger = $$("#js-phone-nav-burger"),//手机端头部导航右侧的汉堡图标
             phoneNavBurgerX = $$("#js-phone-nav-burger span"),//手机端头部导航右侧的x图标
             fullscreen = $$("#js-fullscreen"),//手机端全屏的背景铺满div
-            popImgHandler = $$("#js-img-handler"),//弹出层 裁剪图片的弹窗
+            popImgHandler = $$("#js-img-handler"),//弹出层 裁剪图片的弹窗,
+            sfModel = $$("#js-safe-modal"),
             navSlideIndex = 1;
 
         phoneNavBurger.onclick = function(){
@@ -92,6 +93,7 @@
                 item.style.display = "none";
             });
             body.style.overflow = "auto";
+            sfModel.style.display = "none";
         }
         function regLogDisappear(){
             loginDiv.style.display = "none";
@@ -336,26 +338,71 @@
                 var reader = new FileReader(),
                     baseimg = $$("#js-clip-base-img"),//基础层图片
                     clipimg = $$("#js-clip-img"),// 裁剪层图片
-                    
+                    fileType = input.files[0].type ||  
+                        'image/' + nput.files[0].name.substr(fileName.lastIndexOf('.') + 1),
                     result;
                 
                 reader.onload = function (e) {
                     
                     result = e.target.result;
+                    sfModel.style.display = "block";
                     mask.style.display = "block";
                     popImgHandler.style.display = "block";
-                    if(input.files[0].size>200*1024){
-                        baseimg.src = result;
-                        clipimg.src = result;
+                    // if(input.files[0].size>200*1024){
+                    baseimg.src = result;
+                    clipimg.src = result; 
+                    
+                    baseimg.onload=function(){
+                        var clipArea = $$('#js-clip-area');//需要截图的整张图的div
+                        console.log(baseimg.naturalWidth);
+                        var portion = baseimg.naturalHeight/baseimg.naturalWidth;
+                        var defaultWidth = 740;
+                        var defaultHeight = 500;
+                        if(defaultWidth * portion > defaultHeight){ //文件占满div的话，会超出屏幕情况，这样肯定要缩放宽度
+                            var portionWidth = defaultHeight / portion;//算出来合适的宽度
+                            //如果这个宽度比图片实际高度还大，那么我们就用图片的宽度即可
+                            if(portionWidth>baseimg.naturalWidth){
+                                clipArea.style.width = baseimg.naturalWidth + 'px';
+                            }
+                            else{
+                                clipArea.style.width = portionWidth + 'px';
+                            }
+                            var realWidth = parseInt(clipArea.style.width);
+                            var realHeight = parseInt(window.getComputedStyle(clipArea).height);
+                            if(realWidth<200){//图片太窄了，那么也得缩小选取框宽度
+                                $$('#js-drag-path').style.width = realWidth + 'px';
+                            }
+                            if(realHeight<200){
+                                $$('#js-drag-path').style.height = realHeight + 'px';
+                            }
+                            
+                            
+                        }
+                        else{
+                            if(baseimg.naturalWidth<defaultWidth){//图片小，这样，我们就不缩放了
+                                //这里，横向纵向，就都变为图像大小
+                                clipArea.style.width = baseimg.naturalWidth + 'px'
+                                if(baseimg.naturalWidth<200){
+                                    $$('#js-drag-path').style.width = baseimg.naturalWidth + 'px';
+                                }
+                                if(parseInt(window.getComputedStyle(clipArea).height)<200){
+                                    $$('#js-drag-path').style.height = parseInt(window.getComputedStyle(clipArea).height) + 'px';
+                                }
+                            }else{
+                                
+                                //这里不用做啥
+                            }
+                        }
+
+                       
                         
-                    }
-                    else{
-                        baseimg.src = result;
-                        clipimg.src = result;
-                        
-                    }
+                        setTimeout(dragF,0,fileType);
+                        setTimeout(function(){
+                            $$("#avatar").value = '';
+                        },0);
+                    };
                     body.style.overflow = "hidden";
-                    setTimeout(dragF,0);
+                    
                     
                 }
                 

@@ -76,6 +76,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
   // var gender = req.fields.gender;
   // var bio = req.fields.bio;
   // var avatar = req.files.avatar.path.split(path.sep).pop();
+  var avatar = 'avatar_default.jpg'
   var password = req.fields.password;
   var repassword = req.fields.repassword;
   var message = {
@@ -89,10 +90,10 @@ router.post('/', checkNotLogin, function(req, res, next) {
   var user = {
     name: name,
     nickname:nickname,
-    password: password
+    password: password,
     // gender: gender,
     // bio: bio,
-    // avatar: avatar
+    avatar: avatar
   };
   // 用户信息写入数据库
   UserModel.create(user)

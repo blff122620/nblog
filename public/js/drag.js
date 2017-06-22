@@ -1,5 +1,6 @@
-var dragF = function(){
+var dragF = function(fileType){
     var 
+        popBox = $$('#js-img-handler'),//这个用与处理绝对定位造成的位置偏差计算
         cArea = $$("#js-clip-area"),// 图片容器 
         baseimg = $$("#js-clip-base-img"),//基础层图片
         clipimg = $$("#js-clip-img"),// 裁剪层图片
@@ -9,8 +10,56 @@ var dragF = function(){
         cAreaTop = $.getPosition(cArea).Y, //图片容器距离浏览器上边界距离  
         cAreaLeft = $.getPosition(cArea).X, //图片容器距离浏览器左边界距离 
         mousePosition,mouseStartX,mouseStartY,dragLeft,dragTop,dragMaxH,dragMaxW;// 定义按下鼠标时产生的变量
-        
+
+    var canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d'),
+        img = $$('#js-compressed-img'),
+        clipCanvas = $$('#js-safe-modal canvas'),
+        confirm = $$('#js-clip-confirm'),
+        quality = 30;//图像压缩质量;
     
+    confirm.onclick = function(popsDisappear){
+        var data = clipCanvas.toDataURL(fileType,quality/100);
+        $$('#avatarimg').src = data; 
+        $$('#avatar').src = data;
+
+        var fd = new FormData();
+        var blob = dataURItoBlob(data);
+        fd.append('avatar', blob);
+        fd.append('userid',$$('#userid').value);
+        
+        var config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+
+        axios.post('/personal/avatar', fd, config) ;
+
+        $$(".pop").forEach(function(item){
+            item.style.display = "none";
+        });
+        document.body.style.overflow = "auto";
+        $$('#js-safe-modal').style.display = "none";
+        
+        $$("#js-mask").style.display = "none";
+    };
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {type: mimeString});
+    }
+
+
+    canvas.width = cAreaW;//压缩图片，确定宽度
+    canvas.height = cAreaH;
+    
+    ctx.drawImage(baseimg,0,0,cAreaW,cAreaH);
+    img.src = canvas.toDataURL(fileType,quality/100);
+
     function startDrag(e) {  
         e.preventDefault();
         mouseStartX = e.clientX;    // 刚按下鼠标时 鼠标相对浏览器边界的 X 坐标
@@ -32,40 +81,68 @@ var dragF = function(){
             case 'js-drag-path' : dragMove(e);  break;
             case 'box-n' : nsMove(e, 'n');  break;
             case 'box-s' : nsMove(e, 's');  break;
-            case 'boxW' : weMove(e, 'w');  break;
-            case 'boxE' : weMove(e, 'e');  break;
-            case 'boxNe' : weMove(e, 'w'); nsMove(e, 'n');  break;
-            case 'boxNw' : weMove(e, 'e');nsMove(e, 'n');  break;
-            case 'boxSe' : weMove(e, 'w'); nsMove(e, 's');  break;
-            case 'boxSw' : weMove(e, 'e'); nsMove(e, 's');  break;
+            case 'box-w' : weMove(e, 'w');  break;
+            case 'box-e' : weMove(e, 'e');  break;
+            case 'box-ne' : nsMove(e, 'n'); weMove(e, 'e');  break;
+            case 'box-nw' : nsMove(e, 'n'); weMove(e, 'w');  break;
+            case 'box-se' : nsMove(e, 's'); weMove(e, 'e');  break;
+            case 'box-sw' : nsMove(e, 's'); weMove(e, 'w');  break;
             default : break;
         }
     }
     // 鼠标松开时释放事件
     function clearDragEvent(e) {  
         document.removeEventListener('mousemove', dragging, false);
-        document.removeEventListener('mouseup', clearDragEvent, false)
+        document.removeEventListener('mouseup', clearDragEvent, false);
+          
+        setCanvas();
+    }
+    function setCanvas(){
+        ctx = clipCanvas.getContext('2d');
+        clipCanvas.width = drag.offsetWidth;
+        clipCanvas.height = drag.offsetHeight;
+        ctx.drawImage(img,
+            drag.offsetLeft,drag.offsetTop,drag.offsetWidth,drag.offsetHeight,
+            0,0,drag.offsetWidth,drag.offsetHeight); 
+        
+        
     }
     // 上下方向的边框拖动
-    function nsMove(e, str) {
-        document.body.style.overflow="auto";  
+    function nsMove(e, str) { 
         var  // 拖拽中 鼠标坐标变化值
-            draggingY = e.screenY,
-            dragY = $.getPosition(drag).Y;
-        var newcAreaTop = $.getPosition(cArea).Y;
-        if(draggingY<newcAreaTop) draggingY = cAreaTop;
-        if(draggingY>newcAreaTop+cAreaH) draggingY = cAreaTop+cAreaH;
+            draggingY = e.clientY,
+            dragY = $.getPosition(drag).Y,
+            popBoxStyle = window.getComputedStyle(popBox),
+            changeHeigt;
+        
+        if(draggingY<cAreaTop) draggingY = cAreaTop;
+        if(draggingY>=cAreaTop+cAreaH) draggingY = cAreaTop+cAreaH;
         if(str === 'n'){
-            var changeHeigt = dragY - draggingY;
-            drag.style.top = dragTop - changeHeigt<=0?0:dragTop - changeHeigt +'px';
-            // 
-            console.log("draggingY="+draggingY+", dragY="+dragY);
-            
+            changeHeigt = dragY - draggingY;
+            drag.style.top = drag.offsetTop - dragY + draggingY + 'px';  
         }
-        // drag.style.height = drag.offsetHeight + changeHeigt + 'px';
+        if(str === 's'){
+            changeHeigt = draggingY - drag.offsetHeight - dragY; 
+        }
+        drag.style.height = drag.offsetHeight + changeHeigt + 'px';
         
         setClip();
     }
+    // 水平方向的边框拖动
+    function weMove(e, str) {  
+        var draggingX = e.clientX;
+        if(draggingX < cAreaLeft) draggingX = cAreaLeft;
+        if(draggingX > cAreaLeft + cAreaW) draggingX = cAreaLeft + cAreaW;
+        var dragX = $.getPosition(drag).X;
+        if(str === 'w') {
+            var changeWidth = dragX - draggingX;
+            drag.style.left = drag.offsetLeft - changeWidth + 'px';
+        } else if(str === 'e') {
+            var changeWidth = draggingX - drag.offsetWidth - dragX;
+        }
+        drag.style.width = drag.offsetWidth + changeWidth + 'px';
+        setClip();
+    };
     // 整体拖拽
     function dragMove(e) {  
         var moveX = e.clientX - mouseStartX; // 拖拽中 鼠标坐标变化值
@@ -87,7 +164,7 @@ var dragF = function(){
         // console.log(clipPath.join(','));
     }
 
-   
+    setCanvas();
     drag.addEventListener('mousedown', startDrag, false);
     
 };

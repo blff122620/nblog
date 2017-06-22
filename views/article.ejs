@@ -11,7 +11,9 @@
                     <div class="n-title"><%= post.title %></div>
                     <div class="n-content"><%- post.content %></div>
                     <div class="n-tab-smaller">
-                        <a href="/posts?author=<%= post.author._id %>">作者：<%= post.author.nickname %></a>
+                        <a href="/posts?author=<%= post.author._id %>">
+                        <img class="avatar-xs" src="/img/upload/<%=post.author.avatar%>">
+                        <%= post.author.nickname %></a>
                         
                     </div>
                     <div class="n-read-time">阅读次数(<%= post.pv %>)&nbsp;&nbsp;

@@ -44,12 +44,57 @@ router.get('/',checkLogin, function(req, res, next) {
 });
 
 // POST /personal 用户更新资料
+router.post('/avatar',checkLogin,function(req,res,next){
+  var userId = req.fields.userid;
+  var avatar = req.files.avatar.path.split(path.sep).pop();
+  var avatarpath = req.files.avatar.path;
+  var user = {
+    
+  };
+  var pathPrefix = avatarpath.slice(0,avatarpath.lastIndexOf(path.sep));
+  try {
+    user.avatar = avatar;
+  }catch (e) {
+    // 失败，异步删除上传的头像
+    fs.unlink(req.files.avatar.path);
+    req.flash('error', e.message);
+    return res.redirect('/personal');
+  }
+  Promise.all([UserModel.getUserById(userId),
+    UserModel.updateUserById(userId, user)])
+    .then(function(result){
+      try{
+        if(!(result[0].avatar === 'avatar_default.jpg')){
+          fs.unlink(`${pathPrefix}/${result[0].avatar}`);
+        }
+        
+      }
+      catch (e) {
+        throw new Error('没有该文件');
+        // res.end(JSON.stringify({msg:'buok'}));
+      }
+      res.end(JSON.stringify({msg:'ok'}));
+    })
+    .catch(next);
+  
+  // 用户信息写入数据库
+  // UserModel.updateUserById(userId, user)
+  //   .then(function () {
+  //     // req.flash('success', '个人头像编辑成功');
+      
+  //     res.end(JSON.stringify({msg:'ok'}));
+  //   })
+  //   .catch(next);
+});
+  
+// POST /personal 用户更新资料
 router.post('/', checkLogin, function(req, res, next) {
   var userId = req.fields.userid;
   var nickname = req.fields.nickname;
   var topimg = req.fields.topimg;
   var info = req.fields.info;
-  var avatar = req.files.avatar.path.split(path.sep).pop();
+  
+  // var avatar = req.files.avatar.path.split(path.sep).pop();
   var email = req.fields.email;
 
   // 校验参数
@@ -60,17 +105,17 @@ router.post('/', checkLogin, function(req, res, next) {
     // if (!req.files.avatar.name) {
     //   throw new Error('缺少头像');
     // }
-    if(req.files.avatar.size>200*1024){
-      throw new Error('文件过大，压缩后还是超过了200kb');
-    }
-    if(req.files.avatar.size == 0){
-      throw new Error('');
-    }
+    // if(req.files.avatar.size>200*1024){
+    //   throw new Error('文件过大，压缩后还是超过了200kb');
+    // }
+    // if(req.files.avatar.size == 0){
+    //   throw new Error('');
+    // }
     var type = ['.gif','.jpg','.jpeg','.png'];
-    var filename = req.files.avatar.name;
-    if(filename&&!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
-        throw new Error("文件类型不匹配，请上传如下类型后缀的文件: "+type.join(" "));
-    }
+    // var filename = req.files.avatar.name;
+    // if(filename&&!type.includes(filename.slice(filename.lastIndexOf('.')).toLowerCase())){
+    //     throw new Error("文件类型不匹配，请上传如下类型后缀的文件: "+type.join(" "));
+    // }
     
   } catch (e) {
     // 失败，异步删除上传的头像
@@ -86,9 +131,9 @@ router.post('/', checkLogin, function(req, res, next) {
     info: info,
     email: email
   };
-  if(filename){
-    user.avatar = avatar;
-  }
+  // if(filename){
+  //   user.avatar = avatar;
+  // }
   // 用户信息写入数据库
     UserModel.updateUserById(userId, user)
     .then(function () {

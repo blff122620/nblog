@@ -398,7 +398,7 @@ nav .more>a::before{
     position: relative;
     float: right;
     right: 10px;
-    bottom: -38px;
+    bottom: -18px;
     cursor: default;
     color: #aaa;
 }
@@ -406,6 +406,11 @@ nav .more>a::before{
 .n-box .n-tab-smaller a {
     margin-left: 4px;
     color: #aaa;
+}
+.n-box .n-tab-smaller img{
+    position: relative;
+    top:10px;
+    right: 5px;
 }
 .n-box .comments{
     border-top: 1px solid #eee;
@@ -807,6 +812,9 @@ footer a {
     .n-box .n-read{
         padding-left: 1.5em;
     }
+    .n-box .n-read{
+        float: right;
+    }
     .n-box .n-read-time{
         margin-left: 10px;
     }
@@ -814,8 +822,7 @@ footer a {
         position: relative;
         float: left;
         left: 6px;
-        bottom: -10px;
-        
+        bottom: -16px;
     }
     footer .nav-footer li {
         font-size: 1.5em;

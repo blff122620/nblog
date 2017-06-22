@@ -179,7 +179,11 @@ a.button{
 
 .clip-area{
     position: relative;
-    width: 100%;
+    /*width: 100%;*/
+    max-height: 500px;
+    margin:0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
     /*图像裁剪div*/
 }
 .clip-area .clip-base-img{
@@ -198,7 +202,7 @@ a.button{
 }
 .drag-path{
     box-sizing: border-box;
-    border:1px dashed #ccc;
+    outline:1px dashed #000;
     width: 200px;
     height: 200px;
     cursor: move;
@@ -256,3 +260,22 @@ a.button{
     transform: translateY(-50%);
     cursor: w-resize;
 }
+
+.safe-modal{
+    z-index: 101;
+    position: fixed;
+    display: none;
+    top: 0;left: 0;right: 0;bottom: 0;
+}
+
+.modal{
+    z-index: 102;
+    display: none;
+    width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.dn{display:none;}
+.tr{text-align:right;}

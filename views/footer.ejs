@@ -36,9 +36,16 @@
     
 
     <div class="mask" id="js-mask"></div>
+    
     <%- include('components/login') %>
     <%- include('components/register') %>
-    <%- include('components/img_handler') %>
+    <div class="safe-modal" id="js-safe-modal">
+        <canvas id="js-clip-canvas " class="dn"></canvas>
+        <img id="js-compressed-img" class="dn">
+        <%- include('components/img_handler') %>
+        
+    </div>
+    
 </body>
 
 </html>
