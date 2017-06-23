@@ -15,8 +15,9 @@ body{
     background:
         linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
         url("/img/header_bg.jpeg") center/cover no-repeat;
-
+    
 }
+
 .header-avatar{
     position: absolute;
     right: 40px;
@@ -310,6 +311,20 @@ nav .more>a::before{
     padding: 0 120px 0 140px;
 }
 
+.n-box .box-content{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.n-box .box-top-content{
+    padding-top:60px;
+}
+.n-box .nw-pos{
+    position: absolute;
+    top: -25px;
+    left: 10px;
+    
+}
+
 .n-box .n-tab {
     float: right;
     position: relative;
@@ -407,7 +422,7 @@ nav .more>a::before{
 }
 
 .n-box .n-tab-smaller a {
-    margin-left: 4px;
+    /*margin-left: 4px;*/
     color: #aaa;
 }
 .n-box .n-tab-smaller img{
@@ -656,6 +671,10 @@ footer a {
     width: 30px;
     height: 30px;
 }
+.avatar-n{
+    width: 60px;
+    height: 60px;
+}
 
 .avatar-upload img,
 .avatar-mask{
@@ -878,6 +897,10 @@ footer a {
     }
     .avatar-upload:hover .avatar-mask{
         display: none;
+    }
+    .box-content a.button{
+        display: block;
+        margin-bottom: 10px;
     }
 
 }

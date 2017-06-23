@@ -55,6 +55,7 @@ app.use(function (req, res, next) {
   res.locals.authorName = "";//logo的名字
   res.locals.nicknameSelected = false;
   res.locals.authorId = '';
+  res.locals.authorTopimg = '';
   res.locals.nav = [
     {
       href:'/posts',

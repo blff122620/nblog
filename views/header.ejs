@@ -21,7 +21,21 @@
 </head>
 
 <body>
-    <header class="header-bg" id="js-header">
+    <header class="header-bg " id="js-header" style="
+
+    <%if(!!authorTopimg){%>
+      background:
+        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+        url('<%=authorTopimg%>') center/cover no-repeat;  
+    <%}else if(user){%>
+
+    background:
+        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+        url('<%=user.topimg%>') center/cover no-repeat;
+    <%}%>
+
+
+    ">
         <%if(user){%>
         <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
         <%}%>

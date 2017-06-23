@@ -12,23 +12,43 @@ router.get('/', function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var author = req.query.author;
   var nickname ='';
-  UserModel.getUserById(author)
-    .then(function (user) {
-      if(user){
-        nickname = user.nickname;
+  var authorTopimg = '';
+  Promise.all([UserModel.getUserById(author),
+    PostModel.getPostsSkeleton(author)])
+    .then(function(result){
+      if(result[0]){
+        nickname = result[0].nickname;
+        authorTopimg = result[0].topimg;
       }
-      
-    });
-  PostModel.getPostsSkeleton(author)
-    .then(function (posts) {
-      
       res.render('index', {
-        posts: posts,
+        posts: result[1],
         date:utils.formatDate(new Date()),
-        authorName:nickname
+        authorName:nickname,
+        authorId:author,
+        authorTopimg:authorTopimg
       });
     })
     .catch(next);
+  // UserModel.getUserById(author)
+  //   .then(function (user) {
+  //     if(user){
+  //       nickname = user.nickname;
+  //       authorTopimg = user.topimg;
+  //     }
+      
+  //   });
+  // PostModel.getPostsSkeleton(author)
+  //   .then(function (posts) {
+      
+  //     res.render('index', {
+  //       posts: posts,
+  //       date:utils.formatDate(new Date()),
+  //       authorName:nickname,
+  //       authorId:author,
+  //       authorTopimg:authorTopimg
+  //     });
+  //   })
+  //   .catch(next);
 });
 
 // POST /posts 发表一篇文章
@@ -101,10 +121,11 @@ router.get('/:postId', function(req, res, next) {
       // res.redirect('back');
       throw new Error('该文章不存在');    
     }
-
     res.render('article', {
       post: post,
-      authorName:post.author.nickname
+      authorName:post.author.nickname,
+      authorId:post.author._id,
+      authorTopimg:post.author.topimg
     });
   })
   .catch(next);

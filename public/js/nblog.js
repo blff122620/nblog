@@ -130,7 +130,7 @@
             switch(event.type){
                 case "touchmove":
                     if(navAsideOpen()){
-                        event.preventDefault();
+                        event.preventDefault();//阻止屏幕的默认滚动
                     }
                     break;
                 case "touchstart":
@@ -343,10 +343,21 @@
                     result;
                 
                 reader.onload = function (e) {
-                    
                     result = e.target.result;
                     sfModel.style.display = "block";
                     mask.style.display = "block";
+                    if(!$.isPc()){
+                        //手机的裁剪头像图片，在这里编写
+                        body.style.overflow = "hidden";
+                        $.toggleTouchMove(true);//禁止页面滚动
+                        $$('#js-mobile-baseimg').src = result;
+                        $$('#js-safe-modal').addEventListener("touchmove",$.handleTouch);
+                        $$('#js-safe-modal').addEventListener("touchstart",$.handleTouch);
+                        $$('#js-safe-modal').addEventListener("touchend",$.handleTouch);
+                        return;
+                    }
+                    
+                    
                     popImgHandler.style.display = "block";
                     // if(input.files[0].size>200*1024){
                     baseimg.src = result;
@@ -354,7 +365,6 @@
                     
                     baseimg.onload=function(){
                         var clipArea = $$('#js-clip-area');//需要截图的整张图的div
-                        console.log(baseimg.naturalWidth);
                         var portion = baseimg.naturalHeight/baseimg.naturalWidth;
                         var defaultWidth = 740;
                         var defaultHeight = 500;

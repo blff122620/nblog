@@ -282,3 +282,9 @@ a.button{
 
 .dn{display:none;}
 .tr{text-align:right;}
+
+.bs3{box-shadow: 3px 3px 3px ;}
+.br5{border-radius: 5px;}
+.db{display: block;}
+.tac{text-align: center;}
+.mt10 {margin-top: 10px;}

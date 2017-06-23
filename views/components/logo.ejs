@@ -5,6 +5,11 @@
 <% }else {%>
     <!-- Beau's&nbsp;&nbsp;BLOG -->
     <a href="/">
-    HerdsMEN-牧马人
+       <% if(user){%>
+        <%=user.nickname%> 
+       <% }else{ %>
+
+        HerdsMEN-牧马人
+        <% } %>
     </a>
 <% } %>

@@ -93,7 +93,8 @@ router.post('/', checkNotLogin, function(req, res, next) {
     password: password,
     // gender: gender,
     // bio: bio,
-    avatar: avatar
+    avatar: avatar,
+    topimg:[req.protocol + ':/' ,req.get('host'),'img/header_bg_default.jpg'].join('/')
   };
   // 用户信息写入数据库
   UserModel.create(user)

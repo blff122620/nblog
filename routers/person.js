@@ -21,7 +21,8 @@ router.get("/info",function(req,res,next){
         res.render('person',{
           userinfo:user,
           authorName:user.nickname,
-          authorId:user._id
+          authorId:user._id,
+          authorTopimg:user.topimg
         });
       }
       
