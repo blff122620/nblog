@@ -208,6 +208,9 @@ nav .more>a::before{
     line-height: 50px;
     font-size: 3em;
 }
+.nav-aside-copyright a{
+    font-size: 20px;
+}
 .fullscreen-default{
     display: none;
 }

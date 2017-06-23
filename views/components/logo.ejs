@@ -1,7 +1,10 @@
 <% if(authorName){%>
+    <a href="/personal/info<%if(!!authorId){%>?author=<%=authorId%><%}%>">
     <%= authorName %>
-
+    </a>
 <% }else {%>
     <!-- Beau's&nbsp;&nbsp;BLOG -->
+    <a href="/">
     HerdsMEN-牧马人
+    </a>
 <% } %>

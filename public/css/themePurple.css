@@ -2,7 +2,9 @@ body{
     background: #f7f9fc;
 }
 
-header a,header a:hover{
+header,header a,header a:hover,
+.phone-nav-title a,
+.logo-footer a:hover{
     color: #fff;
 }
 
@@ -70,7 +72,7 @@ nav .more .classify a,
 
 }
 
-.logo-footer,
+.logo-footer a,
 .nav-aside .selected,
 .nav-aside-copyright span,
 .nav-footer a,

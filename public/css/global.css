@@ -176,6 +176,9 @@ a.button{
 .ft16{
     font-size: 1.6rem;
 }
+.ft20{
+    font-size: 2rem;
+}
 
 .clip-area{
     position: relative;

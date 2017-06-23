@@ -8,12 +8,20 @@ var checkLogin = require('../middlewares/check').checkLogin
 
 // GET /personal/info 个人资料
 router.get("/info",function(req,res,next){
-  var userid = req.query.author;
+  var userid ;
+  if(req.query.author){
+    userid = req.query.author;
+  }
+  else if(req.session.user){
+    userid = req.session.user._id;
+  }
   UserModel.getUserById(userid)
     .then(function (user) {
       if(user){
         res.render('person',{
-          user:user
+          userinfo:user,
+          authorName:user.nickname,
+          authorId:user._id
         });
       }
       
