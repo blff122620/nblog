@@ -9,7 +9,7 @@
         <%- post.content %></div>
         
     <div class="n-tab-smaller">
-        阅读次数(<%= post.pv %>)&nbsp;&nbsp;&nbsp;<a href="/posts?author=<%= post.author._id %>"><img class="avatar-xs" src="/img/upload/<%=post.author.avatar%>"><%= post.author.nickname %> </a>
+        阅读次数(<%= post.pv %>)&nbsp;&nbsp;&nbsp;<a href="/posts?author=<%= post.author._id %>"><%= post.author.nickname %><img class="avatar-xs" src="/img/upload/<%=post.author.avatar%>"> </a>
     </div>
     <div class="n-read"><a href="/posts/<%= post._id %>" class="underline">阅读全文</a></div>
 </div>

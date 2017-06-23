@@ -410,7 +410,7 @@ nav .more>a::before{
 .n-box .n-tab-smaller img{
     position: relative;
     top:10px;
-    right: 5px;
+    right: -5px;
 }
 .n-box .comments{
     border-top: 1px solid #eee;
@@ -476,7 +476,7 @@ nav .more>a::before{
 }
 .comments .c-list{
     position: relative;
-    padding:20px 0;
+    padding:20px 0 0;
     word-break: break-all;
     word-wrap: break-word;
 }
@@ -490,6 +490,7 @@ nav .more>a::before{
 }
 .comments .c-list .c-data{
     font-size:1.8em;
+    line-height: 1.5;
 }
 .comments .c-list .c-data span{
     font-size: .7em;
@@ -510,6 +511,13 @@ nav .more>a::before{
 .comments .c-list .c-user{
     overflow: hidden;
     text-align: right;
+    position: relative;
+    top: -10px;
+}
+.comments .c-list .c-user span{
+    position: relative;
+    right: 5px;
+    bottom: 10px;
 }
 .comments .c-submit .message{
     position: relative;
@@ -809,20 +817,29 @@ footer a {
         padding: 0 1em 0 1em;
     }
   
-    .n-box .n-read{
-        padding-left: 1.5em;
+    .n-box .n-read,
+    .n-box .n-tab-smaller{
+        margin-left: 20px;
     }
     .n-box .n-read{
-        float: right;
+        padding-left: 0;
+        padding-top: 0;
+        /*float: right;*/
     }
     .n-box .n-read-time{
         margin-left: 10px;
+        padding-top: 20px;
     }
     .n-box .n-tab-smaller {
         position: relative;
-        float: left;
-        left: 6px;
-        bottom: -16px;
+        top:-15px;
+        float: none;
+        /*float: left;*/
+        /*left: 6px;*/
+        /*bottom: -16px;*/
+        /*display: block;
+        float: right;
+*/    
     }
     footer .nav-footer li {
         font-size: 1.5em;

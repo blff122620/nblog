@@ -73,6 +73,8 @@ router.post('/avatar',checkLogin,function(req,res,next){
         throw new Error('没有该文件');
         // res.end(JSON.stringify({msg:'buok'}));
       }
+      //更新session里的的头像信息
+      req.session.user.avatar = avatar;
       res.end(JSON.stringify({msg:'ok'}));
     })
     .catch(next);

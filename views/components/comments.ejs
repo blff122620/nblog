@@ -6,14 +6,15 @@
     <div class="c-list" v-for="(comment,index) in comments" >
         <div class="c-data"><span>{{index+1}}楼</span>&nbsp;&nbsp;&nbsp;&nbsp;{{comment.content}}</div>
         <div class="c-detail">
-            <div class="c-date">发布时间：{{comment.created_at}}
+            <div class="c-date">{{comment.created_at}}
 
                 <span v-if="comment.post_author || comment.session_author==(comment.author?comment.author._id:'null')"><a @click="delComment(comment._id)">删除</a></span>
             </div>
 
             <div class="c-user">
-                评论者：<a v-if="comment.author" :href="'/posts?author='+comment.author._id">{{comment.author.nickname}}</a>
-                <a v-else>游客</a></div>
+                <a v-if="comment.author" :href="'/posts?author='+comment.author._id"><span>{{comment.author.nickname}}</span><img class="avatar-xs" :src="'/img/upload/'+comment.author.avatar"></a>
+                
+                <a v-else><span>游客</span><img class="avatar-xs" src="/img/upload/avatar_default.jpg"></a></div>
         </div>
     </div>
     <div class="c-content">

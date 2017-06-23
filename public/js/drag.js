@@ -21,6 +21,7 @@ var dragF = function(fileType){
     confirm.onclick = function(popsDisappear){
         var data = clipCanvas.toDataURL(fileType,quality/100);
         $$('#avatarimg').src = data; 
+        $$('#js-header-avatar').src = data;
         $$('#avatar').src = data;
 
         var fd = new FormData();
