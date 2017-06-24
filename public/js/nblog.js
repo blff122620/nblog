@@ -418,7 +418,30 @@
                 readURL(this,mask);
             };
         }
-        
+        window.addEventListener("onorientationchange" in window ? "orientationchange": "resize", function() {
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                // you're in PORTRAIT mode
+                $$('#js-mobile-wrap').classList.remove('dn');
+                $$('#js-mobile-wrap').classList.add('df');
+                $$('#js-mobile-wrap-tips').classList.add('dn');
+                $$('#js-mobile-wrap-tips').classList.remove('df');
+            }
+            if (window.matchMedia("(orientation: landscape)").matches) {
+                // you're in LANDSCAPE mode
+                $$('#js-mobile-wrap').classList.add('dn');
+                $$('#js-mobile-wrap').classList.remove('df');
+                $$('#js-mobile-wrap-tips').classList.remove('dn');
+                $$('#js-mobile-wrap-tips').classList.add('df');
+            }
+            if(window.orientation === 180 || window.orientation === 0) {
+                
+                // alert('竖屏状态！');
+            }
+            if(window.orientation === 90 || window.orientation === -90 ){
+                // alert('横屏状态！');
+                
+            } 
+        }, false);
     };
 
     //load事件外

@@ -282,7 +282,7 @@ a.button{
 
 .mobile-wrap,
 .mobile-wrap-tips{
-    display: flex;
+    /*display: flex;*/
     position: absolute;
     top: 0;left: 0;right: 0;bottom: 0;
     align-items: center;
@@ -330,6 +330,7 @@ a.button{
 }
 
 .dn{display:none;}
+.df{display: flex;}
 .tr{text-align:right;}
 
 .bs3{box-shadow: 3px 3px 3px ;}
