@@ -902,6 +902,24 @@ footer a {
         display: block;
         margin-bottom: 10px;
     }
+    @media screen and (orientation: landscape) {
+      /*横屏 css*/
+      .mobile-wrap{
+        display: none;
+      }
+      .mobile-wrap-tips{
+        display: flex;
+      }
+    }
+    @media screen and (orientation: portrait) {
+      /*竖屏 css*/
+      .mobile-wrap{
+        display: flex;
+      }
+      .mobile-wrap-tips{
+        display: none;
+      }
+    }
 
 }
 @media screen and (max-width: 640px) {
@@ -928,3 +946,4 @@ footer a {
         max-width: 290px;
     }
 }
+

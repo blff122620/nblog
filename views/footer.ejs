@@ -26,6 +26,7 @@
     <script type="text/javascript" src="/js/vue.js"></script>
     <script src="/js/progress.js"></script>
     <script type="text/javascript" src="/js/drag.js"></script>
+    <script type="text/javascript" src="/js/dragMobile.js"></script>
     <script type="text/javascript" src="/js/nblog.js"></script>
 
     <script src="/js/prism.js"></script>
@@ -41,9 +42,18 @@
         <canvas id="js-clip-canvas " class="dn"></canvas>
         <img id="js-compressed-img" class="dn">
         <%- include('components/img_handler') %>
-        <img src="" width="100%" id="js-mobile-baseimg">
-        <div class><input id="test" width="400">
-        <input id="test2" width="400" ></div>
+        <div class="mobile-wrap dn">   
+            <img class="mobile-baseimg" src="" id="js-mobile-baseimg">
+            <img class="mobile-clipimg" src="" id="js-mobile-clipimg">
+            <div class="mobile-clip" id="js-mobile-clip" ></div>
+            <div class="mw-footer">
+                <a class="mw-f-left cw ft16">取消</a>
+                <a class="mw-f-right cw ft16">完成</a>
+            </div>
+        </div>
+        <div class="mobile-wrap-tips">亲，请把手机竖过来~</div>
+        <!--<div class="ttest"><input id="test" width="400">
+        <input id="test2" width="400" ></div>-->
     </div>
     
 </body>

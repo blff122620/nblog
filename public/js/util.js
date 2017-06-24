@@ -209,6 +209,20 @@ var $ = (function() {
 
         }
     };
+    //负责手势的处理函数
+    var _handleGesture = function(callback,event){
+        switch(event.type){
+            case 'gesturestart':
+                callback(event.scale);
+                break;
+            case 'gesturechange':
+                callback(event.scale);
+                break;
+            case 'gestureend':
+                callback(event.scale);
+                break;
+        }
+    };
 
     function Single() {
         this.getAllElement = _getAllElement;
@@ -220,6 +234,7 @@ var $ = (function() {
         this.isPc = _isPc;
         this.toggleTouchMove = _toggleTouchMove;
         this.handleTouch = _handleTouch;
+        this.handleGesture = _handleGesture;
     }
 
     if (!_instance) {

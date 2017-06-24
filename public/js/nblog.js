@@ -346,17 +346,10 @@
                     result = e.target.result;
                     sfModel.style.display = "block";
                     mask.style.display = "block";
-                    if(!$.isPc()){
-                        //手机的裁剪头像图片，在这里编写
-                        body.style.overflow = "hidden";
-                        $.toggleTouchMove(true);//禁止页面滚动
-                        $$('#js-mobile-baseimg').src = result;
-                        $$('#js-safe-modal').addEventListener("touchmove",$.handleTouch);
-                        $$('#js-safe-modal').addEventListener("touchstart",$.handleTouch);
-                        $$('#js-safe-modal').addEventListener("touchend",$.handleTouch);
+                    if(dragMobile(result)){
+                        //处理手机端头像上传逻辑，如果是手机端，不往下执行
                         return;
                     }
-                    
                     
                     popImgHandler.style.display = "block";
                     // if(input.files[0].size>200*1024){
