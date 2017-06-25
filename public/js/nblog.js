@@ -420,11 +420,21 @@
         }
         window.addEventListener("onorientationchange" in window ? "orientationchange": "resize", function() {
             if (window.matchMedia("(orientation: portrait)").matches) {
+                $$('#js-mobile-wrap-tips').classList.add('dn');
+                $$('#js-mobile-wrap-tips').classList.remove('df');
+                if($$('#js-mobile-wrap-tips').dataset.firstshow == 'true'){
+                    //这里是处理第一次载入图片时手机是横着的，那么返回,并初始化网页
+                    body.style.overflow = "auto";
+                    sfModel.style.display = "none";
+        
+                    mask.style.display = "none";
+                    $$('#js-mobile-wrap-tips').dataset.firstshow = '';
+                    return;
+                }
                 // you're in PORTRAIT mode
                 $$('#js-mobile-wrap').classList.remove('dn');
                 $$('#js-mobile-wrap').classList.add('df');
-                $$('#js-mobile-wrap-tips').classList.add('dn');
-                $$('#js-mobile-wrap-tips').classList.remove('df');
+                
             }
             if (window.matchMedia("(orientation: landscape)").matches) {
                 // you're in LANDSCAPE mode
@@ -433,14 +443,7 @@
                 $$('#js-mobile-wrap-tips').classList.remove('dn');
                 $$('#js-mobile-wrap-tips').classList.add('df');
             }
-            if(window.orientation === 180 || window.orientation === 0) {
-                
-                // alert('竖屏状态！');
-            }
-            if(window.orientation === 90 || window.orientation === -90 ){
-                // alert('横屏状态！');
-                
-            } 
+            
         }, false);
     };
 

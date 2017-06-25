@@ -8,6 +8,16 @@ var dragMobile = function(result){
     var mBaseimgWidth;//img的当前宽度
     var loadFlag = 0;
     if(!$.isPc()){
+        //首先判断初始状态，如果不是竖屏的，那么返回，啥也不做
+        if(window.matchMedia("(orientation: landscape)").matches){
+            $$('#js-mobile-wrap-tips').classList.add('df');
+            $$('#js-mobile-wrap-tips').classList.remove('dn');
+            $$('#js-mobile-wrap-tips').dataset.firstshow = 'true';
+            
+            return true;
+        }
+        $$('#js-mobile-wrap').classList.add('df');
+        $$('#js-mobile-wrap').classList.remove('dn');
         //手机的裁剪头像图片，在这里编写
         document.body.style.overflow = "hidden";
         $.toggleTouchMove(true);//禁止页面滚动
