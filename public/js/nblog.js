@@ -79,6 +79,7 @@
             }
             ele.classList.remove("underline");
             whatDiv.style.display = "block";
+            $$('input',whatDiv)[0].focus();//默认选中第一个input
             whatDiv.scrollIntoView();
             maskShow(true);
         }

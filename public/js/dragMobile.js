@@ -22,6 +22,7 @@ var dragMobile = function(result){
         document.body.style.overflow = "hidden";
         $.toggleTouchMove(true);//禁止页面滚动
         mobileBaseimg.src = result;
+        mobileClipimg.src = result;
         mobileBaseimg.onload = function(){
             
             if(!loadFlag){

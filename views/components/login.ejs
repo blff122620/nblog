@@ -7,7 +7,7 @@
         <form action="/signin" method="post" id="js-login-form"  v-on:keyup.enter="check($event)">
             <label class="form-label" for="">用户名<input required maxlength="10" class="input" type="text" name="name" v-model="name"></label>
             <label class="form-label" for="">密码<input required maxlength="20" class="input" type="password" name="password" v-model="password"></label>
-            <span class="tips">{{message}}</span><button class="submit" type="button" v-on:keyup.enter="check($event)">登录</button>
+            <span class="tips">{{message}}</span><button class="submit" type="button" v-on:click="check($event)">登录</button>
         </form>
     </div>
 </div>
