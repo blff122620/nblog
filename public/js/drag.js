@@ -1,6 +1,5 @@
 var dragF = function(fileType){
     var 
-        popBox = $$('#js-img-handler'),//这个用与处理绝对定位造成的位置偏差计算
         cArea = $$("#js-clip-area"),// 图片容器 
         baseimg = $$("#js-clip-base-img"),//基础层图片
         clipimg = $$("#js-clip-img"),// 裁剪层图片
@@ -60,7 +59,16 @@ var dragF = function(fileType){
     
     ctx.drawImage(baseimg,0,0,cAreaW,cAreaH);
     img.src = canvas.toDataURL(fileType,quality/100);
-
+    
+    //默认必须对drag-path做一次处理，防止上次图片的裁剪区域patch超过了这次小图片的范围
+    //对clip-img做一次处理
+    setTimeout(function(){
+        drag.style.left = '0px';
+        drag.style.top = '0px';
+        setClip();//第一次加载也要做一遍裁剪区域的选择，要不然，会造成clippath和裁剪图片不配对的情况
+    },0);
+    setTimeout(setCanvas,0);//这里是为了压缩图片加载完了才执行，要不然就是黑图了
+    
     function startDrag(e) {  
         e.preventDefault();
         mouseStartX = e.clientX;    // 刚按下鼠标时 鼠标相对浏览器边界的 X 坐标
@@ -113,7 +121,6 @@ var dragF = function(fileType){
         var  // 拖拽中 鼠标坐标变化值
             draggingY = e.clientY,
             dragY = $.getPosition(drag).Y,
-            popBoxStyle = window.getComputedStyle(popBox),
             changeHeigt;
         
         if(draggingY<cAreaTop) draggingY = cAreaTop;
@@ -165,7 +172,7 @@ var dragF = function(fileType){
         // console.log(clipPath.join(','));
     }
 
-    setCanvas();
+    
     drag.addEventListener('mousedown', startDrag, false);
     
 };

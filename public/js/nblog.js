@@ -362,6 +362,8 @@
                         var portion = baseimg.naturalHeight/baseimg.naturalWidth;
                         var defaultWidth = 740;
                         var defaultHeight = 500;
+                        clipArea.style.width = defaultWidth+'px';//默认必须初始化裁剪区域为最大宽度
+                        
                         if(defaultWidth * portion > defaultHeight){ //文件占满div的话，会超出屏幕情况，这样肯定要缩放宽度
                             var portionWidth = defaultHeight / portion;//算出来合适的宽度
                             //如果这个宽度比图片实际高度还大，那么我们就用图片的宽度即可
@@ -420,7 +422,7 @@
             };
         }
         window.addEventListener("onorientationchange" in window ? "orientationchange": "resize", function() {
-            if(!$.isPc()){
+            if(!$.isPc()){//要在手机里才判断屏幕的方向
                 if (window.matchMedia("(orientation: portrait)").matches) {
                     $$('#js-mobile-wrap-tips').classList.add('dn');
                     $$('#js-mobile-wrap-tips').classList.remove('df');
