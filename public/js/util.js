@@ -160,7 +160,9 @@ var $ = (function() {
         touchStartY0,
         touchStartX1,
         touchStartY1;
-    var _handleTouch = function (event,callback){
+    var touchEndX0,
+        touchEndY0;
+    var _handleTouch = function (callback,event){
         
         //负责处理单手机和双手操作
         switch(event.type){
@@ -168,42 +170,46 @@ var $ = (function() {
                 // console.log('movving');
                 touchingNowX0 = event.touches[0].clientX;
                 touchingNowY0 = event.touches[0].clientY;
-                if(event.touches.length == 2){
-                    touchingNowX1 = event.touches[1].clientX;
-                    touchingNowY1 = event.touches[1].clientY;
-                }
-                else if(event.touches.length == 1){
-                    //一个手指头操作，调用该函数，传递过去一个数组，x,y
-                    callback([touchingNowX0,touchingNowY0]);
+                if(event.touches.length == 1){
+                    //一个手指头操作，调用该函数，传递过去x,y
+                    callback(touchingNowX0,touchingNowY0);
                 }
                 // var str = 'x0:'+touchingNowX0+' y0:'+touchingNowY0;
                 // var str2 = 'x1:'+touchingNowX1+' y1:'+touchingNowY1;
-                var str = 'x变了'+(touchingNowX0-touchStartX0);
-                var str2 = 'y变了'+(touchingNowY0-touchStartY0);
-                // console.log();
-                $$('#test').value = touchStartX0;
-                $$('#test2').value = touchStartX1;
+                // var str = 'x变了'+(touchingNowX0-touchStartX0);
+                // var str2 = 'y变了'+(touchingNowY0-touchStartY0);
+                // // console.log();
+                // $$('#test').value = touchStartX0;
+                // $$('#test2').value = touchStartX1;
                 // event.preventDefault();//阻止屏幕的默认滚动
                 break;
             case "touchstart":
-                console.log("start");
-                touchStartX0 = event.touches[0].clientX,
+                // console.log("start");
+                touchStartX0 = event.touches[0].clientX;
                 touchStartY0 = event.touches[0].clientY;
-                console.log(touchStartX0);
-                if(event.touches.length == 2){//有第二个手指参与,记录第二个手指信息
-                    touchStartX1 = event.touches[1].clientX;
-                    touchStartY1 = event.touches[1].clientY;
+                if(event.touches.length == 1){
+                    //一个手指头操作，调用该函数，传递过去x,y
+                    callback(touchStartX0,touchStartY0);
                 }
+                // console.log(touchStartX0);
+                // if(event.touches.length == 2){//有第二个手指参与,记录第二个手指信息
+                //     touchStartX1 = event.touches[1].clientX;
+                //     touchStartY1 = event.touches[1].clientY;
+                // }
                 break;
             case "touchend":
-                var touchEndX0 = event.changedTouches[0].clientX,
-                    touchEndY0 = event.changedTouches[0].clientY,
-                    touchEndX1 ,
-                    touchEndY1 ;
-                if(event.touches.length == 2){//有第二个手指参与,记录第二个手指信息
-                    touchEndX1 = event.changedTouches[1].clientX;
-                    touchEndY1 = event.changedTouches[1].clientY;
-                }
+                touchEndX0 = event.changedTouches[0].clientX;
+                touchEndY0 = event.changedTouches[0].clientY;
+                //     touchEndX1 ,
+                //     touchEndY1 ;
+                // if(event.touches.length == 2){//有第二个手指参与,记录第二个手指信息
+                //     touchEndX1 = event.changedTouches[1].clientX;
+                //     touchEndY1 = event.changedTouches[1].clientY;
+                // }
+        
+                //一个手指头操作，调用该函数，传递过去x,y
+                callback(touchEndX0,touchEndY0);
+                
                 
                 break;
 

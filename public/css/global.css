@@ -320,7 +320,7 @@ a.button{
 .mobile-baseimg{
     width: 100%;
     opacity: .5;
-    
+    position: relative;
 }
 .mobile-img-transition{
     transition: .5s ease-in-out;
