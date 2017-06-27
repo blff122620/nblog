@@ -8,6 +8,9 @@ var dragMobile = function(result){
     var mBaseimgWidth;//img的当前宽度
     var loadFlag = 0,//图片载入后只做一次图片初始化，需要一个flag
         imgStartX,imgStartY,imgNowX,imgNowY,imgEndX,imgEndY,imgStartLeft,imgStartTop,imgLeftRightRemain,imgTopBottomRemain;//单手操作手指的相应x,y坐标
+    var tStartHandler = $.handleTouch.bind(null,imgMoveStart),
+        tMoveHandler = $.handleTouch.bind(null,imgMoving),
+        tEndHandler = $.handleTouch.bind(null,imgMoveOver);
     if(!$.isPc()){
         //首先判断初始状态，如果不是竖屏的，那么返回，啥也不做
         if(window.matchMedia("(orientation: landscape)").matches){
@@ -38,9 +41,8 @@ var dragMobile = function(result){
             
         };
         //一个手指移动的时候，要处理图片的移动
-        $$('#js-safe-modal').addEventListener("touchstart",$.handleTouch.bind(null,imgMoveStart));
-        $$('#js-safe-modal').addEventListener("touchmove",$.handleTouch.bind(null,imgMoving));
-        $$('#js-safe-modal').addEventListener("touchend",$.handleTouch.bind(null,imgMoveOver));
+        allowOwnFinger(tStartHandler,tMoveHandler,tEndHandler);
+    
         //两个手指移动的时候要处理图片的缩放
         $$('#js-safe-modal').addEventListener('gesturestart',$.handleGesture.bind(null,imgScaleStart));
         $$('#js-safe-modal').addEventListener('gesturechange',$.handleGesture.bind(null,imgScale));
@@ -48,7 +50,18 @@ var dragMobile = function(result){
         return true;//在手机里，那么就返回true
         
     }
-
+    
+    function forbidOneFinger(tStartHandler,tMoveHandler,tEndHandler){
+        $$('#js-safe-modal').removeEventListener("touchstart",tStartHandler,false);
+        $$('#js-safe-modal').removeEventListener("touchmove",tMoveHandler,false);
+        // $$('#js-safe-modal').removeEventListener("touchend",tEndHandler,false);
+    }
+    function allowOwnFinger(tStartHandler,tMoveHandler,tEndHandler){
+        
+        $$('#js-safe-modal').addEventListener("touchstart",tStartHandler,false);
+        $$('#js-safe-modal').addEventListener("touchmove",tMoveHandler,false);
+        $$('#js-safe-modal').addEventListener("touchend",tEndHandler,false);
+    }
     //图片单手移动开始后的回调函数
     function imgMoveStart(x,y){
         mobileBaseimg.classList.remove("mobile-img-transition");//移动前，移除动画效果，防止卡顿
@@ -70,6 +83,7 @@ var dragMobile = function(result){
         // window.getComputedStyle(mobileClip).width
         // $$('#test').value = window.getComputedStyle(mobileBaseimg).left;
         // $$('#test2').value = imgStartX;
+        // console.log(imgNowX);
     }
     function imgMoveOver(x,y){
         imgEndX = x;
@@ -87,12 +101,15 @@ var dragMobile = function(result){
             //无法向左,向右移动了
             mobileBaseimg.classList.add("mobile-img-transition");//增加动画效果，缓冲图片
             mobileBaseimg.style.left = Math.abs(left)/left * (imgCenter[0] - mobileClip.offsetWidth/2) + 'px';
+        
+          
         }
         if(imgTopBottomRemain){
             //无法向上，下右移动了
             mobileBaseimg.classList.add("mobile-img-transition");//增加动画效果，缓冲图片
             mobileBaseimg.style.top = Math.abs(top)/top * (imgCenter[1] - mobileClip.offsetHeight/2) + 'px';
         }
+        console.log(mobileBaseimg.offsetWidth ,mobileClip.offsetWidth);
     }
     //获取图像的中心坐标
     function getImgCenter(imgIn){
@@ -120,6 +137,7 @@ var dragMobile = function(result){
         // $$('#test').value = mBaseimgWidth*scale;
         mobileBaseimg.classList.remove("mobile-img-transition");
         //缩放前，移除动画效果，防止卡顿
+        forbidOneFinger(tStartHandler,tMoveHandler,tEndHandler);//禁止单手事件
     }
     function imgScale(scale){
         mobileBaseimg.style.transform = 'scale(' + scale + ')';
@@ -137,7 +155,6 @@ var dragMobile = function(result){
         // $$('#test2').value = window.getComputedStyle(mobileBaseimg).width;
         
         //判断，如果缩放过小或者过大，那么不允许再次缩放
-    
         
         if(parseInt(nowBaseimgWidth)<mobileClipHeight||parseInt(nowBaseimgHeight)<mobileClipHeight){
             //图片的宽度小于截取框的宽度,图片的高度小于默认截取框的高度
@@ -150,6 +167,7 @@ var dragMobile = function(result){
             mobileBaseimg.style.width = mobileBaseimg.naturalWidth*defaultMaxPortion +'px';//图片最好的宽度是这样的
             mobileBaseimg.style.height =  mobileBaseimg.naturalHeight*defaultMaxPortion + 'px';//图片高度就是截取框高度
         }
-    
+        setTimeout(allowOwnFinger,0,tStartHandler,tMoveHandler,tEndHandler);//允许单手事件
+        
     }
 };

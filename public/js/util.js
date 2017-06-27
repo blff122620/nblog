@@ -163,7 +163,7 @@ var $ = (function() {
     var touchEndX0,
         touchEndY0;
     var _handleTouch = function (callback,event){
-        
+        event.stopPropagation();
         //负责处理单手机和双手操作
         switch(event.type){
             case "touchmove":
@@ -217,6 +217,7 @@ var $ = (function() {
     };
     //负责手势的处理函数
     var _handleGesture = function(callback,event){
+        event.stopPropagation();
         switch(event.type){
             case 'gesturestart':
                 callback(event.scale);
