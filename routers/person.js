@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var utils = require('../lib/utils');
 var UserModel = require('../models/users');
+var SessionModel = require('../models/sessions');
 var checkLogin = require('../middlewares/check').checkLogin
 
 // GET /personal/info 个人资料
@@ -70,7 +71,8 @@ router.post('/avatar',checkLogin,function(req,res,next){
     return res.redirect('/personal');
   }
   Promise.all([UserModel.getUserById(userId),
-    UserModel.updateUserById(userId, user)])
+    UserModel.updateUserById(userId, user),
+    SessionModel.getSessions()])
     .then(function(result){
       try{
         if(!(result[0].avatar === 'avatar_default.jpg')){
@@ -83,7 +85,7 @@ router.post('/avatar',checkLogin,function(req,res,next){
         // res.end(JSON.stringify({msg:'buok'}));
       }
       //更新session里的的头像信息
-      req.session.user.avatar = avatar;
+      utils.updateSession(result[2],userId,SessionModel,req);//更新和该用户相关的所有session
       res.end(JSON.stringify({msg:'ok'}));
     })
     .catch(next);
@@ -146,9 +148,11 @@ router.post('/', checkLogin, function(req, res, next) {
   //   user.avatar = avatar;
   // }
   // 用户信息写入数据库
-    UserModel.updateUserById(userId, user)
-    .then(function () {
+  Promise.all([UserModel.updateUserById(userId, user),
+    SessionModel.getSessions()])
+    .then(function (result) {
       req.flash('success', '个人资料编辑成功');
+      utils.updateSession(result[1],userId,SessionModel,req);//更新和该用户相关的所有session
       // 编辑成功后跳转到上一页
       res.redirect('/personal');
     })

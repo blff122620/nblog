@@ -22,5 +22,5 @@ module.exports = {
     // 通过用户 id 更新
   updateUserById: function updateUserById(userId, data) {
     return User.update({ _id: userId }, { $set: data }).exec();
-  },
+  }
 };

@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var UserModel = require('../models/users');
+
 var checkNotLogin = require('../middlewares/check').checkNotLogin;
 
 // GET /signin 登录页
@@ -58,12 +59,14 @@ router.post('/', checkNotLogin, function(req, res, next) {
         // 用户信息写入 session
         delete user.password;
         req.session.user = user;
+       
         // 跳转到主页
         res.redirect('back');
       }
       
     })
     .catch(next);
+  
 });
 
 module.exports = router;

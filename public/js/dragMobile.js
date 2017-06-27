@@ -7,7 +7,7 @@ var dragMobile = function(result){
     var mobilePortion;
     var mBaseimgWidth;//img的当前宽度
     var loadFlag = 0,//图片载入后只做一次图片初始化，需要一个flag
-        imgStartX,imgStartY,imgNowX,imgNowY,imgEndX,imgEndY,imgStartLeft,imgStartTop,imgLeftRemain,imgTopRemain;//单手操作手指的相应x,y坐标
+        imgStartX,imgStartY,imgNowX,imgNowY,imgEndX,imgEndY,imgStartLeft,imgStartTop,imgLeftRightRemain,imgTopBottomRemain;//单手操作手指的相应x,y坐标
     if(!$.isPc()){
         //首先判断初始状态，如果不是竖屏的，那么返回，啥也不做
         if(window.matchMedia("(orientation: landscape)").matches){
@@ -74,15 +74,24 @@ var dragMobile = function(result){
     function imgMoveOver(x,y){
         imgEndX = x;
         imgEndY = y;
-        var imgCenter = getImgCenter(mobileBaseimg);
-        //图片左边缘是否还剩下像素可移动
-        imgLeftRemain = imgCenter[0]-(imgStartLeft+imgNowX-imgStartX) - mobileClip.offsetWidth/2;
+        var imgCenter = getImgCenter(mobileBaseimg),
+            left = imgStartLeft+imgNowX-imgStartX,
+            top = imgStartTop+imgNowY-imgStartY;
+        //图片左,右边缘是否还剩下像素可移动
+        imgLeftRightRemain = Math.abs(left) > (imgCenter[0] - mobileClip.offsetWidth/2);
+        //图片上，下边缘是否还剩下像素可移动
+        imgTopBottomRemain = Math.abs(top) > (imgCenter[1] - mobileClip.offsetHeight/2);
         // $$('#test2').value = imgCenter[0];
         // $$('#test').value = imgLeftRemain;
-        if(imgLeftRemain<0){
-            //无法向左移动了
+        if(imgLeftRightRemain){
+            //无法向左,向右移动了
             mobileBaseimg.classList.add("mobile-img-transition");//增加动画效果，缓冲图片
-            mobileBaseimg.style.left = (imgCenter[0] - mobileClip.offsetWidth/2) + 'px';
+            mobileBaseimg.style.left = Math.abs(left)/left * (imgCenter[0] - mobileClip.offsetWidth/2) + 'px';
+        }
+        if(imgTopBottomRemain){
+            //无法向上，下右移动了
+            mobileBaseimg.classList.add("mobile-img-transition");//增加动画效果，缓冲图片
+            mobileBaseimg.style.top = Math.abs(top)/top * (imgCenter[1] - mobileClip.offsetHeight/2) + 'px';
         }
     }
     //获取图像的中心坐标
