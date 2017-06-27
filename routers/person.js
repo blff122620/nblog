@@ -39,6 +39,7 @@ router.get('/',checkLogin, function(req, res, next) {
   UserModel.getUserById(author._id)
     .then(function (user) {
       if(user){
+        delete user.password;
         req.session.user = user;
         res.render('personal',{
           date:utils.formatDate(new Date()),
@@ -85,6 +86,7 @@ router.post('/avatar',checkLogin,function(req,res,next){
         // res.end(JSON.stringify({msg:'buok'}));
       }
       //更新session里的的头像信息
+      req.session.user.avatar = avatar;
       utils.updateSession(result[2],userId,SessionModel,req);//更新和该用户相关的所有session
       res.end(JSON.stringify({msg:'ok'}));
     })
@@ -151,8 +153,14 @@ router.post('/', checkLogin, function(req, res, next) {
   Promise.all([UserModel.updateUserById(userId, user),
     SessionModel.getSessions()])
     .then(function (result) {
-      req.flash('success', '个人资料编辑成功');
+      
+      req.session.user.nickname = nickname;
+      req.session.user.topimg = topimg;
+      req.session.user.info = info;
+      req.session.user.email = email;
+      req.session.user.password = null;
       utils.updateSession(result[1],userId,SessionModel,req);//更新和该用户相关的所有session
+      req.flash('success', '个人资料编辑成功');
       // 编辑成功后跳转到上一页
       res.redirect('/personal');
     })
