@@ -902,7 +902,9 @@ footer a {
         display: block;
         margin-bottom: 10px;
     }
-    
+    .label-mobile{
+        padding-left: 20px;
+    }
 
 }
 @media screen and (max-width: 640px) {

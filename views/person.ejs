@@ -8,8 +8,8 @@
                     
                     <div class="box-content ft20 box-top-content">昵称：<%=userinfo.nickname%></div>
                     <div class="nw-pos "><img id="js-header-avatar" class="avatar-n bs3 br5" src="/img/upload/<%=userinfo.avatar%>"></div>
-                    <div class="box-content ft20">邮箱：<%=userinfo.email%></div>
-                    <div class="box-content ft20">个人简介：<%=userinfo.info%></div>
+                    <div class="box-content ft20">邮箱：<%if(userinfo.email){%><%=userinfo.email%><%}else{%>暂无<%}%></div>
+                    <div class="box-content ft20">个人简介：<%if(userinfo.info){%><%=userinfo.info%><%}else{%>暂无<%}%></div>
                     <div class="box-content ft20"><a href="/posts?author=<%=userinfo._id%>" class="button ft16 tac"  >查看<%=userinfo.nickname%>的文章</a>
                     <%if(user){%><%if(user._id==userinfo._id){%><a href="/personal" class="button ft16  tac"  >编辑个人资料</a><%}%><%}%>
                     </div>
