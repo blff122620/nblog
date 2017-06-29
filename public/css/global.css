@@ -322,12 +322,24 @@ a.button{
     opacity: .5;
     position: relative;
 }
+.mobile-clipimg-wrap{
+    position: absolute ;
+    top:0;
+}
+.mobile-clipimg{
+    position: relative;
+}
 .mobile-img-transition{
     transition: .5s ease-in-out;
 }
-.ttest{
+/*.ttest{
     position: absolute;
 }
+#js-compressed-img{
+    position: fixed;
+    z-index: 10000;
+    top:0;
+}*/
 
 .dn{display:none;}
 .df{display: flex;}

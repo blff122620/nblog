@@ -168,6 +168,7 @@ var $ = (function() {
         switch(event.type){
             case "touchmove":
                 // console.log('movving');
+                event.preventDefault();
                 touchingNowX0 = event.touches[0].clientX;
                 touchingNowY0 = event.touches[0].clientY;
                 if(event.touches.length == 1){

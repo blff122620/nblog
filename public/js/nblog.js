@@ -324,7 +324,17 @@
         });
         Prism.highlightAll();
 
-        function readURL(input,mask) {
+        //为了判别手机中图像的旋转问题，需要此函数来拿到图像的方向
+        function readFile(fileObj){
+            EXIF.getData(fileObj.files[0],function(){
+                var orientation=EXIF.getTag(this,'Orientation');//图片的方向，Number类型
+                readURL(fileObj,mask,orientation);
+                //需要判断是不是undefined,不在手机中，会变成undefined，在手机中会是number类型
+                // console.log(Object.prototype.toString.call(orientation));
+            });
+        }
+        
+        function readURL(input,mask,orientation) {
             var type = ['.gif','.jpg','.jpeg','.png'];
             // if(input.files[0].size>200*1024){
             //     alert("文件过大，头像文件需要小于200KB的文件~");
@@ -341,13 +351,14 @@
                     clipimg = $$("#js-clip-img"),// 裁剪层图片
                     fileType = input.files[0].type ||  
                         'image/' + nput.files[0].name.substr(fileName.lastIndexOf('.') + 1),
-                    result;
+                    result ;
+                
                 
                 reader.onload = function (e) {
                     result = e.target.result;
                     sfModel.style.display = "block";
                     mask.style.display = "block";
-                    if(dragMobile(result)){
+                    if(dragMobile(result,fileType,orientation)){
                         //处理手机端头像上传逻辑，如果是手机端，不往下执行
                         return;
                     }
@@ -418,7 +429,8 @@
 
         if($$("#avatar").length!=0){
             $$("#avatar").onchange=function(){
-                readURL(this,mask);
+                //先拿图像的方向信息，再去处理图像
+                readFile(this);
             };
         }
         window.addEventListener("onorientationchange" in window ? "orientationchange": "resize", function() {
