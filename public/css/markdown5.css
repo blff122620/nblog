@@ -53,7 +53,7 @@
     font-variant:small-caps;
 }
 .n-box .n-content a {
-    color: grey;
+    color: #2196f3;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
@@ -67,7 +67,7 @@
 }
 .n-box .n-content ul, .n-box .n-content ol {
     padding: 0;
-    margin: 0px 0px 0px 50px;
+    margin: 0px 0px 0px 25px;
 }
 .n-box .n-content ul {
     list-style-type: square;
@@ -76,7 +76,8 @@
 }
 
 .n-box .n-content li {
-     line-height:150%    
+     line-height:150%  ;
+     list-style: square !important;
 }
 .n-box .n-content li ul, .n-box .n-content li ul {
     margin-left: 24px;
