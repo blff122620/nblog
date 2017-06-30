@@ -4,7 +4,8 @@
   "description": "第一个博客系统",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --harmony test"
+    "test": "mocha --harmony test",
+    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'nblog'"
   },
   "repository": {
     "type": "git",

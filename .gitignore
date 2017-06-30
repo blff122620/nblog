@@ -16,3 +16,4 @@ public/img/sprite.psd
 public/img/sprite.psd
 public/img/upload/*
 !public/img/upload/avatar_default.jpg
+config/production.js
