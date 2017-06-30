@@ -1,7 +1,7 @@
 var marked = require('marked');
 var Post = require('../lib/mongo').Post;
 var CommentModel = require('./comments');
-var postContentLengh = 15;//保留的每篇文章的前多少行，列表页的显示
+var postContentLengh = 5;//保留的每篇文章的前多少行，列表页的显示
 
 // 将 post 的 content 从 markdown 转换成 html
 Post.plugin('contentToHtml', {
