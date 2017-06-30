@@ -12,7 +12,7 @@
             </div>
 
             <div class="c-user">
-                <a v-if="comment.author" :href="'/posts?author='+comment.author._id"><span>{{comment.author.nickname}}</span><img class="avatar-xs" :src="'/img/upload/'+comment.author.avatar"></a>
+                <a v-if="comment.author" :href="'/posts?author='+comment.author._id"><span>{{comment.author.nickname}}({{comment.author.name}})</span><img class="avatar-xs" :src="'/img/upload/'+comment.author.avatar"></a>
                 
                 <a v-else><span>游客</span><img class="avatar-xs" src="/img/upload/avatar_default.jpg"></a></div>
         </div>
