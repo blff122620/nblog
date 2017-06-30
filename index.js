@@ -8,6 +8,7 @@ var routers = require('./routers');
 var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
+require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 var app = express();
 
