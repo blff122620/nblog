@@ -910,25 +910,7 @@ footer a {
 @media screen and (max-width: 640px) {
   /*代码片段*/
     .n-box .n-content pre{
-        max-width: 600px;
-    }
-}
-@media screen and (max-width: 480px) {
-  /*代码片段*/
-    .n-box .n-content pre{
-        max-width: 380px;
-    }
-}
-@media screen and (max-width: 420px) {
-  /*代码片段*/
-    .n-box .n-content pre{
-        max-width: 320px;
-    }
-}
-@media screen and (max-width: 360px) {
-  /*代码片段*/
-    .n-box .n-content pre{
-        max-width: 290px;
+        max-width: 80vw;
     }
 }
 

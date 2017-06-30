@@ -56,17 +56,23 @@ function cutPost(content,pattern,lines){
   var inBlock = false;
   var lineCount = 0;
   var appendStr = "\r\n# .................";
+  var pairs = 0; //代码块是否成对的结束了,pairs 为偶数，则全部结束了
   return contentArray.filter(function(item,index){
     lineCount++;
     if(index<lines){
       if(item.indexOf("```") !=-1){
         inBlock = true;
+        pairs++;
       }
       return true;
     }
     else if(inBlock){
       if(item.indexOf("```") !=-1){
-        inBlock = false;
+        pairs++;
+        if(pairs%2 == 0){
+          inBlock = false;//代码块配对结束才退出循环
+        }
+        
       }
       return true;
     }
