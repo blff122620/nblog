@@ -133,3 +133,32 @@
     word-wrap: normal;
 }
 
+.n-box .n-content table{
+    display: table;
+    border-spacing: 2px;
+    border-collapse: collapse;
+    overflow: auto;
+    
+    line-height: 2em;
+    width: 100%;
+}
+.n-box .n-content table tr{
+    display: table-row;
+}
+.n-box .n-content table tr:nth-of-type(2n){
+    background: #f6f8fa;
+}
+.n-box .n-content table td,
+.n-box .n-content table th{
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 3px;
+}
+.n-box .n-content table th{
+    text-align: center;
+    font-weight: bold;
+}
+.n-box .n-content table tr td:first-of-type{
+    word-break: keep-all;
+}
