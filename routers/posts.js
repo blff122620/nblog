@@ -13,19 +13,22 @@ router.get('/', function(req, res, next) {
   var author = req.query.author;
   var nickname ='';
   var authorTopimg = '';
+  var authorAvatar = '';
   Promise.all([UserModel.getUserById(author),
     PostModel.getPostsSkeleton(author)])
     .then(function(result){
       if(result[0]){
         nickname = result[0].nickname;
         authorTopimg = result[0].topimg;
+        authorAvatar = result[0].avatar;
       }
       res.render('index', {
         posts: result[1],
         date:utils.formatDate(new Date()),
         authorName:nickname,
         authorId:author,
-        authorTopimg:authorTopimg
+        authorTopimg:authorTopimg,
+        authorAvatar:authorAvatar
       });
     })
     .catch(next);

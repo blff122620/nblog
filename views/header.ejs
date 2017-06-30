@@ -39,13 +39,15 @@
     ">
         <%if(user){%>
         <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
+        <%}else if(authorAvatar){%>
+        <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=authorAvatar%>"></a>
         <%}%>
             <a href="/">
             <div class="logo-b logo-b-positon">
                  
             </div></a>
             <div class="semi-title">-&nbsp;&nbsp;尽情的驰骋吧&nbsp;&nbsp;-</div>  
-            <div class="logo <%if(user){%>logo-new<%}%>">
+            <div class="logo <%if(user||authorAvatar){%>logo-new<%}%>">
             <%- include('components/logo') %>
             </div>
         <nav class="nav">
