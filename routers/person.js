@@ -15,6 +15,8 @@ router.get("/info",function(req,res,next){
   }
   else if(req.session.user){
     userid = req.session.user._id;
+  }else{
+    res.redirect('back');
   }
   UserModel.getUserById(userid)
     .then(function (user) {
