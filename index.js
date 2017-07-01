@@ -79,7 +79,7 @@ app.use(function (req, res, next) {
       display:res.locals.user
     },
     {
-      href:'mailto:blff122620@163.com',
+      href:'mailto:blff122620@gmail.com',
       value:'联系博主',
       selected:false,
       display:!res.locals.user
