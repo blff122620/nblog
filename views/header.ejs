@@ -40,10 +40,10 @@
 
 
     ">
-        <%if(user){%>
-        <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
-        <%}else if(authorAvatar){%>
+        <%if(authorAvatar){%>
         <a href="/personal/info?author=<%=authorId%>" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=authorAvatar%>"></a>
+        <%}else if(user){%>
+        <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
         <%}%>
             <a href="/">
             <div class="logo-b logo-b-positon">

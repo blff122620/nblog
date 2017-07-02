@@ -10,6 +10,7 @@ var checkLogin = require('../middlewares/check').checkLogin
 // GET /personal/info 个人资料
 router.get("/info",function(req,res,next){
   var userid ;
+  var authorAvatar = '';
   if(req.query.author){
     userid = req.query.author;
   }
@@ -25,7 +26,8 @@ router.get("/info",function(req,res,next){
           userinfo:user,
           authorName:user.nickname,
           authorId:user._id,
-          authorTopimg:user.topimg
+          authorTopimg:user.topimg,
+          authorAvatar:user.avatar
         });
       }
       
