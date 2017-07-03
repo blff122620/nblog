@@ -149,7 +149,8 @@ a.button{
     border-radius: 5px;
     border: 1px solid #ccc;
     /*height: 30px;*/
-    font-size: 1.6em;
+    line-height: 1.8;
+    font-size: 1.4em;
     padding:6px 6px;
 }
 .select{
