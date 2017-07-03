@@ -65,7 +65,8 @@ nav .more>a::before,
 .comments .c-top p,
 nav .more .classify a,
 .comments .c-list .c-detail a:hover,
-.label
+.label,
+.n-color
 {
     /*color:#5c6bc0;*/
     color: #2196f3;

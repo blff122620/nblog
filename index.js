@@ -136,13 +136,13 @@ app.use(expressWinston.errorLogger({
 }));
 
 //处理所有的最后的消息，包括异常，并返回主页
-// app.use(function(err, req, res, next) {
-//   // res.status(err.status || 500);
-//   res.render('/', {
-//     message: err.message,
-//     error: err.message
-//   });
-// });
+app.use(function(err, req, res, next) {
+  // res.status(err.status || 500);
+  res.render('/', {
+    message: err.message,
+    error: err.message
+  });
+});
 
 // 监听端口，启动程序
 app.listen(config.port, function () {

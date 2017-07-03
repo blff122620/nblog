@@ -352,3 +352,13 @@ a.button{
 .mt10 {margin-top: 10px;}
 .cw{color: #fff;}
 .pt30{padding-top: 30px !important;}
+.lh30{line-height: 30px;}
+
+.n-box .nw-corner{
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+
+    padding: 0;
+    vertical-align: bottom;
+}

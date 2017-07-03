@@ -4,8 +4,8 @@
         <article id="js-article">
             <% if(posts){%>
             <% if(posts.length>0){%>
-            <% posts.forEach(function (post) { %>
-                <%- include('components/box', { post: post }) %>
+            <% posts.forEach(function (post,index) { %>
+                <%- include('components/box', { post: post ,index:posts.length-index}) %>
             <% }); %>
             <% }else{%>
                 <div class="alert">
