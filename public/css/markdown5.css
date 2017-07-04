@@ -163,7 +163,7 @@
 }
 
 .n-box .n-content h4, .n-box .n-content h5, .n-box .n-content ul, 
-.n-box .n-content ol, .n-box .n-content pre, 
+.n-box .n-content ol, .n-box .n-content pre,.n-box .n-content p, 
 .n-box .n-content blockquote, .n-box .n-content table{
     margin: 1.5em 0;
 }
@@ -171,4 +171,7 @@
 .n-box .n-content ul, .n-box .n-content ol {
     padding: 0;
     margin-left: 25px;
+}
+.n-box .n-content blockquote p{
+    margin: 0;
 }
