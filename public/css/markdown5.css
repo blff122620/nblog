@@ -16,7 +16,7 @@
     font-weight: 400;
 }
 
-.n-box .n-content h2, .n-box .n-content h3, .n-box .n-content h4, .n-box .n-content h5, .n-box .n-content p {
+.n-box .n-content h2, .n-box .n-content h3, .n-box .n-content h4, .n-box .n-content h5{
     margin-bottom: 25px;
     padding: 0;
 }
@@ -65,10 +65,7 @@
 .n-box .n-content a:visited {
     color: black;
 }
-.n-box .n-content ul, .n-box .n-content ol {
-    padding: 0;
-    margin: 0px 0px 0px 25px;
-}
+
 .n-box .n-content ul {
     list-style-type: square;
     list-style-position: inside;
@@ -99,8 +96,9 @@
     width: 390px;
 }
 .n-box .n-content blockquote {
-    border-left:.5em solid #eee;
-    padding: 0 1em;
+    border-left:2px solid #2196f3;
+    background: #F6F6F6;
+    padding: 10px 20px;
     margin-left:0;
     /*max-width: 476px;*/
 }
@@ -162,4 +160,15 @@
 }
 .n-box .n-content table tr td:first-of-type{
     word-break: keep-all;
+}
+
+.n-box .n-content h4, .n-box .n-content h5, .n-box .n-content ul, 
+.n-box .n-content ol, .n-box .n-content pre, 
+.n-box .n-content blockquote, .n-box .n-content table{
+    margin: 1.5em 0;
+}
+
+.n-box .n-content ul, .n-box .n-content ol {
+    padding: 0;
+    margin-left: 25px;
 }
