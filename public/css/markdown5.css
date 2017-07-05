@@ -90,6 +90,15 @@
     line-height: 1.5;
     font-size: 13px;
 }*/
+.n-content code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    padding: 5px 4px 2px;
+    margin: 0 4px;
+    font-size: 0.93em;
+    color: #c7254e;
+    background: #f9f2f4;
+    border-radius:4px;
+}
 .n-box .n-content aside {
     display: block;
     float: right;
