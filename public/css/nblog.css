@@ -360,7 +360,7 @@ nav .more>a::before{
 .n-box .n-title,
 .n-box .n-content{
     word-wrap: break-word;
-    word-break: break-all;
+    /*word-break: break-all;*/
 }
 
 .n-box .n-content {
