@@ -112,7 +112,7 @@ router.get('/publisher', checkLogin, function(req, res, next) {
 // GET /posts/:postId 单独一篇的文章页
 router.get('/:postId', function(req, res, next) {
   var postId = req.params.postId;
-  
+  var authorAvatar = '';
   Promise.all([
     PostModel.getPostById(postId),// 获取文章信息
     
@@ -128,7 +128,8 @@ router.get('/:postId', function(req, res, next) {
       post: post,
       authorName:post.author.nickname,
       authorId:post.author._id,
-      authorTopimg:post.author.topimg
+      authorTopimg:post.author.topimg,
+      authorAvatar:post.author.avatar
     });
   })
   .catch(next);
