@@ -10,7 +10,7 @@
                     <div class="pub-tab pub"><input required type="text" class="input" value="<%= post.tab %>" placeholder="  文章标签：建议小于6字" name="tab"></div>
                     </label>
                     <label class="label">文章配图url(显示在文章头部)
-                    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/([\w\-%\d:\.]+(\.[\w\-%\d:\.]+)*\/)*[\w\-%\d:\.]+(\.[\w\-%\d:\.]+)*\/?(\?([\w\-%\d:\.,@?^=%&:\/~\+#]*)+)?" placeholder="  文章配图：(可选项)，在此输入图片URL" class="input" type="text" value="<%= post.img %>" name="img"></div>
+                    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/.*" placeholder="  文章配图：(可选项)，在此输入图片URL" class="input" type="text" value="<%= post.img %>" name="img"></div>
                     </label>
                     <label class="label">文章内容(支持markdown)
                     <div class="pub-content pub"><textarea required class="textarea" name="content" id="" cols="30" rows="25" placeholder="  
