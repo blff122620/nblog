@@ -35,7 +35,7 @@
     color: #fff;
 }
 
-body{
+body p{
     /*font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;*/
     font-family:"Lucida Grande","Helvetica Neue",Helvetica,Arial,Verdana,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
 }
