@@ -910,7 +910,7 @@ footer a {
 @media screen and (max-width: 640px) {
   /*代码片段*/
     .n-box .n-content pre{
-        max-width: 80vw;
+        max-width: 75vw;
     }
 }
 
