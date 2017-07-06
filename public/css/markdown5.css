@@ -76,6 +76,9 @@
      line-height:150%  ;
      list-style: square !important;
 }
+.n-box .n-content ol li {
+     list-style: decimal !important;
+}
 .n-box .n-content li ul, .n-box .n-content li ul {
     margin-left: 24px;
 }
