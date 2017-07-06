@@ -1,4 +1,5 @@
 var marked = require('marked');
+var xss = require('xss');
 var Post = require('../lib/mongo').Post;
 var CommentModel = require('./comments');
 var postContentLengh = 10;//保留的每篇文章的前多少行，列表页的显示
@@ -16,17 +17,39 @@ marked.setOptions({
 Post.plugin('contentToHtml', {
   afterFind: function (posts) {
     return posts.map(function (post) {
+
       post.content = marked(post.content);
+      post.content = xssFormat(post.content);
       return post;
     });
   },
   afterFindOne: function (post) {
     if (post) {
+      
       post.content = marked(post.content);
+      post.content = xssFormat(post.content);//防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
     }
     return post;
   }
 });
+
+//防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
+function xssFormat(content){
+  return xss(content, {
+    onIgnoreTagAttr: function (tag, name, value, isWhiteAttr) {
+      if (name.substr(0, 5) === 'data-') {
+        // 通过内置的escapeAttrValue函数来对属性值进行转义,不让懒加载失效,懒加载用到了data-数据
+        return name + '="' + xss.escapeAttrValue(value) + '"';
+      }
+    },
+    onTag:function(tag, html, options) {
+      if (tag === 'pre' || tag === 'code') {
+        // 不对其属性列表进行过滤，让code部分代码可以高亮
+        return html;
+      }
+    }
+  });
+}
 
 // 将 post 的 content 截断，只留前几行
 Post.plugin('postsSkeleton', {
@@ -47,9 +70,9 @@ Post.plugin('postsSkeleton', {
 /**
  * 切割post.content ,只取前几行
  * 这里还要处理markdown的问题，不能截断 语句块``` ```
- * @param {*} content 
- * @param {*} pattern 
- * @param {*} lines 
+ * @param {*} content
+ * @param {*} pattern
+ * @param {*} lines
  */
 function cutPost(content,pattern,lines){
   var contentArray = content.split(pattern);
@@ -72,7 +95,7 @@ function cutPost(content,pattern,lines){
         if(pairs%2 == 0){
           inBlock = false;//代码块配对结束才退出循环
         }
-        
+
       }
       return true;
     }

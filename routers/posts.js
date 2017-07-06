@@ -38,11 +38,11 @@ router.get('/', function(req, res, next) {
   //       nickname = user.nickname;
   //       authorTopimg = user.topimg;
   //     }
-      
+
   //   });
   // PostModel.getPostsSkeleton(author)
   //   .then(function (posts) {
-      
+
   //     res.render('index', {
   //       posts: posts,
   //       date:utils.formatDate(new Date()),
@@ -102,7 +102,7 @@ router.get('/publisher', checkLogin, function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var date = new Date();
   var authorName = req.session.user.nickname;
-  
+
   res.render("publisher.ejs",{
     date: utils.formatDate(date),
     authorName:authorName
@@ -115,14 +115,14 @@ router.get('/:postId', function(req, res, next) {
   var authorAvatar = '';
   Promise.all([
     PostModel.getPostById(postId),// 获取文章信息
-    
+
     PostModel.incPv(postId)// pv 加 1
   ])
   .then(function (result) {
     var post = result[0];
     if (!post) {
       // res.redirect('back');
-      throw new Error('该文章不存在');    
+      throw new Error('该文章不存在');
     }
     res.render('article', {
       post: post,
@@ -165,8 +165,8 @@ router.post('/:postId/editor', checkLogin, function(req, res, next) {
   var tab = req.fields.tab;
   var content = req.fields.content;
 
-  PostModel.updatePostById(postId, author, { 
-    title: title, 
+  PostModel.updatePostById(postId, author, {
+    title: title,
     content: content,
     tab:tab,
     img: img,
@@ -215,7 +215,7 @@ router.get('/:postId/comment/',function(req,res,next){
 });
 // POST /posts/:postId/comment 创建一条留言
 router.post('/:postId/comment', function(req, res, next) {
-  
+
   var postId = req.fields.postId;
   var content = req.fields.comment;
   var author = '';
@@ -266,18 +266,18 @@ router.get('/:postId/comment/:commentId/removal', checkLogin, function(req, res,
       else if(result[0].author && result[0].author == author){
         canDelComment = true;
       }
-      
+
     })
     .then(function(){
       if(canDelComment){
         CommentModel.delCommentById(commentId)
-      
+
         .then(function(){
           CommentModel.getComments(postId)
           .then(function(comment){
             res.end(JSON.stringify(comment));
           });
-          
+
         });
       }
       else{
@@ -285,10 +285,10 @@ router.get('/:postId/comment/:commentId/removal', checkLogin, function(req, res,
       }
     })
     .catch(next);
-  
-  
 
-    
+
+
+
 });
 
 module.exports = router;
