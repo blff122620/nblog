@@ -25,7 +25,7 @@ Post.plugin('contentToHtml', {
   },
   afterFindOne: function (post) {
     if (post) {
-      
+
       post.content = marked(post.content);
       post.content = xssFormat(post.content);//防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
     }
@@ -106,6 +106,15 @@ function getMarkedRenderer(){
   var renderer = new marked.Renderer();
   renderer.image = function(href,title,text){
     return `<img src="/img/img_default.png" data-url="${href}" alt="${text}">`;
+  };
+  //处理代码块，防止未写代码语言的代码块影响网页的布局，所以需要赋值默认的代码语言
+  renderer.code = function(content,lang){
+    if(!lang){
+      return `<pre><code class="lang-markup">${content}</code></pre>`;
+    }
+    else{
+      return `<pre><code class="lang-${lang}">${content}</code></pre>`;
+    }
   };
   renderer.html = function(text){
     // console.log(text);
