@@ -62,9 +62,9 @@
     text-decoration: blink;
     color: green;
 }
-.n-box .n-content a:visited {
+/*.n-box .n-content a:visited {
     color: black;
-}
+}*/
 
 .n-box .n-content ul {
     list-style-type: square;
