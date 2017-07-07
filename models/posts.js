@@ -28,6 +28,7 @@ Post.plugin('contentToHtml', {
 
       post.content = marked(post.content);
       post.content = xssFormat(post.content);//防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
+      console.log(post.content);
     }
     return post;
   }
@@ -35,6 +36,7 @@ Post.plugin('contentToHtml', {
 
 //防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
 function xssFormat(content){
+  // var inCode = false ; //在pre代码块中
   return xss(content, {
     onIgnoreTagAttr: function (tag, name, value, isWhiteAttr) {
       if (name.substr(0, 5) === 'data-') {
@@ -43,9 +45,16 @@ function xssFormat(content){
       }
     },
     onTag:function(tag, html, options) {
-      if (tag === 'pre' || tag === 'code') {
+
+      if (tag.substr(0,4) === 'code') {
         // 不对其属性列表进行过滤，让code部分代码可以高亮
+        // inCode = !inCode; //在pre中的开关
+        
         return html;
+      }
+      if(tag.substr(0,3) === 'div'){
+          //处理div不被转义的问题
+          return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
     }
   });
