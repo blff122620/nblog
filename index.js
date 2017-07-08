@@ -67,6 +67,12 @@ app.use(function (req, res, next) {
       display:true
     },
     {
+      href:'#',
+      value:'归档',
+      selected:false,
+      display:true
+    },
+    {
       href:res.locals.user?'/posts?author=' + res.locals.user._id:'/',
       value:'我的文章',
       selected:false,
