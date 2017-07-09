@@ -45,7 +45,7 @@ app.use(require('express-formidable')({
 // 设置模板全局常量
 app.locals.blog = {
   // title: pkg.name,
-  title: '@旭 - Hello World',
+  title: '幽忧志 - Hello World',
   description: pkg.description
 };
 
