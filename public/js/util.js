@@ -232,6 +232,21 @@ var $ = (function() {
         }
     };
 
+    //添加window.onload 事件处理函数
+    
+    var _addLoadEvent = function(func){
+        var oldOnload = window.onload;
+        if(typeof oldOnload != 'function'){
+            window.onload = func;
+        }
+        else{
+            window.onload = function(){
+                oldOnload();
+                func();
+            }
+        }
+    }
+
     function Single() {
         this.getAllElement = _getAllElement;
         this.getNodeIndex = _getNodeIndex;
@@ -243,6 +258,7 @@ var $ = (function() {
         this.toggleTouchMove = _toggleTouchMove;
         this.handleTouch = _handleTouch;
         this.handleGesture = _handleGesture;
+        this.addLoadEvent = _addLoadEvent;
     }
 
     if (!_instance) {

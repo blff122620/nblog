@@ -41,7 +41,8 @@ body{
 .logo-c,
 .logo-d,
 .contact .git,
-.contact .facebook
+.contact .facebook,
+.sprite
 {
     background: url("/img/sprite.png");
 }
@@ -904,6 +905,9 @@ footer a {
     }
     .label-mobile{
         padding-left: 20px;
+    }
+    .body .totop{
+        display: none;
     }
 
 }

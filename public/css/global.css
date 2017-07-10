@@ -363,3 +363,17 @@ a.button{
     padding: 0;
     vertical-align: bottom;
 }
+
+.body .totop{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 65px;
+    background-position: -65px -37px;
+    opacity: .5;
+    cursor: pointer;
+}
+.body .totop:hover{
+    opacity: 1;
+}

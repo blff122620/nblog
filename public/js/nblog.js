@@ -1,6 +1,6 @@
 (function(){
 
-    window.onload = function(){
+    var windowOnload = function(){
         var burger = $$("#js-burger"),
             navAside = $$("#js-nav-aside"),
             article = $$("#js-article"),
@@ -288,10 +288,13 @@
         pics = pics.concat(nContentPics);
         setPicSrc(pics);
         setDefaultNav();
-        window.onscroll = function(){
+        addEventListener('scroll',function(){
             body.style.transform = "none"; //解决aside点击之后transform影响nav弹出的bug
             setDefaultNav();
             setPicSrc(pics);
+        });
+        window.onscroll = function(){
+            
         };
         function setPicSrc(pics){//设置照片的src，用于懒加载
             pics.forEach(function(item){
@@ -463,6 +466,7 @@
         }, false);
     };
 
+    $.addLoadEvent(windowOnload);
     //load事件外
     var p = myProgress.create($$("#js-top-progress"), "#2196f3", false); //第一个参数必须为原生dom对象
     //第三个参数默认为true，表示进度条走完是否还显示
