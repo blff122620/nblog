@@ -28,7 +28,7 @@ Post.plugin('contentToHtml', {
 
       post.content = marked(post.content);
       post.content = xssFormat(post.content);//防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
-      console.log(post.content);
+      
     }
     return post;
   }
