@@ -60,8 +60,8 @@ router.post('/', checkNotLogin, function(req, res, next) {
         delete user.password;
         req.session.user = user;
        
-        // 跳转到主页
-        res.redirect('back');
+        // 跳转到我的文章
+        res.redirect('/posts?author='+user._id);
       }
       
     })

@@ -6,6 +6,7 @@ var UserModel = require('../models/users');
 var checkLogin = require('../middlewares/check').checkLogin;
 var CommentModel = require('../models/comments');
 var pager = require('../lib/page');
+var config = require('config-lite')(__dirname);
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
@@ -18,8 +19,14 @@ router.get('/', function(req, res, next) {
   var authorTopimg = '';
   var authorAvatar = '';
   var symbol = author?'&':'?';
+  var showLandlordPosts = false;//只显示博主的文章
   if(author){
     baseUri = [baseUri,'?author=',author].join('');
+  }
+  else{
+    //默认只显示博主的文章
+    showHostPosts = true;
+    author = config.landlord;
   }
   if(Array.isArray(page)){//如果有多个query,需要处理一下
     page = page[page.length-1];
