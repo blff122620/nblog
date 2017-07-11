@@ -5,53 +5,54 @@ var PostModel = require('../models/posts');
 var UserModel = require('../models/users');
 var checkLogin = require('../middlewares/check').checkLogin;
 var CommentModel = require('../models/comments');
+var pager = require('../lib/page');
 
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
 router.get('/', function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var author = req.query.author;
+  var page = req.query.page?req.query.page:1;//当前页码
+  var baseUri = req.baseUrl;
   var nickname ='';
   var authorTopimg = '';
   var authorAvatar = '';
+  var symbol = author?'&':'?';
+  if(author){
+    baseUri = [baseUri,'?author=',author].join('');
+  }
+  if(Array.isArray(page)){//如果有多个query,需要处理一下
+    page = page[page.length-1];
+  }
   Promise.all([UserModel.getUserById(author),
-    PostModel.getPostsSkeleton(author)])
+    PostModel.getPostsSkeleton(author,page),
+    PostModel.getPostsCount(author)])
     .then(function(result){
       if(result[0]){
         nickname = result[0].nickname;
         authorTopimg = result[0].topimg;
         authorAvatar = result[0].avatar;
       }
+      else if(author){//根本就没有这个用户，用户还伪造一个author参数，直接返回主页   
+        res.redirect('/'); 
+        throw new Error('该用户不存在，你要查一个不存在的人的文章吗？？');
+      }
+      var postsTotal = result[2]; //文章总数
+      var pagesTotal = pager.getPages(postsTotal); //总页数
+      var barArr = pager.getPageArr(parseInt(page),pagesTotal,pager.config.min)//分页数组
       res.render('index', {
         posts: result[1],
         date:utils.formatDate(new Date()),
         authorName:nickname,
         authorId:author,
         authorTopimg:authorTopimg,
-        authorAvatar:authorAvatar
+        authorAvatar:authorAvatar,
+        postsTotal:postsTotal,
+        pageBar: pager.getPagebar(barArr,baseUri,page,symbol) //分页信息
       });
     })
     .catch(next);
-  // UserModel.getUserById(author)
-  //   .then(function (user) {
-  //     if(user){
-  //       nickname = user.nickname;
-  //       authorTopimg = user.topimg;
-  //     }
 
-  //   });
-  // PostModel.getPostsSkeleton(author)
-  //   .then(function (posts) {
-
-  //     res.render('index', {
-  //       posts: posts,
-  //       date:utils.formatDate(new Date()),
-  //       authorName:nickname,
-  //       authorId:author,
-  //       authorTopimg:authorTopimg
-  //     });
-  //   })
-  //   .catch(next);
 });
 
 // POST /posts 发表一篇文章

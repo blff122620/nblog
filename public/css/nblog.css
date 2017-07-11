@@ -909,6 +909,14 @@ footer a {
     .body .totop{
         display: none;
     }
+    .paging .a{
+        display: none;
+    }
+    
+    .paging .a.p-selected,
+    .paging .a.p-aside{
+        display: inline-block;
+    }
 
 }
 @media screen and (max-width: 640px) {

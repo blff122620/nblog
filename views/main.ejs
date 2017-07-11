@@ -16,21 +16,25 @@
             <% }%>
         </article>
         
-        <!--<div class="paging">
+        <div class="paging">
+            
             <ul>
-                <a href="">
-                    <li class="box-shadow">1</li>
+                <% pageBar.forEach(function(item){%>
+                <a 
+                    <% if(item.href){%> 
+                        href="<%=item.url%>"
+                    <%}%> 
+
+                    class="a <% if(item.selected){%> p-selected <%}%> 
+                    <% if(item.aside){%> p-aside <%}%>"
+                >
+                    <li class="box-shadow">
+                        <%=item.content%>  
+                    </li>
                 </a>
-                <a href="" class="p-selected">
-                    <li class="box-shadow">2</li>
-                </a>
-                <a href="">
-                    <li class="box-shadow">3</li>
-                </a>
-                <a href="">
-                    <li class="box-shadow">4</li>
-                </a>
+                
+                <% });%>
             </ul>
-        </div>-->
+        </div>
     </section>
 </main>

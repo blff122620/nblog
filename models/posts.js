@@ -2,8 +2,9 @@ var marked = require('marked');
 var xss = require('xss');
 var Post = require('../lib/mongo').Post;
 var CommentModel = require('./comments');
-var postContentLengh = 10;//保留的每篇文章的前多少行，列表页的显示
-marked.setOptions({
+var pager = require('../lib/page');
+var postContentLengh = 8;//保留的每篇文章的前多少行，列表页的显示
+marked.setOptions({//markdown配置属性，自定义渲染函数
   renderer:getMarkedRenderer(),
   gfm: true,
   tables: true,
@@ -153,6 +154,26 @@ Post.plugin('addCommentsCount', {
   }
 });
 
+// 给 post 分页用
+/**
+ * now 当前第几页
+ */
+Post.plugin('slice', {
+  afterFind: function (posts,now,pager) {
+    let pages = pager.getPages(posts.length);//总页数
+        
+    if(now <= 0){
+      now = 1;
+    }
+    if(now > pages){
+      now = pages;
+    }
+  
+    return posts.slice((now-1)*pager.config.size,now*pager.config.size);
+  }
+});
+
+
 module.exports = {
   // 创建一篇文章
   create: function create(post) {
@@ -171,7 +192,7 @@ module.exports = {
   },
 
   // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章
-  getPosts: function getPosts(author) {
+  getPosts: function (author) {
     var query = {};
     if (author) {
       query.author = author;
@@ -186,14 +207,15 @@ module.exports = {
       .exec();
   },
 
-    // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章,不过这个获得是缩略，截取每个post的前8行
-  getPostsSkeleton: function getPosts(author) {
+  // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章,不过这个获得是缩略，截取每个post的前postContentLengh行
+  getPostsSkeleton: function (author,now) {
     var query = {};
     if (author) {
       query.author = author;
     }
     return Post
       .find(query)
+      .slice(now,pager)
       .populate({ path: 'author', model: 'User' })
       .sort({ _id: -1 })
       .addCreatedAt()
@@ -201,6 +223,18 @@ module.exports = {
       .postsSkeleton()
       .contentToHtml()
       .exec();
+  },
+  
+  // 获取文章总数
+  getPostsCount: function (author) {
+    var query = {};
+    if (author) {
+      query.author = author;
+    }
+    return Post
+      .count(query)
+      .exec();
+    
   },
 
   // 通过文章 id 给 pv 加 1

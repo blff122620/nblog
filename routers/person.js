@@ -30,6 +30,10 @@ router.get("/info",function(req,res,next){
           authorAvatar:user.avatar
         });
       }
+      else{
+        res.redirect('/');
+        //throw new Error('该用户不存在');
+      }
       
     })
     .catch(next);
