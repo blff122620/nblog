@@ -1,0 +1,20 @@
+<div class="paging">
+    
+    <ul>
+        <% pageBar.forEach(function(item){%>
+        <a 
+            <% if(item.href){%> 
+                href="<%=item.url%>"
+            <%}%> 
+
+            class="a <% if(item.selected){%> p-selected <%}else{%> n-color <%}%> 
+            <% if(item.aside){%> p-aside <%}%>"
+        >
+            <li class="box-shadow">
+                <%=item.content%>  
+            </li>
+        </a>
+        
+        <% });%>
+    </ul>
+</div>

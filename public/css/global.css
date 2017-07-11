@@ -42,7 +42,9 @@ body{
     /*font-family:"Lucida Grande","Helvetica Neue",Helvetica,Arial,Verdana,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;*/
     font-family:"Helvetica Neue",Helvetica,"Microsoft YaHei",sans-serif;
 }
-
+h1{
+    font-size:2rem;
+}
 
 .underline::before,nav .selected::after{
     content: "";

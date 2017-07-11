@@ -67,7 +67,7 @@ app.use(function (req, res, next) {
       display:true
     },
     {
-      href:'#',
+      href:'/posts?archive=1',
       value:'归档',
       selected:false,
       display:true
@@ -75,6 +75,12 @@ app.use(function (req, res, next) {
     {
       href:res.locals.user?'/posts?author=' + res.locals.user._id:'/',
       value:'我的文章',
+      selected:false,
+      display:res.locals.user
+    },
+    {
+      href:res.locals.user?'/posts?archive=1&author=' + res.locals.user._id:'/posts?archive=1',
+      value:'我的归档',
       selected:false,
       display:res.locals.user
     },

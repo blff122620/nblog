@@ -696,6 +696,47 @@ footer a {
     background: rgba(0,0,0,.5);
 }
 
+
+.body .archive{
+    /*margin:  100px;*/
+    display: table;
+    margin: 0 auto;
+    width: 600px;
+}
+.timeline-item {
+	padding: 3em 2em 1em;
+	position: relative;	
+    border-bottom: 1px dotted rgba(0,0,0,.1);
+}
+.timeline-item::before {
+    content: attr(date-is);
+    position: absolute;
+    left: 2em;
+    font-weight: bold;
+    top: 1em;
+    display: block;
+    font-weight: 700;
+    font-size: .785rem;
+    color: rgba(0,0,0,.7);
+}
+
+.timeline-item::after {
+    width: 10px;
+    height: 10px;
+    display: block;
+    top: 1em;
+    position: absolute;
+    left: -7px;
+    border-radius: 10px;
+    content: ''; 
+    background: white;
+}
+
+.timeline-item .time-p{
+    margin-top: 10px;
+    color: rgba(0,0,0,.6);
+}
+
 /*屏幕尺寸小于640的时候采用如下样式*/
 
 @media screen and (max-width: 640px) {
@@ -916,6 +957,10 @@ footer a {
     .paging .a.p-selected,
     .paging .a.p-aside{
         display: inline-block;
+    }
+    .body .archive{
+        width: auto;
+        margin: 0 20px;
     }
 
 }

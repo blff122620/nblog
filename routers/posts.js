@@ -13,15 +13,29 @@ var config = require('config-lite')(__dirname);
 router.get('/', function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
   var author = req.query.author;
+  var archive = req.query.archive;
   var page = req.query.page?req.query.page:1;//当前页码
   var baseUri = req.baseUrl;
   var nickname ='';
   var authorTopimg = '';
   var authorAvatar = '';
-  var symbol = author?'&':'?';
+  var symbol = author||archive?'&':'?';
   var showLandlordPosts = false;//只显示博主的文章
-  if(author){
-    baseUri = [baseUri,'?author=',author].join('');
+  var renderPage = 'index';
+  if(archive){
+    renderPage = 'archive';
+  }
+  if(author || archive){
+    if(!archive){
+      baseUri = [baseUri,'?author=',author].join('');
+    }
+    else if(!author){
+      baseUri = [baseUri,'?archive=1'].join('');
+      author = config.landlord;//默认只显示博主的文章
+    }
+    else{
+      baseUri = [baseUri,'?archive=1&author=',author].join('');
+    }
   }
   else{
     //默认只显示博主的文章
@@ -53,7 +67,7 @@ router.get('/', function(req, res, next) {
       var postsTotal = result[2]; //文章总数
       var pagesTotal = pager.getPages(postsTotal); //总页数
       var barArr = pager.getPageArr(parseInt(page),pagesTotal,pager.config.min)//分页数组
-      res.render('index', {
+      res.render(renderPage, {
         posts: result[1],
         date:utils.formatDate(new Date()),
         authorName:nickname,
@@ -66,6 +80,14 @@ router.get('/', function(req, res, next) {
     })
     .catch(next);
 
+});
+
+// GET /archive 查看归档的博文（只显示标题，方便查找和存档记录）
+router.get('/archive', function(req, res, next) {
+  utils.toggleNav(req,res);//改变导航栏状态
+  res.render('archive', {
+      
+  });
 });
 
 // POST /posts 发表一篇文章
