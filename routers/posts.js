@@ -31,6 +31,12 @@ router.get('/', function(req, res, next) {
   if(Array.isArray(page)){//如果有多个query,需要处理一下
     page = page[page.length-1];
   }
+  else{
+    page = parseInt(page);
+    if(isNaN(page)){
+      page = 1;
+    }
+  }
   Promise.all([UserModel.getUserById(author),
     PostModel.getPostsSkeleton(author,page),
     PostModel.getPostsCount(author)])
