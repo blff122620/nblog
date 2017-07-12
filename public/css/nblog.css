@@ -733,6 +733,9 @@ footer a {
     background: white;
 }
 
+.body .timeline-item:last-child{
+    border-right-width: 0px;/*fix: has right border in mobile*/
+}
 .timeline-item .time-p{
     margin-top: 10px;
     color: rgba(0,0,0,.6);

@@ -107,8 +107,8 @@ a.button,
     border-image: linear-gradient(
         to bottom,
         #2196f3 60%,
-        rgba(0,0,0, 0) 100%) 1 100%
-    ;
+        hsla(0,0%,100%, 0) 100%) 1 100%
+    ; 
 }
 .alert.error p{
     border:1px solid red;
