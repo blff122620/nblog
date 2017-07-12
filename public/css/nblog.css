@@ -11,13 +11,6 @@ body{
     min-width: 1000px;
 }
 
-.header-bg{
-    background:
-        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
-        url("/img/header_bg.jpg") center/cover fixed no-repeat;
-    
-}
-
 .header-avatar{
     position: absolute;
     right: 40px;
@@ -25,14 +18,27 @@ body{
 }
 .about-header{
     position: relative;
+    background:
+        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+        linear-gradient(to top,rgba(0,0,0,.5) 0,transparent 50%),
+        url("/img/header_bg.jpg") center/cover fixed no-repeat;
+    
 }
-.about-header .ab-title{
+.about-header .ab-title,
+.users-header .users-title{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     text-shadow: 0 2px 5px rgba(0,0,0,.2);
+    
+}
+.about-header .ab-title
+{
     font-size: 7rem;
+}
+.users-header .users-title{
+    font-size: 5rem;
 }
 .about{
     width: 710px;
@@ -47,6 +53,67 @@ body{
 }
 .about .about-info{
     line-height: 2;
+}
+.users-header{
+    position: relative;
+    background:
+        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+        linear-gradient(to top,rgba(0,0,0,.5) 0,transparent 50%),
+        url("/img/users.jpg") center/cover fixed no-repeat;
+}
+.n-users{
+    display: table;
+    margin: 0 auto 20px;
+    padding: 0 100px;
+    width: 1000px;
+}
+.n-users .n-users-title{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.n-users .user-box{
+    display: inline-block;
+    margin: 10px;
+    border-radius: 9px;
+    width: 170px;
+}
+.user-box .box-avatar{
+    overflow: hidden;
+    width: inherit;
+    height: 170px;
+    cursor: pointer;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.box-avatar .avatar-a{
+    width: inherit;
+    height: inherit;
+}
+.card-info .card-line{
+    display: block;
+    padding: .2em .5em;
+    line-height: 1.5;
+}
+.card-info .card-title{
+    margin-top: 10px;
+}
+.card-info .card-semi-title{
+    display: block;
+    color: rgba(0,0,0,.4);
+}
+.card-info .card-bottom{
+    margin-bottom: 10px;
+}
+
+.user-box .user-box-avatar{
+    width: inherit;
+    height: inherit;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    transition: .3s linear;
+}
+.user-box .user-box-avatar:hover{
+    transform: scale(1.05);
 }
 
 .top-progress{
@@ -777,6 +844,11 @@ footer a {
     line-height: 1.2;
 }
 
+.person-btn-grp .person-btn{
+    display: block;
+    margin: .6em auto;
+}
+
 /*屏幕尺寸小于640的时候采用如下样式*/
 
 @media screen and (max-width: 640px) {
@@ -1009,9 +1081,31 @@ footer a {
         width: 90vw;
         
     }
-    .about-header{
+    .about-header,
+    .users-header{
         background-attachment: scroll;
     }
+    .n-users{
+        width: auto;
+        padding: 0;
+        text-align: center;
+        
+    }
+    .n-users .user-box{
+        text-align: left;
+        /* display: block; */
+        width: 140px;
+    }
+    .user-box .box-avatar{
+        height: 140px;
+    }
+    .user-box .card-title{
+        font-size: 1.3rem;
+    }
+    .user-box .card-content{
+        font-size: 1.2rem;
+    }
+    
 }
 @media screen and (max-width: 640px) {
   /*代码片段*/

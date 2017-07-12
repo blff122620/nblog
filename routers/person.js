@@ -9,13 +9,18 @@ var checkLogin = require('../middlewares/check').checkLogin
 
 // GET /personal/info 个人资料
 router.get("/info",function(req,res,next){
+  var underlineCount = utils.toggleNav(req,res);//改变导航栏状态
   var userid ;
   var authorAvatar = '';
+  if(req.query.author != (req.session.user?req.session.user._id:'')){
+    underlineCount = true;//处理author不是本人，那么不改变导航栏状态
+  }
   if(req.query.author){
     userid = req.query.author;
   }
   else if(req.session.user){
     userid = req.session.user._id;
+    
   }else{
     res.redirect('back');
   }
@@ -25,6 +30,7 @@ router.get("/info",function(req,res,next){
         res.render('person',{
           userinfo:user,
           authorName:user.nickname,
+          nicknameSelected : !underlineCount?true:false,
           authorId:user._id,
           authorTopimg:user.topimg,
           authorAvatar:user.avatar
@@ -37,6 +43,20 @@ router.get("/info",function(req,res,next){
       
     })
     .catch(next);
+});
+
+// GET /personal/users 所有博主的资料
+router.get("/users",function(req,res,next){
+  utils.toggleNav(req,res);//改变导航栏状态
+  UserModel.getUsers()
+    .then(function(users){
+      res.render('users',{
+        users: users,
+        showDefaultLogo:true
+      });
+    })
+    .catch(next);
+  
 });
 
 // GET /personal 个人资料页的显示及更新

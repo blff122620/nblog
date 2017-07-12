@@ -182,6 +182,9 @@ a.button{
     margin-bottom: 20px;
 }
 
+.ft10{
+    font-size: 1rem;
+}
 .ft14{
     font-size: 1.4rem;
 }
@@ -355,6 +358,7 @@ a.button{
 
 .dn{display:none;}
 .df{display: flex;}
+.db{display: block;}
 .tr{text-align:right;}
 
 .bs3{box-shadow: 3px 3px 3px ;}

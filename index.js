@@ -91,7 +91,12 @@ app.use(function (req, res, next) {
       selected:false,
       display:res.locals.user
     },
-    
+    {
+      href:'/personal/users',
+      value:'博主们',
+      selected:false,
+      display:true
+    },
     {
       href:'',
       value:'立即登录',

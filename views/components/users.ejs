@@ -1,0 +1,37 @@
+<main>
+    <section id="js-box-section">
+        <article id="js-article">
+            
+            <div class="n-users">
+                <h1 class="n-users-title">本站目前一共入驻了 <span style="font-size:1.4em;"><%= users.length%></span> 位博主, 欢迎他们~</h1>
+                <% users.forEach(function(user){%>
+                    <div class="box-shadow user-box"> 
+                        <div class="box-avatar">
+                            <a href="/personal/info?author=<%= user._id %>" class="avatar-a">
+                                <img src="/img/upload/<%= user.avatar %>" class="user-box-avatar" alt="">
+                            </a>
+                        </div>
+
+                        
+                        <div class="user-box-info card-info">
+                            <a href="/personal/info?author=<%= user._id %>" class="card-line default-a ft16 card-title">
+                                <%= user.nickname %>
+                                <span class="card-semi-title ft10"> <%= user.name %> </span> 
+                            </a>
+                            <a href="" class="card-line default-a ft14 card-bottom card-content">
+                                发表文章: <%= user.postsCount %>篇
+                            </a>
+                            
+                            
+                        </div>
+                        
+                        
+                    </div>
+                
+                <% });%>
+            </div>
+           
+        </article>
+        
+    </section>
+</main>
