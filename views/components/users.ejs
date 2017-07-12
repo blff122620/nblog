@@ -18,7 +18,7 @@
                                 <%= user.nickname %>
                                 <span class="card-semi-title ft10"> <%= user.name %> </span> 
                             </a>
-                            <a href="" class="card-line default-a ft14 card-bottom card-content">
+                            <a href="/posts?author=<%= user._id %>" class="card-line default-a ft14 card-bottom card-content">
                                 发表文章: <%= user.postsCount %>篇
                             </a>
                             

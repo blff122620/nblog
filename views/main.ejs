@@ -9,9 +9,16 @@
             <% }); %>
             <% }else{%>
                 <div class="alert">
-                    <p>朋友，您的主页还空空如也，写篇文章先~</p>
+                    <p>啊，这里的空空的，好像一篇文章也没有呢...</p>
                 </div>
-                 <%- include('components/pub-box') %> 
+                <% if(user){%>
+                    <% if(authorId == user._id){%>
+                        <div class="alert">
+                            <p>哎呀，我的主页还空空如也，是不是要写篇文章先？</p>
+                        </div>
+                        <%- include('components/pub-box') %>
+                    <%}%> 
+                <%}%>
             <% }%>
             <% }%>
         </article>
