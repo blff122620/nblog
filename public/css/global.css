@@ -34,6 +34,11 @@
     text-overflow: ellipsis;
     color: #fff;
 }
+.over-ellip{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 body p,
 body a,

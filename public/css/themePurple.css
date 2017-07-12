@@ -40,7 +40,8 @@ a.button:hover,
 .nav-aside,
 .default-nav-horizon,
 nav .more .classify li:hover,
-.fullscreen-default
+.fullscreen-default,
+.n-background
 {
     /*background: #5c6bc0;*/
     background:#2196f3;
@@ -67,7 +68,8 @@ nav .more .classify a,
 .comments .c-list .c-detail a:hover,
 .label,
 .n-color,
-.timeline-item .time-h1:hover a
+.time-h1 .time-title:hover,
+.time-h1:hover/*适配ellipsis's color*/
 {
     /*color:#5c6bc0;*/
     color: #2196f3;

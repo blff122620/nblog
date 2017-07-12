@@ -698,14 +698,15 @@ footer a {
 
 
 .body .archive{
-    /*margin:  100px;*/
     display: table;
     margin: 0 auto;
-    width: 600px;
+    max-width: 90vw; 
+    
 }
 .timeline-item {
 	padding: 3em 2em 1em;
-	position: relative;	
+    position: relative;	
+    max-width: inherit;
     border-bottom: 1px dotted rgba(0,0,0,.1);
 }
 .timeline-item::before {
@@ -735,6 +736,17 @@ footer a {
 .timeline-item .time-p{
     margin-top: 10px;
     color: rgba(0,0,0,.6);
+}
+.timeline-item .time-tab{
+    padding: 0 5px;
+    margin-right: 10px;
+    line-height: 23px;
+    border-radius: 4px;
+    color: #fff;
+}
+.timeline-item .time-h1{
+    max-width: inherit;
+    line-height: 1.2;
 }
 
 /*屏幕尺寸小于640的时候采用如下样式*/
@@ -959,9 +971,14 @@ footer a {
         display: inline-block;
     }
     .body .archive{
-        width: auto;
-        margin: 0 20px;
+        margin-left: 5vw;
+        
     }
+    .timeline-item .time-h1{
+        max-width:80vw;
+        white-space: normal;
+        overflow: auto;
+    } 
 
 }
 @media screen and (max-width: 640px) {

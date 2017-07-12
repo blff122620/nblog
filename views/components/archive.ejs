@@ -6,8 +6,8 @@
             <% if(posts.length>0){%>
             <div class="archive">
                 <% posts.forEach(function (post,index) { %>
-                    <div class="timeline-item" date-is='<%= post.created_at %>'>
-                        <h1 class="time-h1"><a href="/posts/<%= post._id %>"><%= post.title %></a></h1>
+                    <div class="timeline-item" date-is='<%= post.created_at %> '>
+                        <h1 class="time-h1 over-ellip"><a class="time-tab n-background" title="<%= post.tab %>"><%= post.tab %></a><a class="time-title" title="<%= post.title %>" href="/posts/<%= post._id %>"><%= post.title %></a></h1>
                         <p class="time-p">
                             阅读次数(<%= post.pv %>) 评论(<%= post.commentsCount %>)
                         </p>
