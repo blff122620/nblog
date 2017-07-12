@@ -41,7 +41,7 @@ body{
     font-size: 5rem;
 }
 .about{
-    width: 710px;
+    width: 680px;
     margin: 0 auto;
     padding-bottom: 30px;
 }
@@ -113,7 +113,7 @@ body{
     transition: .3s linear;
 }
 .user-box .user-box-avatar:hover{
-    transform: scale(1.05);
+    transform: translateZ(0) scale(1.05);
 }
 
 .top-progress{
@@ -415,6 +415,11 @@ nav .more>a::before{
     top: -25px;
     left: 10px;
     
+}
+.nw-pos .large-avatar{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .n-box .n-tab {

@@ -362,6 +362,7 @@ a.button{
 .tr{text-align:right;}
 
 .bs3{box-shadow: 3px 3px 3px ;}
+.bs3-b{box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);}
 .br5{border-radius: 5px;}
 .db{display: block;}
 .tac{text-align: center;}
