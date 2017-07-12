@@ -5,11 +5,12 @@
 <% }else {%>
     <!-- Beau's&nbsp;&nbsp;BLOG -->
     <a href="/">
-       <% if(user){%>
-        <%=user.nickname%> 
-       <% }else{ %>
-
-        幽忧志
+        
+        <% if(!user || showDefaultLogo){%>
+             幽忧志
+        <% }else{ %>
+            <%=user.nickname%>
+        
         <% } %>
     </a>
 <% } %>

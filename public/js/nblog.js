@@ -322,7 +322,7 @@
                 }
             }
         }
-        $A("pre").forEach(function(item){
+        $A(".n-content pre").forEach(function(item){
             item.classList.add("line-numbers");
         });
         Prism.highlightAll();

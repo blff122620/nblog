@@ -1,31 +1,13 @@
 <%- include('components/head') %>
 
-    <header class="header-bg " id="js-header" style="
-
-    <%if(!!authorTopimg){%>
-      background:
-        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
-        url('<%=authorTopimg%>') center/cover no-repeat;  
-    <%}else if(user){%>
-
-    background:
-        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
-        url('<%=user.topimg%>') center/cover no-repeat;
-    <%}%>
-
-
-    ">
-        <%if(authorAvatar){%>
-        <a href="/personal/info?author=<%=authorId%>" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=authorAvatar%>"></a>
-        <%}else if(user){%>
-        <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile" src="/img/upload/<%=user.avatar%>"></a>
-        <%}%>
+    <header class="header-bg about-header" id="js-header" >
+        <h1 class="ab-title">关于</h1>
             <a href="/">
             <div class="logo-b logo-b-positon">
                  
             </div></a>
             <div class="semi-title">-&nbsp;&nbsp;Hello World&nbsp;&nbsp;-</div>  
-            <div class="logo <%if(user||authorAvatar){%>logo-new<%}%>">
+            <div class="logo">
             <%- include('components/logo') %>
             </div>
         <nav class="nav">

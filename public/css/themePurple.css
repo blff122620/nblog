@@ -68,6 +68,7 @@ nav .more .classify a,
 .comments .c-list .c-detail a:hover,
 .label,
 .n-color,
+.default-a:hover,
 .time-h1 .time-title:hover,
 .time-h1:hover/*适配ellipsis's color*/
 {

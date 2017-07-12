@@ -51,7 +51,7 @@ router.get('/',checkLogin, function(req, res, next) {
         req.session.user = user;
         res.render('personal',{
           date:utils.formatDate(new Date()),
-          nicknameSelected : !!underlineCount?true:false,
+          nicknameSelected : !underlineCount?true:false,
           authorName: req.session.user.nickname,
           user:user
         });

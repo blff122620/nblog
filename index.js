@@ -59,6 +59,7 @@ app.use(function (req, res, next) {
   res.locals.authorId = '';
   res.locals.authorTopimg = '';
   res.locals.authorAvatar = '';
+  res.locals.showDefaultLogo = false;//显示默认的网站logo
   res.locals.nav = [
     {
       href:'/posts',
@@ -90,12 +91,7 @@ app.use(function (req, res, next) {
       selected:false,
       display:res.locals.user
     },
-    {
-      href:'mailto:blff122620@gmail.com',
-      value:'联系博主',
-      selected:false,
-      display:!res.locals.user
-    },
+    
     {
       href:'',
       value:'立即登录',
@@ -110,11 +106,12 @@ app.use(function (req, res, next) {
       selected:false,
       display:!res.locals.user
     },
+    
     {
-      href:'/personal',
-      value:'nickname',
+      href:'/about',
+      value:'关于',
       selected:false,
-      display:false
+      display:true
     }
   ];
   next();
