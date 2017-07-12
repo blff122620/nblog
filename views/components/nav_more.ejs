@@ -5,6 +5,13 @@
     <div class="classify">
         <ul>
             <li><a href="/personal/info">个人资料</a></li>
+            <% nav.forEach(function(item){
+                if(item.inMore){   
+            %>
+                <li><a href="<%=item.href%>"><%=item.value%></a></li>
+            <%}});%>
+            
+            
             <li><a href="/signout">登出</a></li>
             
         </ul>

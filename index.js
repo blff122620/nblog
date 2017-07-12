@@ -77,13 +77,15 @@ app.use(function (req, res, next) {
       href:res.locals.user?'/posts?author=' + res.locals.user._id:'/',
       value:'我的文章',
       selected:false,
-      display:res.locals.user
+      display:res.locals.user,
+      inMore:true
     },
     {
       href:res.locals.user?'/posts?archive=1&author=' + res.locals.user._id:'/posts?archive=1',
       value:'我的归档',
       selected:false,
-      display:res.locals.user
+      display:res.locals.user,
+      inMore:true //是否在更多下拉列表，不会显示在主导航
     },
     {
       href:'/posts/publisher',
