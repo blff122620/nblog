@@ -418,9 +418,32 @@ nav .more>a::before{
 }
 .nw-pos .large-avatar{
     position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 100;
+    top: -20px;
+    left: 220px;
+    padding: 7px;
+    padding-bottom: 5px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
 }
+.large-avatar .lg-img{
+    position: relative;
+    
+}
+.nw-pos .large-avatar::before {
+    content: "";
+    background: #fff;
+    position: absolute;
+    padding: .5em;
+    left: -.55em;
+    top: 2em;
+    transform: rotate(45deg);
+    border: inherit;
+    border-top: 0;
+    border-right: 0;
+}
+
 
 .n-box .n-tab {
     float: right;
@@ -1109,7 +1132,25 @@ footer a {
     .user-box .card-content{
         font-size: 1.2rem;
     }
-    
+    .nw-pos .large-avatar::before {
+        content: "";
+        background: #fff;
+        position: absolute;
+        padding: .5em;
+        left: 4.5em;
+        top: -.55em;
+        transform: rotate(45deg);
+        border: inherit;
+        border-bottom: 0;
+        border-right: 0;
+    }
+    .nw-pos .large-avatar{
+        left: -20px;
+        top: 80px;
+    }
+    .large-avatar .lg-img{
+        width: 91vw;
+    }
 }
 @media screen and (max-width: 640px) {
   /*代码片段*/

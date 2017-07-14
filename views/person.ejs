@@ -1,4 +1,5 @@
 <%- include('header') %>
+    
     <main>
         <section id="js-box-section">
             <article id="js-article">
@@ -7,7 +8,13 @@
                     <div class="n-tab overflow-ellipse"><a title="">个人资料</a></div>
                     
                     <div class="box-content ft20 box-top-content">昵称：<%=userinfo.nickname%></div>
-                    <div class="nw-pos "><img id="js-header-avatar" class="avatar-n bs3 br5" src="/img/upload/<%=userinfo.avatar%>"></div>
+                    <div class="nw-pos ">
+                        <a ><img id="js-person-avatar" class="avatar-n bs3 br5" src="/img/upload/<%=userinfo.avatar%>"></a>
+                        <div class="large-avatar dn" id="js-person-lg-avatar">
+                            
+                             <img class="lg-img" src="/img/upload/<%=userinfo.avatar%>" alt="">
+                        </div>
+                    </div>
                     <div class="box-content ft20">邮箱：<%if(userinfo.email){%><%=userinfo.email%><%}else{%>暂无<%}%></div>
                     <div class="box-content ft20">个人简介：<%if(userinfo.info){%><%=userinfo.info%><%}else{%>暂无<%}%></div>
                     <div class="box-content ft20 person-btn-grp">
@@ -25,4 +32,24 @@
             
         </section>
     </main>
-<%- include('footer') %>
+   
+<%- include('footer_top') %>
+<script>
+    (function(){
+        
+        $.addLoadEvent(function(){
+            var nwAvatar = $$('#js-person-avatar'),//个人信息页左上角的头像，用于hover
+            nwLgavatar = $$('#js-person-lg-avatar');
+            nwAvatar.addEventListener('click',function(event){
+                event.stopPropagation();
+                
+                nwLgavatar.classList.toggle('dn');
+            });
+            document.body.addEventListener('click',function(){
+                nwLgavatar.classList.add('dn');
+            });
+        });
+        
+    })();
+</script>
+<%- include('footer_bottom') %>

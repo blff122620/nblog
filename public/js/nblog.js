@@ -464,6 +464,7 @@
                 }
             }
         }, false);
+        
     };
 
     $.addLoadEvent(windowOnload);
