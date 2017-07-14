@@ -3,7 +3,8 @@
         var toTop = $$('#js-totop');
 
         var body = document.body || document.documentElement;
-        var totalTime = 300, //1s
+        var HEIGHT = 500, //超过此高度显示top按钮
+            totalTime = 300, //1s
             frames = 60, //帧数
             timeStep = totalTime / frames, //时间间隔
             distance = 0; //总距离
@@ -30,7 +31,7 @@
         }
         addEventListener('scroll',function(){
 
-            if(body.scrollTop > 1000){
+            if(body.scrollTop > HEIGHT){
                 toTop.classList.remove('dn');
             }
             else{
