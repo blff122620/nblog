@@ -15,7 +15,7 @@ var dragF = function(fileType){
         img = $$('#js-compressed-img'),
         clipCanvas = $$('#js-safe-modal canvas'),
         confirm = $$('#js-clip-confirm'),
-        quality = 70;//图像压缩质量;
+        quality = 100;//图像压缩质量;
     
     confirm.onclick = function(popsDisappear){
         var data = clipCanvas.toDataURL(fileType,quality/100);
