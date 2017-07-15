@@ -27,7 +27,7 @@ var dragMobile = function(result,fileType,orientation){
         mclipCanvas = $$('#js-safe-modal canvas'),
         mconfirm = $$('#js-mobile-clip-confirm'),
         mcancel = $$('#js-mobile-clip-cancel'),
-        mquality = 100;//图像压缩质量;
+        mquality = 80;//图像压缩质量;
         
     //初始化图像，在ios中，手机拍照方向是个坑
     function initialCompressedImg(){
