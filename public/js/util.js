@@ -127,18 +127,7 @@ var $ = (function() {
         return {X : elemX, Y : elemY}
     };
     var _isPc = function() {
-        var userAgentInfo = navigator.userAgent;
-        var Agents = ["Android", "iPhone",
-                    "SymbianOS", "Windows Phone",
-                    "iPad", "iPod"];
-        var flag = true;
-        for (var v = 0; v < Agents.length; v++) {
-            if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
+         return !((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1) );
     };
     var _toggleTouchMove = function (flag){
         if(flag){
