@@ -1,13 +1,14 @@
-var path = require('path');
-var express = require('express');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
-var config = require('config-lite')(__dirname);
-var routers = require('./routers');
-var pkg = require('./package');
-var winston = require('winston');
-var expressWinston = require('express-winston');
+var path = require('path'),
+    express = require('express'),
+    session = require('express-session'),
+    MongoStore = require('connect-mongo')(session),
+    flash = require('connect-flash'),
+    config = require('config-lite')(__dirname),
+    routers = require('./routers'),
+    pkg = require('./package'),
+    winston = require('winston'),
+    expressWinston = require('express-winston');
+
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 var app = express();
@@ -164,3 +165,6 @@ app.use(function(err, req, res, next) {
 app.listen(config.port, function () {
   console.log(`${pkg.name} listening on port ${config.port}`);
 });
+
+
+
