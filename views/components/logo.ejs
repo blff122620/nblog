@@ -5,12 +5,13 @@
 <% }else {%>
     <!-- Beau's&nbsp;&nbsp;BLOG -->
     <a href="/">
-        
+        <h1 style="font-size:inherit">
         <% if(!user || showDefaultLogo){%>
              幽忧志
         <% }else{ %>
             <%=user.nickname%>
         
         <% } %>
+        </h1>
     </a>
 <% } %>
