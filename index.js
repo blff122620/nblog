@@ -156,10 +156,11 @@ app.use(expressWinston.errorLogger({
 app.use(function(err, req, res, next) {
   // res.status(err.status || 500);
   try{
-    res.render('index', {
-      message: err.message,
-      error: err.message
-    });
+    // res.render('index', {
+    //   message: err.message,
+    //   error: err.message
+    // });
+    res.redirect('back');
   }catch(e){
     console.log('最外面一层index的错误处理,错误信息是：',e)
   }
