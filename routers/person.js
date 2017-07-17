@@ -37,8 +37,8 @@ router.get("/info",function(req,res,next){
         });
       }
       else{
-        // res.redirect('back');
-        throw new Error('该用户不存在');
+        res.redirect('back');
+        // throw new Error('该用户不存在');
       }
       
     })
@@ -162,7 +162,7 @@ router.post('/', checkLogin, function(req, res, next) {
     
   } catch (e) {
     // 失败，异步删除上传的头像
-    fs.unlink(req.files.avatar.path);
+    // fs.unlink(req.files.avatar.path);
     req.flash('error', e.message);
     return res.redirect('/personal');
   }
