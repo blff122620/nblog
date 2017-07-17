@@ -16,14 +16,14 @@ module.exports = function (app) {
     }
   });
   // error page
-  app.use(function (err, req, res, next) {
-    // res.render('error', {
-    //   error: (err?err:{message:'有错误'})
-    // });
-    console.log('错误信息:'+err);
-    res.writeHead(200, {
-      'Content-Type': 'text/html; charset=utf-8'
-    });
-    res.end('<h1 style="display:flex;align-items:center;justify-content:center;height:100%;"><a style="text-decoration:none;" href="/">哎呀，您运气不好，出错了，点我回到主页</a></h1>');
-  });
+  // app.use(function (err, req, res, next) {
+  //   // res.render('error', {
+  //   //   error: (err?err:{message:'有错误'})
+  //   // });
+  //   console.log('错误信息:'+err);
+  //   res.writeHead(200, {
+  //     'Content-Type': 'text/html; charset=utf-8'
+  //   });
+  //   res.end('<h1 style="display:flex;align-items:center;justify-content:center;height:100%;"><a style="text-decoration:none;" href="/">哎呀，您运气不好，出错了，点我回到主页</a></h1>');
+  // });
 };

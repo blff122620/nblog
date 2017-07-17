@@ -161,7 +161,7 @@ app.use(function(err, req, res, next) {
       error: err.message
     });
   }catch(e){
-    console.log('最外面一层index的错误处理',e)
+    console.log('最外面一层index的错误处理,错误信息是：',e)
   }
   
 });
