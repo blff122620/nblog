@@ -37,8 +37,8 @@ router.get("/info",function(req,res,next){
         });
       }
       else{
-        res.redirect('/');
-        //throw new Error('该用户不存在');
+        // res.redirect('back');
+        throw new Error('该用户不存在');
       }
       
     })

@@ -155,10 +155,15 @@ app.use(expressWinston.errorLogger({
 //处理所有的最后的消息，包括异常，并返回主页
 app.use(function(err, req, res, next) {
   // res.status(err.status || 500);
-  res.render('/', {
-    message: err.message,
-    error: err.message
-  });
+  try{
+    res.render('index', {
+      message: err.message,
+      error: err.message
+    });
+  }catch(e){
+    console.log('最外面一层index的错误处理',e)
+  }
+  
 });
 
 // 监听端口，启动程序
