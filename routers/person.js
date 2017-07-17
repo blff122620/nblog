@@ -22,7 +22,7 @@ router.get("/info",function(req,res,next){
     userid = req.session.user._id;
     
   }else{
-    res.redirect('back');
+    return res.redirect('back');
   }
   UserModel.getUserById(userid)
     .then(function (user) {

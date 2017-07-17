@@ -160,7 +160,7 @@ app.use(function(err, req, res, next) {
     //   message: err.message,
     //   error: err.message
     // });
-    res.redirect('back');
+    return res.redirect('back');
   }catch(e){
     console.log('最外面一层index的错误处理,错误信息是：',e)
   }
