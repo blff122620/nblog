@@ -1,7 +1,7 @@
 module.exports = function (app) {
   app.get('/', function (req, res) {
     res.locals.indexShowUnderline = true;//默认显示首页下划线
-    res.redirect('/posts');
+    return res.redirect('/posts');
   });
   app.use('/signup', require('./signup'));
   app.use('/signin', require('./signin'));
@@ -16,6 +16,22 @@ module.exports = function (app) {
     }
   });
   // error page
+  //处理所有的最后的消息，包括异常，并返回主页,记录日志
+  app.use(function(err, req, res, next) {
+    // res.status(err.status || 500);
+    console.log('发生了错误：',err);
+    try{
+      // res.render('index', {
+      //   message: err.message,
+      //   error: err.message
+      // });
+      return res.redirect('back');
+    }catch(e){
+      console.log('最外面一层index的错误处理,错误信息是：',e);
+    }
+    
+  });
+
   // app.use(function (err, req, res, next) {
   //   // res.render('error', {
   //   //   error: (err?err:{message:'有错误'})

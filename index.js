@@ -45,7 +45,6 @@ app.use(require('express-formidable')({
 
 // 设置模板全局常量
 app.locals.blog = {
-  // title: pkg.name,
   title: '幽忧志 - Hello World',
   description: pkg.description
 };
@@ -151,21 +150,6 @@ app.use(expressWinston.errorLogger({
     })
   ]
 }));
-
-//处理所有的最后的消息，包括异常，并返回主页
-app.use(function(err, req, res, next) {
-  // res.status(err.status || 500);
-  try{
-    // res.render('index', {
-    //   message: err.message,
-    //   error: err.message
-    // });
-    return res.redirect('back');
-  }catch(e){
-    console.log('最外面一层index的错误处理,错误信息是：',e)
-  }
-  
-});
 
 // 监听端口，启动程序
 app.listen(config.port, function () {

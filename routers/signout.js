@@ -10,7 +10,7 @@ router.get('/', checkLogin, function(req, res, next) {
   req.flash('success', '登出成功，欢迎您下次再来');
   
   // 登出成功后跳转到主页
-  res.redirect('/posts');
+  return res.redirect('/posts');
 });
 
 module.exports = router;

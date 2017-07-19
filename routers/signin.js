@@ -10,7 +10,7 @@ var checkNotLogin = require('../middlewares/check').checkNotLogin;
 router.get('/', checkNotLogin, function(req, res, next) {
   res.render('signin');
 });
-//检查用户是否存在还有密码问题
+//检查用户是否存在，密码验证
 router.post('/check',function(req,res,next){
 
   var name = req.fields.name;
@@ -23,7 +23,7 @@ router.post('/check',function(req,res,next){
   UserModel.getUserByName(name)
     .then(function (user) {
       if (!user) {
-        // req.flash('error', '用户不存在');
+        
         message.status = "notvalid";
         message.msg = "用户不存在";
         res.end(JSON.stringify(message));
@@ -37,7 +37,7 @@ router.post('/check',function(req,res,next){
       if(user){
         if (!!password && 
         sha1(password) !== user.password) {
-          // req.flash('error', '用户名或密码错误');
+          
           message.status = "notvalid";
           message.msg = "用户名或密码错误";
           res.end(JSON.stringify(message));
@@ -61,7 +61,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
         req.session.user = user;
        
         // 跳转到我的文章
-        res.redirect('/posts?author='+user._id);
+        return res.redirect('/posts?author='+user._id);
       }
       
     })

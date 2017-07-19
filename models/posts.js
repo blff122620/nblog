@@ -127,7 +127,7 @@ function getMarkedRenderer(){
     }
   };
   renderer.html = function(text){
-    // console.log(text);
+    
   };
 
   return renderer;

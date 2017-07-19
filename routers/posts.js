@@ -12,16 +12,16 @@ var config = require('config-lite')(__dirname);
 //   eg: GET /posts?author=xxx
 router.get('/', function(req, res, next) {
   utils.toggleNav(req,res);//改变导航栏状态
-  var author = req.query.author;
-  var archive = req.query.archive;
-  var page = req.query.page?req.query.page:1;//当前页码
-  var baseUri = req.baseUrl;
-  var nickname ='';
-  var authorTopimg = '';
-  var authorAvatar = '';
-  var symbol = author||archive?'&':'?';
-  var showLandlordPosts = false;//只显示博主的文章
-  var renderPage = 'index';
+  var author = req.query.author,
+      archive = req.query.archive,
+      page = req.query.page?req.query.page:1,//当前页码
+      baseUri = req.baseUrl,
+      nickname ='',
+      authorTopimg = '',
+      authorAvatar = '',
+      symbol = author||archive?'&':'?',
+      renderPage = 'index';
+
   if(archive){
     renderPage = 'archive';
   }
@@ -39,7 +39,6 @@ router.get('/', function(req, res, next) {
   }
   else{
     //默认只显示博主的文章
-    showHostPosts = true;
     author = config.landlord;
   }
   if(Array.isArray(page)){//如果有多个query,需要处理一下
@@ -61,7 +60,6 @@ router.get('/', function(req, res, next) {
         authorAvatar = result[0].avatar;
       }
       else if(author){//根本就没有这个用户，用户还伪造一个author参数，直接返回主页   
-        // res.redirect('/'); 
         try{
           throw new Error('该用户不存在，你要查一个不存在的人的文章吗？？');
         }
@@ -111,7 +109,13 @@ router.post('/publisher', checkLogin, function(req, res, next) {
       throw new Error('请填写标题');
     }
     if (!content.length) {
-      throw new Error('请填写内容');
+      throw new Error('请填写文章内容');
+    }
+    if (!tab.length) {
+      throw new Error('请填写标签');
+    }
+    if (!(title.trim().length && content.trim().length && tab.trim().length)) {
+      throw new Error('标题、标签、文章内容不能为纯空白符');
     }
   } catch (e) {
     req.flash('error', e.message);
@@ -134,7 +138,7 @@ router.post('/publisher', checkLogin, function(req, res, next) {
       post = result.ops[0];
       req.flash('success', '发表成功');
       // 发表成功后跳转到该文章页
-      res.redirect(`/posts/${post._id}`);
+      return res.redirect(`/posts/${post._id}`);
     })
     .catch(next);
 });
@@ -163,7 +167,6 @@ router.get('/:postId', function(req, res, next) {
   .then(function (result) {
     var post = result[0];
     if (!post) {
-      // res.redirect('back');
       return res.redirect('/');
     }
     res.render('article', {
@@ -213,6 +216,24 @@ router.post('/:postId/editor', checkLogin, function(req, res, next) {
   var img = req.fields.img;
   var tab = req.fields.tab;
   var content = req.fields.content;
+  // 校验参数
+  try {
+    if (!title.length) {
+      throw new Error('请填写标题');
+    }
+    if (!content.length) {
+      throw new Error('请填写文章内容');
+    }
+    if (!tab.length) {
+      throw new Error('请填写标签');
+    }
+    if (!(title.trim().length && content.trim().length && tab.trim().length)) {
+      throw new Error('更新失败，标题、标签、文章内容不能为纯空白符');
+    }
+  } catch (e) {
+    req.flash('error', e.message);
+    return res.redirect('back');
+  }
 
   PostModel.updatePostById(postId, author, {
     title: title,
@@ -223,7 +244,7 @@ router.post('/:postId/editor', checkLogin, function(req, res, next) {
     .then(function () {
       req.flash('success', '文章编辑成功');
       // 编辑成功后跳转到上一页
-      res.redirect(`/posts/${postId}`);
+      return res.redirect(`/posts/${postId}`);
     })
     .catch(next);
 });
@@ -235,9 +256,9 @@ router.get('/:postId/removal', checkLogin, function(req, res, next) {
 
   PostModel.delPostById(postId, author)
     .then(function () {
-      // req.flash('success', '文章删除成功');
-      // 删除成功后跳转到主页
-      res.redirect(`/posts?author=${author}`);
+      req.flash('success', '文章删除成功');
+      // 删除成功后跳转到我的文章主页
+      return res.redirect(`/posts?author=${author}`);
     })
     .catch(next);
 });
@@ -283,11 +304,10 @@ router.post('/:postId/comment', function(req, res, next) {
   if(comment.content){
     CommentModel.create(comment)
       .then(function () {
-        // req.flash('success', '留言成功');
+        
         message.status = 'valid';
         message.result = '留言成功';
-        // 留言成功后跳转到上一页
-        // res.redirect('back');
+        // 留言成功后返回
         res.end(JSON.stringify(message));
       })
       .catch(next);

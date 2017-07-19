@@ -12,7 +12,7 @@ router.get('/', checkNotLogin, function(req, res, next) {
   res.render('signup');
 });
 
-// GET /signup 注册页
+// GET /signup/check 校验注册参数
 router.post('/check', function(req, res, next) {
   var name = req.fields.name;
   var nickname = req.fields.nickname;
@@ -37,10 +37,15 @@ router.post('/check', function(req, res, next) {
         if (nickname.length === 0 ) {
           throw new Error('请输入昵称');
         }
-        if (!(name.length >= 1 && name.length <= 10)) {
-          throw new Error('名字请限制在 1-10 个字符');
+        if (name.trim().length === 0 ) {
+          throw new Error('用户名不能用空白符');
         }
-        
+        if (nickname.trim().length === 0 ) {
+          throw new Error('昵称不能用空白符');
+        }
+        if (!(name.length >= 1 && name.length <= 10)) {
+          throw new Error('用户名请限制在 1-10 个字符');
+        }
         
         if(existUser){
           throw new Error('用户名已经存在');
@@ -56,7 +61,6 @@ router.post('/check', function(req, res, next) {
         // 注册失败
         message.msg = e.message;
         message.status = "notvalid";
-        // req.flash('error', message);
         res.end(JSON.stringify(message));
       }
 
@@ -67,15 +71,11 @@ router.post('/check', function(req, res, next) {
   
 });
 
-
 // POST /signup 用户注册
 router.post('/', checkNotLogin, function(req, res, next) {
   
   var name = req.fields.name;
   var nickname = req.fields.nickname;
-  // var gender = req.fields.gender;
-  // var bio = req.fields.bio;
-  // var avatar = req.files.avatar.path.split(path.sep).pop();
   var avatar = 'avatar_default.jpg'
   var password = req.fields.password;
   var repassword = req.fields.repassword;
@@ -91,8 +91,6 @@ router.post('/', checkNotLogin, function(req, res, next) {
     name: name,
     nickname:nickname,
     password: password,
-    // gender: gender,
-    // bio: bio,
     avatar: avatar,
     topimg:[req.protocol + ':/' ,req.get('host'),'img/header_bg_default.jpg'].join('/')
   };
@@ -102,22 +100,21 @@ router.post('/', checkNotLogin, function(req, res, next) {
       // 此 user 是插入 mongodb 后的值，包含 _id
       user = result.ops[0];
       // 将用户信息存入 session
-      // delete user.password;
-      // req.session.user = user;
+      delete user.password;
+      req.session.user = user;
       // 写入 flash
-      req.flash('success', '注册成功，欢迎您的到来，点击右上方即可登录');
-      // 跳转到首页
-      res.redirect('/posts');
+      req.flash('success', '注册成功，欢迎您的到来，您已成功登录');
+      // 跳转到我的文章页面
+      return res.redirect('/posts?author='+user._id);
     })
     .catch(function (e) {
-      // 注册失败，异步删除上传的头像
-      // fs.unlink(req.files.avatar.path);
-      // 用户名被占用则跳回注册页，而不是错误页
+      // 注册失败
+      // 用户名被占用则返回相应信息
       if (e.message.match('E11000 duplicate key')) {
-        req.flash('error', '用户名已被占用');
+        
         message.msg = '用户名已被占用';
         res.end(JSON.stringify(message));
-        // return res.redirect('/signup');
+    
       }
       next(e);
     });
