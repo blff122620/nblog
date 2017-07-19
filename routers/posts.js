@@ -61,8 +61,14 @@ router.get('/', function(req, res, next) {
         authorAvatar = result[0].avatar;
       }
       else if(author){//根本就没有这个用户，用户还伪造一个author参数，直接返回主页   
-        res.redirect('/'); 
-        throw new Error('该用户不存在，你要查一个不存在的人的文章吗？？');
+        // res.redirect('/'); 
+        try{
+          throw new Error('该用户不存在，你要查一个不存在的人的文章吗？？');
+        }
+        catch(e){
+          req.flash('error', e.message);
+          return res.redirect('back');
+        }
       }
       var postsTotal = result[2]; //文章总数
       var pagesTotal = pager.getPages(postsTotal); //总页数
@@ -158,7 +164,7 @@ router.get('/:postId', function(req, res, next) {
     var post = result[0];
     if (!post) {
       // res.redirect('back');
-      throw new Error('该文章不存在');
+      return res.redirect('/');
     }
     res.render('article', {
       post: post,
@@ -178,12 +184,19 @@ router.get('/:postId/editor', checkLogin, function(req, res, next) {
 
   PostModel.getRawPostById(postId)
     .then(function (post) {
-      if (!post) {
-        throw new Error('该文章不存在');
+      try{
+        if (!post) {
+          throw new Error('该文章不存在');
+        }
+        if (author.toString() !== post.author._id.toString()) {
+          throw new Error('权限不足');
+        }
       }
-      if (author.toString() !== post.author._id.toString()) {
-        throw new Error('权限不足');
+      catch(e){
+        req.flash('error', e.message);
+        return res.redirect('back');
       }
+      
       res.render('editor', {
         post: post,
         date: utils.formatDate(new Date)
