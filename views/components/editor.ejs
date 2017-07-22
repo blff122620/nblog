@@ -1,26 +1,26 @@
 <div class="n-box box-shadow clearfix">
-                    
-                    <div class="n-tab overflow-ellipse"><a title="">编辑文章</a></div>
-                    <div class="n-date"><%= date%></div>
-                    <form action="/posts/<%= post._id %>/editor" method="post" class="n-box-form pt30">
-                    <label class="label">文章标题
-                    <div class="pub-title pub"><input required type="text" class="input" value="<%= post.title %>" placeholder="  标题：朋友，给文章起个带劲儿的标题吧" name="title"></div>
-                    </label>
-                    <label class="label">文章标签
-                    <div class="pub-tab pub"><input required type="text" class="input" value="<%= post.tab %>" placeholder="  文章标签：建议小于6字" name="tab"></div>
-                    </label>
-                    <label class="label">文章配图url(显示在文章头部)
-                    <div class="pub-img pub"><input pattern="^((ht|f)tps?):\/\/.*" placeholder="  文章配图：(可选项)，在此输入图片URL" class="input" type="text" value="<%= post.img %>" name="img"></div>
-                    </label>
-                    <label class="label">文章内容(支持markdown)
-                    <div class="pub-content pub"><textarea required class="textarea" name="content" id="" cols="30" rows="25" placeholder="  
-  路漫漫其修远兮，这里写下的每字每句都将成为美好的回忆
+    
+    <div class="n-tab overflow-ellipse"><a title="">编辑文章</a></div>
+    <div class="n-date"><%= date%></div>
+    <form action="/posts/<%= post._id %>/editor" method="post" class="n-box-form pt30">
+    <label class="label">文章标题
+    <div class="pub-title pub"><input required type="text" class="input" value="<%= post.title %>" placeholder="  标题：朋友，给文章起个带劲儿的标题吧" name="title"></div>
+    </label>
+    <label class="label">文章标签
+    <div class="pub-tab pub"><input required type="text" class="input" value="<%= post.tab %>" placeholder="  文章标签：建议小于6字" name="tab"></div>
+    </label>
+    <label class="label">文章配图url(显示在文章头部)
+    <div class="pub-img pub"><input placeholder="  文章配图：(可选项)，在此输入图片URL" class="input" type="text" value="<%= post.media %>" name="img"></div>
+    </label>
+    <label class="label">文章内容(支持markdown)
+    <div class="pub-content pub"><textarea required class="textarea" name="content" id="" cols="30" rows="25" placeholder="  
+路漫漫其修远兮，这里写下的每字每句都将成为美好的回忆
 
-  如果你会写markdown，那就太perfect了，我们支持MD的写法
-     
-  请在此尽情挥洒笔墨吧~"><%= post.content %></textarea></div>
-                    </label>
-                    
-                    <div class="pub "><button class="submit pub-btn" >更新文章</button></div>
-                    </form>
-                </div>
+如果你会写markdown，那就太perfect了，我们支持MD的写法
+
+请在此尽情挥洒笔墨吧~"><%= post.content %></textarea></div>
+    </label>
+    
+    <div class="pub "><button class="submit pub-btn" >更新文章</button></div>
+    </form>
+</div>

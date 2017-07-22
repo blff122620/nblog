@@ -70,7 +70,18 @@ router.get('/', function(req, res, next) {
       }
       var postsTotal = result[2]; //文章总数
       var pagesTotal = pager.getPages(postsTotal); //总页数
-      var barArr = pager.getPageArr(parseInt(page),pagesTotal,pager.config.min)//分页数组
+      var barArr = pager.getPageArr(parseInt(page),pagesTotal,pager.config.min);//分页数组
+
+      var posts = result[1];
+      posts = posts.map(post=>{
+        if(post.audio){
+          post.audios = [post.audio,post.audio.toLowerCase().replace('.mp3','.webm')];
+        }
+        else{
+          post.audios = '';
+        }
+        return post;
+      });
       res.render(renderPage, {
         posts: result[1],
         date:utils.formatDate(new Date()),
@@ -96,12 +107,14 @@ router.get('/archive', function(req, res, next) {
 
 // POST /posts 发表一篇文章
 router.post('/publisher', checkLogin, function(req, res, next) {
-  var author = req.session.user._id;
-  var title = req.fields.title;
-  var tab = req.fields.tab;
-  var img = req.fields.img;
-  var date = utils.formatDate(new Date());
-  var content = req.fields.content;
+  var author = req.session.user._id,
+      title = req.fields.title,
+      tab = req.fields.tab,
+      media = req.fields.img,
+      img = '',
+      audio = '',
+      date = utils.formatDate(new Date()),
+      content = req.fields.content;
 
   // 校验参数
   try {
@@ -117,6 +130,7 @@ router.post('/publisher', checkLogin, function(req, res, next) {
     if (!(title.trim().length && content.trim().length && tab.trim().length)) {
       throw new Error('标题、标签、文章内容不能为纯空白符');
     }
+    ({img,audio} = handleMedia(media));
   } catch (e) {
     req.flash('error', e.message);
     return res.redirect('back');
@@ -126,6 +140,7 @@ router.post('/publisher', checkLogin, function(req, res, next) {
     author: author,
     title: title,
     img:img,
+    audio:audio,
     tab:tab,
     date:date,
     content: content,
@@ -169,6 +184,12 @@ router.get('/:postId', function(req, res, next) {
     if (!post) {
       return res.redirect('/');
     }
+    if(post.audio){
+      post.audios = [post.audio,post.audio.toLowerCase().replace('.mp3','.webm')];
+    }
+    else{
+      post.audios = '';
+    }
     res.render('article', {
       post: post,
       authorName:post.author.nickname,
@@ -183,7 +204,8 @@ router.get('/:postId', function(req, res, next) {
 // GET /posts/:postId/editor 更新文章页
 router.get('/:postId/editor', checkLogin, function(req, res, next) {
   var postId = req.params.postId;
-  var author = req.session.user._id;
+  var author = req.session.user._id,
+      media = '';
 
   PostModel.getRawPostById(postId)
     .then(function (post) {
@@ -194,6 +216,14 @@ router.get('/:postId/editor', checkLogin, function(req, res, next) {
         if (author.toString() !== post.author._id.toString()) {
           throw new Error('权限不足');
         }
+        let [img,audio] = [post.img,post.audio];
+        if(img&&audio){
+          media = [img,audio].join(',');
+        }
+        else{
+          media = img?img:audio;
+        }
+        post.media = media;
       }
       catch(e){
         req.flash('error', e.message);
@@ -210,12 +240,14 @@ router.get('/:postId/editor', checkLogin, function(req, res, next) {
 
 // POST /posts/:postId/editor 更新一篇文章
 router.post('/:postId/editor', checkLogin, function(req, res, next) {
-  var postId = req.params.postId;
-  var author = req.session.user._id;
-  var title = req.fields.title;
-  var img = req.fields.img;
-  var tab = req.fields.tab;
-  var content = req.fields.content;
+  var postId = req.params.postId,
+      author = req.session.user._id,
+      title = req.fields.title,
+      media = req.fields.img,
+      img = '',
+      tab = req.fields.tab,
+      content = req.fields.content,
+      audio = '';
   // 校验参数
   try {
     if (!title.length) {
@@ -230,6 +262,7 @@ router.post('/:postId/editor', checkLogin, function(req, res, next) {
     if (!(title.trim().length && content.trim().length && tab.trim().length)) {
       throw new Error('更新失败，标题、标签、文章内容不能为纯空白符');
     }
+    ({img,audio} = handleMedia(media));
   } catch (e) {
     req.flash('error', e.message);
     return res.redirect('back');
@@ -240,6 +273,7 @@ router.post('/:postId/editor', checkLogin, function(req, res, next) {
     content: content,
     tab:tab,
     img: img,
+    audio: audio,
     date: utils.formatDate(new Date()) })
     .then(function () {
       req.flash('success', '文章编辑成功');
@@ -355,9 +389,34 @@ router.get('/:postId/comment/:commentId/removal', checkLogin, function(req, res,
     })
     .catch(next);
 
-
-
-
 });
+
+function handleMedia(media){
+  var audio = '',
+      img = '';
+  if(media.toLowerCase().indexOf('.mp3')!='-1'){
+    //利用页面头图的input来处理添加MP3的逻辑
+    var items = media.split(',');
+    if(items.length<=2){
+      //只处理小于两项的media
+      items.forEach(function(item){
+        if(item.toLowerCase().indexOf('.mp3')!='-1'){
+          audio = item.trim();
+        }
+        else{
+          img = item.trim();
+        }
+      });
+    }
+  }
+  else{
+    //不包含MP3
+    img = media.trim();
+  }
+  return {
+    img: img,
+    audio: audio
+  }
+}
 
 module.exports = router;

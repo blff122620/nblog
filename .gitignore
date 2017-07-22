@@ -17,3 +17,5 @@ public/img/sprite.psd
 public/img/upload/*
 !public/img/upload/avatar_default.jpg
 config/production.js
+public/js/audio.js
+public/js/howler.min.js

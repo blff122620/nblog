@@ -3,6 +3,9 @@
     <% if (post.img){%>
         <div class="n-top"><img src="/img/img_default.png" data-url="<%= post.img %>" alt=""></div>
     <% }%>
+    <% if (post.audio){%>
+        <%- include('audio',{audios:post.audios})%>
+    <% }%>
     <div class="n-tab overflow-ellipse"><a title="<%= post.tab %>"><%= post.tab %></a></div>
     <div class="n-date"><%= post.created_at %></div>
     <div class="n-title"><%= post.title %></div>
