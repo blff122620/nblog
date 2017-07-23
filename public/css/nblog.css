@@ -398,6 +398,9 @@ nav .more>a::before{
 .n-box .n-top img{
     width: 100%;
 }
+.n-box .top-img{
+    vertical-align: middle;
+} 
 
 .n-box>div ,.n-box-form{
     padding: 0 120px 0 140px;

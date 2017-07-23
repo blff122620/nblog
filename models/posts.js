@@ -40,7 +40,8 @@ function xssFormat(content){
   // var inCode = false ; //在pre代码块中
   return xss(content, {
     onIgnoreTagAttr: function (tag, name, value, isWhiteAttr) {
-      if (name.substr(0, 5) === 'data-') {
+      if (name.substr(0, 5) === 'data-' || name === 'style' || name === 'class') {
+        // 不过滤style样式属性,class属性
         // 通过内置的escapeAttrValue函数来对属性值进行转义,不让懒加载失效,懒加载用到了data-数据
         return name + '="' + xss.escapeAttrValue(value) + '"';
       }
@@ -53,10 +54,17 @@ function xssFormat(content){
         
         return html;
       }
-      if(tag.substr(0,3) === 'div'){
-          //处理div不被转义的问题
-          return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (tag.substr(0,5) === 'style' ) {
+        // 不对其属性列表进行过滤，让style样式标签生效
+            
+        return html;
       }
+      
+      // if(tag.substr(0,3) === 'div'){
+      //     //处理div不被转义的问题
+      //     return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      // }
+      
     }
   });
 }
@@ -126,9 +134,9 @@ function getMarkedRenderer(){
       return `<pre><code class="lang-${lang}">${content}</code></pre>`;
     }
   };
-  renderer.html = function(text){
+  // renderer.html = function(text){
     
-  };
+  // };
 
   return renderer;
 }
