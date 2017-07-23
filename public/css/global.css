@@ -357,6 +357,9 @@ a.button{
 }*/
 
 .dn{display:none;}
+.vh{visibility: hidden;}
+.opa0{opacity: 0;}
+.trans3{transition: .3s linear;}
 .df{display: flex;}
 .db{display: block;}
 .tr{text-align:right;}

@@ -121,17 +121,18 @@ function cutPost(content,pattern,lines){
 }
 
 function getMarkedRenderer(){
-  var renderer = new marked.Renderer();
+  var renderer = new marked.Renderer(),
+      cssClass = 'opa0 trans3';
   renderer.image = function(href,title,text){
     return `<img src="/img/img_default.png" data-url="${href}" alt="${text}">`;
   };
   //处理代码块，防止未写代码语言的代码块影响网页的布局，所以需要赋值默认的代码语言
   renderer.code = function(content,lang){
     if(!lang){
-      return `<pre><code class="lang-markup">${content}</code></pre>`;
+      return `<pre class="${cssClass}"><code class="lang-markup">${content}</code></pre>`;
     }
     else{
-      return `<pre><code class="lang-${lang}">${content}</code></pre>`;
+      return `<pre class="${cssClass}"><code class="lang-${lang}">${content}</code></pre>`;
     }
   };
   // renderer.html = function(text){

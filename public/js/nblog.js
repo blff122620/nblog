@@ -326,6 +326,10 @@
             item.classList.add("line-numbers");
         });
         Prism.highlightAll();
+        //显示所有的pre>code
+        $A('pre').forEach(function(pre){
+            pre.classList.remove('opa0');//fadein
+        });
 
         //为了判别手机中图像的旋转问题，需要此函数来拿到图像的方向
         function readFile(fileObj){
