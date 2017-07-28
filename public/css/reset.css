@@ -22,5 +22,6 @@
     a,a:hover{color:#333;}
     /*改变placeholder，去掉input的x，改变button按下去的mask遮罩*/
     h4{font-size: 1.8rem;}
+    a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}/* 1.去除android a/button/input标签被点击时产生的边框 2.去除ios a标签被点击时产生的半透明灰色背景 */
 
 
