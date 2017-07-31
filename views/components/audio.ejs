@@ -1,7 +1,14 @@
-<audio controls="controls" class="m-audio" preload="auto">
-    Your browser does not support the <code>audio</code> element.  
-    <% audios.forEach(function(item){  
-    %>
-        <source src="<%=item%>" >
-    <%});%>
-</audio>
+
+<div class="m-player">
+    <div class="album" >
+        <div class="play-pause"></div>
+    </div>
+    <div class="waveform progress vh" data-music="<%=audio%>">
+        
+        <div class="loading vv">
+            
+            
+        </div>
+    </div>
+    
+</div>

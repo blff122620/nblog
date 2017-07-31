@@ -7,7 +7,7 @@
                     <div class="n-top"><img class="top-img" src="/img/img_default.png" data-url="<%= post.img %>" alt=""></div>
                     <% }%>
                     <% if (post.audio){%>
-                        <%- include('components/audio',{audios:post.audios})%>
+                        <%- include('components/audio',{audio:post.audio})%>
                     <% }%>
                     <div class="n-tab overflow-ellipse"><a title="<%= post.tab %>"><%= post.tab %></a></div>
                     <div class="n-date"><%= post.created_at %></div>
@@ -33,5 +33,6 @@
             
         </section>
     </main>
+    
 <%- include('footer_top') %>
 <%- include('footer_bottom') %>

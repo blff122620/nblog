@@ -1,3 +1,50 @@
-.n-box .m-audio{
-    width:100%;
+.n-box .m-player{
+    padding-top: 10px;
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+.m-player .album,
+.m-player .play-pause{
+    background: url("/img/sprite.png");
+}
+.m-player .album{
+    float: left;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-position: 0 -276px;
+}
+
+.m-player .play-pause{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 24px;
+    width: 24px;
+    background-position:0 -248px; 
+}
+.m-player .album-hover{
+    position: absolute;
+    z-index: 1;
+    top: 0; bottom: 0; left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: inherit;
+}
+.m-player .progress{
+    position: relative;
+    overflow: hidden; 
+}
+.m-player .loading{
+    position: absolute;
+    top:0;bottom: 0;left:0;right: 0;
+    background: url("/img/loading.gif") -80px -75px no-repeat;
+}
+.m-player .loading-p{
+    position: absolute;
+    line-height: 60px;
 }
