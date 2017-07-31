@@ -25,11 +25,13 @@
             item.rotateDeg = 0;//唱片转动角度
             item.playPause = $$('.play-pause',item);//暂停播放按钮
             item.loading = $$('.loading',item);//loading图片
+            item.ready = false;
         });
         
         mPlayers.forEach(function(player){
             player.wavesurfer.load(player.wavesurfer.container.dataset.music);
             player.wavesurfer.on('ready', function () {
+                player.ready = true;
                 player.loading.classList.remove('vv');
                 player.loading.classList.add('vh');//删除loading动画
                 player.wavesurfer.container.classList.remove('vh');//显示音乐进度条
@@ -51,21 +53,27 @@
                     //改变为暂停状态
                     player.playPause.style.backgroundPositionX = '0';
                 });
-                player.wavesurfer.isPlaying() ? 
+                if(player.ready){
+                    player.wavesurfer.isPlaying() ? 
                     (function(){
-                        player.wavesurfer.pause();
-                        clearTimeout(player.rotateAnimationId);
-                        //改变为暂停状态
-                        player.playPause.style.backgroundPositionX = '0';
+                            player.wavesurfer.pause();
+                            clearTimeout(player.rotateAnimationId);
+                            //改变为暂停状态
+                            player.playPause.style.backgroundPositionX = '0';
                     })()
                     : 
                     (function(){
-                        player.wavesurfer.play();
-                        //调用唱片旋转动画
-                        player.rotateAnimationId = setTimeout(rotateAlbum,time,player);
-                        //改变播放状态
-                        player.playPause.style.backgroundPositionX = '-28px';
+                            player.wavesurfer.play();
+                            //调用唱片旋转动画
+                            player.rotateAnimationId = setTimeout(rotateAlbum,time,player);
+                            //改变播放状态
+                            player.playPause.style.backgroundPositionX = '-28px';
                     })();
+                }
+                else{
+                    alert('朋友，别急，等等音乐资源下载完');
+                }
+                
                 
             });
         });   
