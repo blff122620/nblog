@@ -8,7 +8,6 @@ views/index.html
 public/img/sprite.psd
 public/img/sprite.psd
 public/img/sprite.psd
-public/img/loading.gif
 public/img/temp/*
 public/img/mi.jpeg
 public/img/mi.jpeg
@@ -17,5 +16,4 @@ public/img/sprite.psd
 public/img/upload/*
 !public/img/upload/avatar_default.jpg
 config/production.js
-public/js/audio.js
 public/js/howler.min.js
