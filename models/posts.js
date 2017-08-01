@@ -37,7 +37,7 @@ Post.plugin('contentToHtml', {
 
 //防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
 function xssFormat(content){
-  // var inCode = false ; //在pre代码块中
+  var inCode = false ; //在pre代码块中
   return xss(content, {
     onIgnoreTagAttr: function (tag, name, value, isWhiteAttr) {
       if (name.substr(0, 5) === 'data-' || name === 'style' || name === 'class') {
@@ -47,23 +47,27 @@ function xssFormat(content){
       }
     },
     onTag:function(tag, html, options) {
-
+      console.log(tag);
       if (tag.substr(0,4) === 'code') {
         // 不对其属性列表进行过滤，让code部分代码可以高亮
-        // inCode = !inCode; //在pre中的开关
+        inCode = !inCode; //在pre中的开关
         
         return html;
       }
-      if (tag.substr(0,5) === 'style' ) {
-        // 不对其属性列表进行过滤，让style样式标签生效
-            
-        return html;
+      if(inCode){
+        //在代码块中，处理div不被转义的问题
+        if(tag.substr(0,3) === 'div'){
+          //处理div不被转义的问题
+          return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
       }
-      
-      // if(tag.substr(0,3) === 'div'){
-      //     //处理div不被转义的问题
-      //     return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      // }
+      else{
+        //不在代码块中
+        // 不对其属性列表进行过滤，让style样式标签生效
+        if (tag.substr(0,5) === 'style' ) {
+          return html;
+        }
+      }
       
     }
   });
@@ -134,6 +138,7 @@ function getMarkedRenderer(){
     else{
       return `<pre class="${cssClass}"><code class="lang-${lang}">${content}</code></pre>`;
     }
+    
   };
   // renderer.html = function(text){
     
