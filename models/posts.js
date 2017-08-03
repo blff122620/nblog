@@ -47,7 +47,6 @@ function xssFormat(content){
       }
     },
     onTag:function(tag, html, options) {
-      console.log(tag);
       if (tag.substr(0,4) === 'code') {
         // 不对其属性列表进行过滤，让code部分代码可以高亮
         inCode = !inCode; //在pre中的开关
