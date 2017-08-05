@@ -218,7 +218,7 @@ nav .more .classify{
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
-    z-index: 1;
+    z-index: 100;
     opacity: 0;
     cursor: pointer;
     border-radius: 3px;
