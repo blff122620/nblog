@@ -397,3 +397,14 @@ a.button{
 .body .totop:hover{
     opacity: 1;
 }
+
+.m-identify{
+    position: relative;
+}
+.m-identify .identify-img{
+    position: absolute;
+    top: 27px;
+    right: 0;
+    height: 30px;
+    cursor: pointer;
+}
