@@ -96,12 +96,16 @@ Post.plugin('postsSkeleton', {
  * @param {*} lines
  */
 function cutPost(content,pattern,lines){
-  var contentArray = content.split(pattern);
-  var inBlock = false;
-  var lineCount = 0;
-  var appendStr = "\r\n# .................";
-  var pairs = 0; //代码块是否成对的结束了,pairs 为偶数，则全部结束了
+  var contentArray = content.split(pattern),
+    inBlock = false,
+    tagTestFlag = true,
+    endtagFlag = 1,//结束标签，只运行一次，也就是返回结束标签那一句话
+    lineCount = 0,
+    appendStr = "\r\n# .................",
+    pairs = 0, //代码块是否成对的结束了,pairs 为偶数，则全部结束了
+    tempContent = ''; //临时结果，判断临时结果标签是否配对结束
   return contentArray.filter(function(item,index){
+    tempContent += item;//临时文章内容结果增加
     lineCount++;
     if(index<lines){
       if(item.indexOf("```") !=-1){
@@ -114,13 +118,55 @@ function cutPost(content,pattern,lines){
       if(item.indexOf("```") !=-1){
         pairs++;
         if(pairs%2 == 0){
-          inBlock = false;//代码块配对结束才退出循环
+          inBlock = false;//代码块配对结束
         }
 
       }
       return true;
     }
+    
+    //首先判断截取部分是否有未结束的标签，有则需要继续增大截取部分
+    
+    if(tagTestFlag && index>=lines && !tagCoupleOver(tempContent)){
+      return true;
+    }
+    if(index>=lines && tagCoupleOver(tempContent)){
+      tagTestFlag = false;//一旦标签匹配结束（tagTestFlag的作用），那么不再执行tag判断,并且标签结束这一行也要返回
+      return endtagFlag++ == 1 ? true : false;
+    }
+    
+    
   }).join(pattern) + (lineCount>lines?appendStr:'');
+}
+/**
+ * 判断内容中<tag></tag>标签是否成对结束
+ */
+function tagCoupleOver(content){
+  var stack = [], //标签栈
+    index , //游标，记录查询到哪个位置
+    matchResult,
+    tagPattern = /<\/?([a-zA-Z]+?)(?:(\s+?[^>]*)?\s*?)>/g; //匹配<div></div>两种标签
+  matchResult = content.match(tagPattern);
+  if(!matchResult){
+    matchResult = [];
+  }
+  matchResult = matchResult.map((tag)=>{
+    //重构标签数组，只留下标签名 <div xxxx> => div,</div xxxx> => div
+    return tag.replace(tagPattern,'$1');
+  });
+
+  matchResult.forEach((tag)=> {
+    if(stack[stack.length-1] === tag){
+      stack.pop();//标签匹配，出栈
+    }
+    else{
+      stack.push(tag);//标签不匹配，入栈
+    }
+  });
+  
+  //栈空，返回true,标签配对合法
+  return stack.length === 0 ? true:  false;
+  
 }
 
 function getMarkedRenderer(){
