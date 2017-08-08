@@ -15,7 +15,7 @@ router.get('/', checkNotLogin, function(req, res, next) {
   res.render('signup');
 });
 
-// GET /identifycode 注册页
+// GET /signup/identifycode 注册页
 router.get('/identifycode', checkNotLogin, function(req, res, next) {
   var guid = utils.guid(),//唯一标示
     now = Date.now();
@@ -32,15 +32,15 @@ router.get('/identifycode', checkNotLogin, function(req, res, next) {
           delete global.identifyCodes[key];
         }
       }
-      res.writeHead(200, { 'Content-Type': 'text/html' ,
+      res.writeHead(200, { 'Content-Type': 'application/json' ,
         'Cache-Control': 'max-age=0' ,
         'Expires':'0'
       });
-      
-      res.end(JSON.stringify({
+      res.write(JSON.stringify({
         guid: guid,
         base64: 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, data.buffer))   
       }));
+      res.end();
       
     })
     .catch((err) => {
