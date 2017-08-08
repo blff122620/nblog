@@ -21,7 +21,6 @@ router.get('/identifycode', checkNotLogin, function(req, res, next) {
     now = Date.now();
   captcha.default.toBuffer() //生成验证码
     .then((data) => {
-      console.log(data.text);
       global.identifyCodes[guid] = {
         text:data.text, //验证码文本
         createdTime:now //创建时间
