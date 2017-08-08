@@ -25,14 +25,19 @@
 - [x] 注册用户的主页
 - [x] 注册用户的归档
 - [x] 注册
+
+  * 验证码操作
+  
 - [x] 登陆
 - [x] 文章相关
 
   1. 支持markdown语法
       
   2. 支持插图
-      
-  3. 防止xss攻击过滤非法标签与属性
+  
+  3. 支持插入mp3音频
+  
+  4. 防止xss攻击过滤非法标签与属性
       
 - [x] 评论
 - [x] 个人资料编辑
@@ -46,6 +51,30 @@
   1. 所有注册的博主显示页
   
   2. 博主个人简介描述页
+
+## 安装步骤
+
+1. 安装依赖
+
+注册验证码的依赖库，要首先安装
+First download and install GraphicsMagick or ImageMagick. In Mac OS X, you can simply use Homebrew and do:
+
+```
+/* on mac */
+brew install graphicsmagick
+brew install imagemagick
+
+/* on linux */
+apt-get install graphicsmagick
+```
+
+2. 根目录运行 npm install
+
+3. 本地安装mongodb
+
+4. node index.js 运行项目进行预览
+
+5. 部署推荐使用pm2
 
 ## 项目预览(PC端)
 
