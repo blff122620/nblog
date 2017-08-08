@@ -149,7 +149,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
     nickname:nickname,
     password: password,
     avatar: avatar,
-    topimg:[req.protocol + ':/' ,req.get('host'),'img/header_bg_default.jpg'].join('/')
+    topimg:'/img/header_bg_default.jpg'
   };
   // 用户信息写入数据库
   UserModel.create(user)
