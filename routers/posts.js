@@ -81,7 +81,7 @@ router.get('/', function(req, res, next) {
           post.audios = '';
         }
         return post;
-      });
+      });  
       res.render(renderPage, {
         posts: result[1],
         date:utils.formatDate(new Date()),

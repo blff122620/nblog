@@ -49,6 +49,9 @@ app.locals.blog = {
   description: pkg.description
 };
 
+//后台全局变量
+global.identifyCodes = {};//验证码
+
 // 添加模板必需的变量
 app.use(function (req, res, next) {
   res.locals.user = req.session.user;
@@ -60,6 +63,7 @@ app.use(function (req, res, next) {
   res.locals.authorTopimg = '';
   res.locals.authorAvatar = '';
   res.locals.showDefaultLogo = false;//显示默认的网站logo
+  
   res.locals.nav = [
     {
       href:'/posts',

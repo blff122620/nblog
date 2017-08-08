@@ -1,28 +1,52 @@
-var fs = require('fs');
-var path = require('path');
-var sha1 = require('sha1');
-var express = require('express');
-var router = express.Router();
+var fs = require('fs'),
+  path = require('path'),
+  sha1 = require('sha1'),
+  express = require('express'),
+  router = express.Router(),
+  expireTime = 120000; //120s,验证码过期时间
 
-var UserModel = require('../models/users');
-var checkNotLogin = require('../middlewares/check').checkNotLogin;
-
+var UserModel = require('../models/users'),
+  checkNotLogin = require('../middlewares/check').checkNotLogin,
+  utils = require('../lib/utils');
 // GET /signup 注册页
 router.get('/', checkNotLogin, function(req, res, next) {
   res.render('signup');
 });
 
+// GET /identifycode 注册页
+router.get('/identifycode', checkNotLogin, function(req, res, next) {
+  var ccap = utils.genCcap(), //生成验证码
+    guid = utils.guid(),//唯一标示
+    now = Date.now();
+  global.identifyCodes[guid] = {
+    text:ccap.text, //验证码文本
+    createdTime:now //创建时间
+  };
+  //遍历验证码，删除超时的验证码
+  for(var key in global.identifyCodes){
+    if((now - global.identifyCodes[key].createdTime) > expireTime){
+      delete global.identifyCodes[key];
+    }
+  }
+  res.end(JSON.stringify({
+    guid: guid,
+    base64: ccap.base64
+  }));
+});
+
 // GET /signup/check 校验注册参数
 router.post('/check', function(req, res, next) {
-  var name = req.fields.name;
-  var nickname = req.fields.nickname;
-  var password = req.fields.password;
-  var repassword = req.fields.repassword;
-  var message = {
-    status:'',
-    msg:''
-  };
-  var existUser = false;
+  var name = req.fields.name,
+    nickname = req.fields.nickname,
+    password = req.fields.password,
+    repassword = req.fields.repassword,
+    identifycode = req.fields.identifycode,
+    guid = req.fields.guid,
+    message = {
+      status:'',
+      msg:''
+    },
+    existUser = false;
   
   // 校验参数
   UserModel.getUserByName(name)
@@ -56,6 +80,25 @@ router.post('/check', function(req, res, next) {
         }
         if (password !== repassword) {
           throw new Error('两次输入密码不一致');
+        }
+        idCode = global.identifyCodes[guid];
+        if(idCode){
+          if((Date.now() - idCode.createdTime) > expireTime){
+            //验证码超过过期时间,删除验证码
+            delete global.identifyCodes[guid];
+            throw new Error('验证码过期，请点击验证码');
+          }
+          else{
+            if(idCode.text.toLowerCase() == identifycode.toLowerCase()){//验证通过，删除验证码，允许注册
+              delete global.identifyCodes[guid];
+            }
+            else{
+              throw new Error('验证码错误，请重新输入');
+            }
+          }  
+        }
+        else{//不存在该验证码
+          throw new Error('验证码不存在，请点击验证码刷新');
         }
       } catch (e) {
         // 注册失败

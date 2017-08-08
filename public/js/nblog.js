@@ -178,7 +178,10 @@
                 nickname:'',
                 password:'',
                 repassword:'',
-                message:''
+                message:'',
+                guid:'',
+                identifycode:'',
+                base64:''
             },
             methods: {
                 check: function (event) {
@@ -198,6 +201,24 @@
                     });
                     
                     
+                },
+                focus: function(event){
+                    var vm = this;
+                    vm.getIdentifycode(vm);
+                },
+                getIdentifycode:function(vm){
+                    axios.get('/signup/identifycode')
+                    .then(function (response) {
+                        vm.guid = response.data.guid;
+                        vm.base64 = response.data.base64;   
+                    })
+                    .catch(function (error) {
+                        vm.message = '抱歉，服务器出错了';
+                    });
+                },
+                identifyClick: function(event){
+                    var vm = this;
+                    vm.getIdentifycode(vm);
                 }
             }
         });
