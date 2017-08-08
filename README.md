@@ -72,7 +72,9 @@ apt-get install graphicsmagick
 
 3. 本地安装mongodb
 
-4. node index.js 运行项目
+4. node index.js 运行项目进行预览
+
+5. 部署推荐使用pm2
 
 ## 项目预览(PC端)
 
