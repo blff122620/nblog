@@ -32,7 +32,11 @@ router.get('/identifycode', checkNotLogin, function(req, res, next) {
           delete global.identifyCodes[key];
         }
       }
-      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.writeHead(200, { 'Content-Type': 'text/html' ,
+        'Cache-Control': 'max-age=0' ,
+        'Expires':'0'
+      });
+      
       res.end(JSON.stringify({
         guid: guid,
         base64: 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, data.buffer))   
