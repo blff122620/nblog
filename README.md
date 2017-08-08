@@ -52,6 +52,28 @@
   
   2. 博主个人简介描述页
 
+## 安装步骤
+
+1. 安装依赖
+
+注册验证码的依赖库，要首先安装
+First download and install GraphicsMagick or ImageMagick. In Mac OS X, you can simply use Homebrew and do:
+
+```
+/* on mac */
+brew install graphicsmagick
+brew install imagemagick
+
+/* on linux */
+apt-get install graphicsmagick
+```
+
+2. 根目录运行 npm install
+
+3. 本地安装mongodb
+
+4. node index.js 运行项目
+
 ## 项目预览(PC端)
 
 ![项目截图](https://github.com/blff122620/blog/blob/master/static/img/blogpc.jpg?raw=true)
