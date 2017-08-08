@@ -22,7 +22,6 @@
   "homepage": "https://github.com/blff122620/nblog#readme",
   "dependencies": {
     "btoa": "^1.1.2",
-    "ccap": "^0.6.10",
     "config-lite": "^2.0.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^1.3.2",
@@ -32,6 +31,7 @@
     "express-mongoose": "^0.1.0",
     "express-session": "^1.15.3",
     "express-winston": "^2.4.0",
+    "hahoo-captcha": "^1.0.0",
     "i": "^0.3.5",
     "marked": "^0.3.6",
     "moment": "^2.18.1",

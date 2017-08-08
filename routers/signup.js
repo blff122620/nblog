@@ -3,7 +3,9 @@ var fs = require('fs'),
   sha1 = require('sha1'),
   express = require('express'),
   router = express.Router(),
-  expireTime = 120000; //120s,验证码过期时间
+  expireTime = 120000, //120s,验证码过期时间
+  btoa = require('btoa'),
+  captcha = require('hahoo-captcha');
 
 var UserModel = require('../models/users'),
   checkNotLogin = require('../middlewares/check').checkNotLogin,
@@ -15,23 +17,30 @@ router.get('/', checkNotLogin, function(req, res, next) {
 
 // GET /identifycode 注册页
 router.get('/identifycode', checkNotLogin, function(req, res, next) {
-  var ccap = utils.genCcap(), //生成验证码
-    guid = utils.guid(),//唯一标示
+  var guid = utils.guid(),//唯一标示
     now = Date.now();
-  global.identifyCodes[guid] = {
-    text:ccap.text, //验证码文本
-    createdTime:now //创建时间
-  };
-  //遍历验证码，删除超时的验证码
-  for(var key in global.identifyCodes){
-    if((now - global.identifyCodes[key].createdTime) > expireTime){
-      delete global.identifyCodes[key];
-    }
-  }
-  res.end(JSON.stringify({
-    guid: guid,
-    base64: ccap.base64
-  }));
+  captcha.default.toBuffer() //生成验证码
+    .then((data) => {
+      
+      global.identifyCodes[guid] = {
+        text:data.text, //验证码文本
+        createdTime:now //创建时间
+      };
+      //遍历验证码，删除超时的验证码
+      for(var key in global.identifyCodes){
+        if((now - global.identifyCodes[key].createdTime) > expireTime){
+          delete global.identifyCodes[key];
+        }
+      }
+      res.end(JSON.stringify({
+        guid: guid,
+        base64: 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, data.buffer))   
+      }));
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // GET /signup/check 校验注册参数
