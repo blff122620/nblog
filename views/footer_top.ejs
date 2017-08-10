@@ -1,70 +1,67 @@
-    <footer>
-        <div class="logo-footer"><%- include('components/logo') %></div>
-        <div class="nav-footer">
-            <%- include('components/nav_other') %>
-        </div>
-        <div class="info-footer">
-            不要停留在过去，不要去回忆从前，不管发生什么，都不要放弃，坚持走下去，肯定会有意想不到的风景。也许不是你本来想走的路，也不是你本来想登临的山顶，可另一条路有另一条路的风景，不同的山顶也一样会有美丽的日出。
-        </div>
-        <div class="copyright">
-            © 2017 - copyright. All Rights Reserved. Designed &amp; Developed by Beau. <a href="http://www.bx1987.com" target="blank">www.bx1987.com</a>
-        </div>
-        <div class="contact">
-            <a href="https://github.com/blff122620" target="blank">
-                <div class="git" title="github"></div>
-            </a>
-            <a href="https://www.facebook.com/xu.beau" target="blank">
-                <div class="facebook" title="facebook"></div>
-            </a>
-           
-        </div>
-    </footer>
-    <div class="top-progress" id="js-top-progress"></div> <!--结构只有一句话即可-->
-    <script type="text/javascript" src="/js/util.js"></script>
-    <script type="text/javascript" src="/js/lazyLoad.js"></script>
-    <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-    <script type="text/javascript" src="/js/vue.min.js"></script>
-    <script src="/js/progress.js"></script>
-    <script src="/js/exif.js"></script>
-    <script type="text/javascript" src="/js/drag.js"></script>
-    <script type="text/javascript" src="/js/dragMobile.js"></script>
-    <script type="text/javascript" src="/js/toTop.js"></script>
-    <script type="text/javascript" src="/js/nblog.js"></script>
-    <script src="https://cdn.bootcss.com/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
-    <script type="text/javascript" src="/js/audio.js"></script>
-    
-    <script src="/js/prism.js"></script>
-    <!--<script src="http://192.168.1.102:8080/target/target-script-min.js#anonymous"></script>-->
-    
-
-    <div class="mask" id="js-mask"></div>
-    
-    <%- include('components/login') %>
-    <%- include('components/register') %>
-    <div class="safe-modal" id="js-safe-modal">
-        <canvas id="js-clip-canvas " class="dn"></canvas>
-        <img id="js-compressed-img" class="dn">
-        <%- include('components/img_handler') %>
-        <div class="mobile-wrap dn" id="js-mobile-wrap">
-            <div style="position:relative;">
-                <img class="mobile-baseimg" src="" id="js-mobile-baseimg">
-                <div class="mobile-clipimg-wrap"> 
-                    <img class="mobile-clipimg" src="" id="js-mobile-clipimg">  
-                </div> 
-            </div>   
-            
-            
-            <div class="mobile-clip" id="js-mobile-clip" ></div>
-            <div class="mw-footer">
-                <a class="mw-f-left cw ft16" id="js-mobile-clip-cancel">取消</a>
-                <a class="mw-f-right cw ft16" id="js-mobile-clip-confirm">完成</a>
-            </div>
-        </div>
-        <div class="mobile-wrap-tips dn" id="js-mobile-wrap-tips">亲，请把手机竖过来再来搞图片吧~</div>
-        <!--<div class="ttest"><input id="test" width="400">
-        <input id="test2" width="400" ></div>-->
+<footer>
+    <div class="logo-footer"><%- include('components/logo') %></div>
+    <div class="nav-footer">
+        <%- include('components/nav_other') %>
     </div>
+    <div class="info-footer">
+        不要停留在过去，不要去回忆从前，不管发生什么，都不要放弃，坚持走下去，肯定会有意想不到的风景。也许不是你本来想走的路，也不是你本来想登临的山顶，可另一条路有另一条路的风景，不同的山顶也一样会有美丽的日出。
+    </div>
+    <div class="copyright">
+        © 2017 - copyright. All Rights Reserved. Designed &amp; Developed by Beau. <a href="http://www.bx1987.com" target="blank">www.bx1987.com</a>
+    </div>
+    <div class="contact">
+        <a href="https://github.com/blff122620" target="blank">
+            <div class="git" title="github"></div>
+        </a>
+        <a href="https://www.facebook.com/xu.beau" target="blank">
+            <div class="facebook" title="facebook"></div>
+        </a>
+        
+    </div>
+</footer>
+<div class="top-progress" id="js-top-progress"></div> <!--结构只有一句话即可-->
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/lazyLoad.js"></script>
+<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+<script type="text/javascript" src="/js/vue.min.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/exif.js"></script>
+<script type="text/javascript" src="/js/drag.js"></script>
+<script type="text/javascript" src="/js/dragMobile.js"></script>
+<script type="text/javascript" src="/js/toTop.js"></script>
+<script type="text/javascript" src="/js/nblog.js"></script>
+<script src="https://cdn.bootcss.com/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
+<script type="text/javascript" src="/js/audio.js"></script>
 
-    <div id="js-totop" class='totop sprite dn'></div>
+<script src="/js/prism.js"></script>
+
+<div class="mask" id="js-mask"></div>
+
+<%- include('components/login') %>
+<%- include('components/register') %>
+<div class="safe-modal" id="js-safe-modal">
+    <canvas id="js-clip-canvas " class="dn"></canvas>
+    <img id="js-compressed-img" class="dn">
+    <%- include('components/img_handler') %>
+    <div class="mobile-wrap dn" id="js-mobile-wrap">
+        <div style="position:relative;">
+            <img class="mobile-baseimg" src="" id="js-mobile-baseimg">
+            <div class="mobile-clipimg-wrap"> 
+                <img class="mobile-clipimg" src="" id="js-mobile-clipimg">  
+            </div> 
+        </div>   
+        
+        
+        <div class="mobile-clip" id="js-mobile-clip" ></div>
+        <div class="mw-footer">
+            <a class="mw-f-left cw ft16" id="js-mobile-clip-cancel">取消</a>
+            <a class="mw-f-right cw ft16" id="js-mobile-clip-confirm">完成</a>
+        </div>
+    </div>
+    <div class="mobile-wrap-tips dn" id="js-mobile-wrap-tips">亲，请把手机竖过来再来搞图片吧~</div>
     
+</div>
+
+<div id="js-totop" class='totop sprite dn'></div>
+
 

@@ -1,61 +1,61 @@
 <%- include('components/head_top') %>
 <%- include('components/head_bottom') %>
 
-    <header class="header-bg " id="js-header" style="
+<header class="header-bg " id="js-header" style="
 
-    <%if(!!authorTopimg){%>
-      background:
-        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
-        url('<%=authorTopimg%>') center/cover no-repeat;  
-    <%}else if(user){%>
-
+<%if(!!authorTopimg){%>
     background:
-        linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
-        url('<%=user.topimg%>') center/cover no-repeat;
+    linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+    url('<%=authorTopimg%>') center/cover no-repeat;  
+<%}else if(user){%>
+
+background:
+    linear-gradient(to top,rgba(0,0,0,.4) 0, rgba(0,0,0,.4) 50px,hsla(0,0%,100%,0) 0),
+    url('<%=user.topimg%>') center/cover no-repeat;
+<%}%>
+
+
+">
+    <%if(authorAvatar){%>
+    <a href="/personal/info?author=<%=authorId%>" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile bs3-b" src="/img/upload/<%=authorAvatar%>"></a>
+    <%}else if(user){%>
+    <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile bs3-b" src="/img/upload/<%=user.avatar%>"></a>
     <%}%>
-
-
-    ">
-        <%if(authorAvatar){%>
-        <a href="/personal/info?author=<%=authorId%>" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile bs3-b" src="/img/upload/<%=authorAvatar%>"></a>
-        <%}else if(user){%>
-        <a href="/personal/info" class="header-avatar"><img id="js-header-avatar" class="avatar-s avatar-header-mobile bs3-b" src="/img/upload/<%=user.avatar%>"></a>
-        <%}%>
-            <a href="/">
-            <div class="logo-b logo-b-positon">
-                 
-            </div></a>
-            <div class="semi-title">-&nbsp;&nbsp;Hello World&nbsp;&nbsp;-</div>  
-            <div class="logo <%if(user||authorAvatar){%>logo-new<%}%>">
-            <%- include('components/logo') %>
-            </div>
-        <nav class="nav">
-            <%- include('components/nav') %>
-        </nav>
-        <div class="burger" id="js-burger"></div>
-        <aside class="nav-aside" id="js-nav-aside">
-            <%- include('components/nav_other') %>
-            <div class="nav-aside-copyright">
-                <span>
-                    <%- include('components/logo') %>
-                    </span><br/> Designed &amp; Developed by Beau. 
-            </div>
-        </aside>
-    </header>
-    <nav class="default-nav default-move-nav" id="js-default-nav">
-        <div class="logo-c logo-default-nav logo-c-default-nav" id="js-logo-c"></div>
-        <div class="default-nav-horizon">
-            <div class="logo-d logo-default-nav"></div>   
-            <div class="phone-nav-title"><%-include('components/logo')%></div>
-            <div class="phone-nav-burger phone-nav-burger-bg" id="js-phone-nav-burger">
-                <span>X</span>
-            </div>
-
-            <%- include('components/nav') %>
+        <a href="/">
+        <div class="logo-b logo-b-positon">
+                
+        </div></a>
+        <div class="semi-title">-&nbsp;&nbsp;Hello World&nbsp;&nbsp;-</div>  
+        <div class="logo <%if(user||authorAvatar){%>logo-new<%}%>">
+        <%- include('components/logo') %>
         </div>
-        <div class="fullscreen-default" id="js-fullscreen">
-            <%- include('components/nav_other') %>
-        </div>
+    <nav class="nav">
+        <%- include('components/nav') %>
     </nav>
+    <div class="burger" id="js-burger"></div>
+    <aside class="nav-aside" id="js-nav-aside">
+        <%- include('components/nav_other') %>
+        <div class="nav-aside-copyright">
+            <span>
+                <%- include('components/logo') %>
+                </span><br/> Designed &amp; Developed by Beau. 
+        </div>
+    </aside>
+</header>
+<nav class="default-nav default-move-nav" id="js-default-nav">
+    <div class="logo-c logo-default-nav logo-c-default-nav" id="js-logo-c"></div>
+    <div class="default-nav-horizon">
+        <div class="logo-d logo-default-nav"></div>   
+        <div class="phone-nav-title"><%-include('components/logo')%></div>
+        <div class="phone-nav-burger phone-nav-burger-bg" id="js-phone-nav-burger">
+            <span>X</span>
+        </div>
 
-    <%- include('components/notification') %>
+        <%- include('components/nav') %>
+    </div>
+    <div class="fullscreen-default" id="js-fullscreen">
+        <%- include('components/nav_other') %>
+    </div>
+</nav>
+
+<%- include('components/notification') %>

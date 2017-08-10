@@ -1,15 +1,11 @@
+    <% if (success) { %>
+    <div class="alert">
+        <p><%= success %></p>
+    </div>
+<% } %>
 
-
-
-     <% if (success) { %>
-        <div class="alert">
-            <p><%= success %></p>
-        </div>
-    <% } %>
-
-    <% if (error) { %>
-        <div class="alert error">
-            <p><%= error %></p>
-        </div>
-    <% } %>
-    
+<% if (error) { %>
+    <div class="alert error">
+        <p><%= error %></p>
+    </div>
+<% } %>
