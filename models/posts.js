@@ -37,7 +37,8 @@ Post.plugin('contentToHtml', {
 
 //防止xss攻击，过滤textarea内容，同时忽略过滤pre里的代码
 function xssFormat(content){
-  var inCode = false ; //在pre代码块中
+  var inCode = false; //在pre代码块中
+  //在<style></style>标签内，作用div>div中的>大于号不被转义,此问题暂不处理
   return xss(content, {
     onIgnoreTagAttr: function (tag, name, value, isWhiteAttr) {
       if (name.substr(0, 5) === 'data-' || name === 'style' || name === 'class') {
@@ -54,15 +55,15 @@ function xssFormat(content){
         return html;
       }
       if(inCode){
-        //在代码块中，处理div不被转义的问题
+        //在```代码块中，处理div不被转义的问题
         if(tag.substr(0,3) === 'div'){
           //处理div不被转义的问题
           return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }
       }
       else{
-        //不在代码块中
-        // 不对其属性列表进行过滤，让style样式标签生效
+        //不在```代码块中
+        //不对其属性列表进行过滤，让style样式标签生效
         if (tag.substr(0,5) === 'style' ) {
           return html;
         }
