@@ -5,7 +5,8 @@
         "no-param-reassign": 1 ,
         "consistent-return": 1 ,
         "no-unused-vars": 1 ,
-        "arrow-body-style": 1 
+        "arrow-body-style": 1 ,
+        "one-var": 1 
     }
     
 }
