@@ -1,0 +1,10 @@
+{
+    "extends": "airbnb-base",
+    "rules":{ 
+        "no-underscore-dangle": 1 ,
+        "no-param-reassign": 1 ,
+        "consistent-return": 1 ,
+        "no-unused-vars": 1 
+    }
+    
+}

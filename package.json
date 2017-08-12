@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --harmony test",
-    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'nblog'"
+    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'nblog'",
+    "lint": "eslint **/*.js",
+    "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html"
   },
   "repository": {
     "type": "git",
@@ -44,6 +46,9 @@
     "xss": "^0.3.3"
   },
   "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.4.2",
     "supertest": "^3.0.0"
   }

@@ -17,3 +17,5 @@ public/img/upload/*
 !public/img/upload/avatar_default.jpg
 config/production.js
 public/js/howler.min.js
+npm-debug.log
+reports/lint-results.html
