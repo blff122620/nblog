@@ -1,4 +1,4 @@
-# 响应式个人博客(兼多人博客)系统
+# 响应式个人博客(兼多人博客)系统(express+nodejs+mongodb)
 
 > Nodejs环境下 利用express + ejs + mongodb 搭建的博客系统 :virgo:
 
